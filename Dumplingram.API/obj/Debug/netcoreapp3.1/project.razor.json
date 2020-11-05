@@ -1,5 +1,5 @@
 {
-  "FilePath": "/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/Dumplingram.API.csproj",
+  "FilePath": "/Users/bartlomiejpierog/VS Code Projects/DumplingramWebApp/Dumplingram.API/Dumplingram.API.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -14387,7 +14387,7 @@
         }
       }
     ],
-    "CSharpLanguageVersion": 900
+    "CSharpLanguageVersion": 800
   },
   "RootNamespace": "Dumplingram.API",
   "Documents": [],

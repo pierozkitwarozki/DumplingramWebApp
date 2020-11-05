@@ -11,7 +11,7 @@
           [(ngModel)]="model.username"
           id="inputUsername"      
           name="username"
-          placeholder="username"
+          placeholder="nazwa użytkownika"
           required
           autofocus=""
           />
@@ -19,12 +19,12 @@
           type="password"
           id="inputPassword"
           name="password"
-          placeholder="password"
+          placeholder="hasło"
           [(ngModel)]="model.password"
           required
         />
         <button [disabled]="!loginForm.valid" type="submit">
-          Zaloguj się
+          zaloguj się
         </button>
         <h1 id="login-register-click" class="float-right ml-2">dołącz</h1>
         <h1 id="login-register" class="float-right">nie masz konta?</h1>       

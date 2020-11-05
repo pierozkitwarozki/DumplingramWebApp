@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\Dumplingram.API\\Dumplingram.API.csproj": {}
+    "/Users/bartlomiejpierog/VS Code Projects/DumplingramWebApp/Dumplingram.API/Dumplingram.API.csproj": {}
   },
   "projects": {
-    "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\Dumplingram.API\\Dumplingram.API.csproj": {
+    "/Users/bartlomiejpierog/VS Code Projects/DumplingramWebApp/Dumplingram.API/Dumplingram.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\Dumplingram.API\\Dumplingram.API.csproj",
+        "projectUniqueName": "/Users/bartlomiejpierog/VS Code Projects/DumplingramWebApp/Dumplingram.API/Dumplingram.API.csproj",
         "projectName": "Dumplingram.API",
-        "projectPath": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\Dumplingram.API\\Dumplingram.API.csproj",
-        "packagesPath": "C:\\Users\\Bartłomiej\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\Dumplingram.API\\obj\\",
+        "projectPath": "/Users/bartlomiejpierog/VS Code Projects/DumplingramWebApp/Dumplingram.API/Dumplingram.API.csproj",
+        "packagesPath": "/Users/bartlomiejpierog/.nuget/packages/",
+        "outputPath": "/Users/bartlomiejpierog/VS Code Projects/DumplingramWebApp/Dumplingram.API/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Bartłomiej\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "/Users/bartlomiejpierog/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -94,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
         }
       }
     }

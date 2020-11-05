@@ -3,3 +3,36 @@
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
 @import '../node_modules/alertifyjs/build/css/alertify.min.css';
 @import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+@import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+
+input {
+    border: #D1D1D1;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    opacity: 0.7;
+    box-shadow: 0px 19px 38px -16px rgba(166,166,166,1);
+    outline: none;
+}
+
+button {
+    font-family: 'Roboto Slab';
+    outline: none;
+    padding: 4%;
+    font-size: medium;
+    background-color: #D1B875;
+    border: #707070;
+    border-style: none;
+    border-radius: 20px;
+    box-shadow: 0px 19px 38px -16px rgba(166,166,166,1);
+    color: white;
+}
+
+button:focus{
+    outline: none;
+}
+
+input.form-control {
+    border-radius: 20px;
+    opacity: 0.7;
+}

@@ -3,7 +3,6 @@ import { environment } from 'src/environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../_models/User';
 import { map } from 'rxjs/operators';
-import { LoginPageComponent } from '../login-page/login-page.component';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
