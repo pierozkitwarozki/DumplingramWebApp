@@ -1,0 +1,18 @@
+using AutoMapper;
+using System.Linq;
+using Dumplingram.API.Dtos;
+using Dumplingram.API.Models;
+
+namespace Dumplingram.API.Helpers
+{
+    public class AutoMapperProfiles : Profile
+    {
+        public AutoMapperProfiles()
+        {   
+            CreateMap<User, UserForRegisterDto>(); //tu będą dołączone includy zdjęcia itd, dlatego nie uzywam reversemap
+            CreateMap<UserForRegisterDto, User>();
+            CreateMap<User, UserForDetailedDto>().ForMember(dest => dest.Age, 
+                opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
+        }
+    }
+}

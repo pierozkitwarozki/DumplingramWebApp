@@ -1,0 +1,34 @@
+<div id="login-page-content">
+  <div id="login-page-content-img" class="col-sm">
+      <img src='../../assets/login-page-photo-2.png' alt="Zdjecie główne" />
+  </div>
+  <div id="login-page-content-form" class="col-sm">
+    <div id="centered-div">
+      <form id="form-login" #loginForm="ngForm" class="text-center" (ngSubmit)="login()">
+        <h1 id="login-header">Dumplingram</h1>
+        <input
+          type="text"
+          [(ngModel)]="model.username"
+          id="inputUsername"      
+          name="username"
+          placeholder="username"
+          required
+          autofocus=""
+          />
+        <input
+          type="password"
+          id="inputPassword"
+          name="password"
+          placeholder="password"
+          [(ngModel)]="model.password"
+          required
+        />
+        <button [disabled]="!loginForm.valid" type="submit">
+          Zaloguj się
+        </button>
+        <h1 id="login-register-click" class="float-right ml-2">dołącz</h1>
+        <h1 id="login-register" class="float-right">nie masz konta?</h1>       
+      </form> 
+    </div>     
+  </div>
+</div>

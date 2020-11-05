@@ -1,0 +1,147 @@
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/appsettings.Development.json
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/appsettings.json
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Properties/launchSettings.json
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Dumplingram.API.deps.json
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Dumplingram.API.runtimeconfig.json
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Dumplingram.API.runtimeconfig.dev.json
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Dumplingram.API.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Dumplingram.API.pdb
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/obj/Debug/netcoreapp3.1/Dumplingram.API.csprojAssemblyReference.cache
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/obj/Debug/netcoreapp3.1/Dumplingram.API.AssemblyInfoInputs.cache
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/obj/Debug/netcoreapp3.1/Dumplingram.API.AssemblyInfo.cs
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/obj/Debug/netcoreapp3.1/Dumplingram.API.csproj.CoreCompileInputs.cache
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/obj/Debug/netcoreapp3.1/Dumplingram.API.MvcApplicationPartsAssemblyInfo.cache
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/obj/Debug/netcoreapp3.1/Dumplingram.API.RazorTargetAssemblyInfo.cache
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/obj/Debug/netcoreapp3.1/staticwebassets/Dumplingram.API.StaticWebAssets.Manifest.cache
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/obj/Debug/netcoreapp3.1/staticwebassets/Dumplingram.API.StaticWebAssets.xml
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/obj/Debug/netcoreapp3.1/Dumplingram.API.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/obj/Debug/netcoreapp3.1/Dumplingram.API.pdb
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/obj/Debug/netcoreapp3.1/Dumplingram.API.genruntimeconfig.cache
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Bcl.HashCode.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Caching.Abstractions.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Caching.Memory.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Configuration.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Configuration.Abstractions.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Configuration.Binder.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Extensions.DependencyInjection.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Logging.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Options.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Primitives.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/obj/Debug/netcoreapp3.1/Dumplingram.API.csproj.CopyComplete
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Data.Sqlite.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.DotNet.PlatformAbstractions.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.Sqlite.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.Extensions.DependencyModel.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/SQLitePCLRaw.batteries_v2.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/SQLitePCLRaw.nativelibrary.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/SQLitePCLRaw.core.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/SQLitePCLRaw.provider.dynamic_cdecl.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/System.Text.Json.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/alpine-x64/native/libe_sqlite3.so
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/linux-arm/native/libe_sqlite3.so
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/linux-arm64/native/libe_sqlite3.so
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/linux-armel/native/libe_sqlite3.so
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/linux-musl-x64/native/libe_sqlite3.so
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/linux-x64/native/libe_sqlite3.so
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/linux-x86/native/libe_sqlite3.so
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/osx-x64/native/libe_sqlite3.dylib
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/win-arm/native/e_sqlite3.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/win-arm64/native/e_sqlite3.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/win-x64/native/e_sqlite3.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/win-x86/native/e_sqlite3.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.EntityFrameworkCore.Design.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/System.Collections.Immutable.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/System.Diagnostics.DiagnosticSource.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/AutoMapper.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Logging.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Tokens.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/System.IdentityModel.Tokens.Jwt.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Protocols.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.JsonPatch.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/bartlomiejpierog/VS Code Projects/Dumplingram/Dumplingram.API/bin/Debug/netcoreapp3.1/Newtonsoft.Json.Bson.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\appsettings.json
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Dumplingram.API.exe
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Dumplingram.API.deps.json
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Dumplingram.API.runtimeconfig.json
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Dumplingram.API.runtimeconfig.dev.json
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Dumplingram.API.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Dumplingram.API.pdb
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\AutoMapper.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Data.Sqlite.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Sqlite.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\SQLitePCLRaw.batteries_v2.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\SQLitePCLRaw.nativelibrary.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\SQLitePCLRaw.core.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\SQLitePCLRaw.provider.dynamic_cdecl.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\runtimes\alpine-x64\native\libe_sqlite3.so
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\runtimes\linux-arm\native\libe_sqlite3.so
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\runtimes\linux-arm64\native\libe_sqlite3.so
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\runtimes\linux-armel\native\libe_sqlite3.so
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\runtimes\linux-musl-x64\native\libe_sqlite3.so
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libe_sqlite3.so
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\runtimes\linux-x86\native\libe_sqlite3.so
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\libe_sqlite3.dylib
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\e_sqlite3.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.csprojAssemblyReference.cache
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.AssemblyInfoInputs.cache
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.AssemblyInfo.cs
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.csproj.CoreCompileInputs.cache
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.MvcApplicationPartsAssemblyInfo.cache
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.RazorTargetAssemblyInfo.cache
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.csproj.CopyComplete
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\obj\Debug\netcoreapp3.1\staticwebassets\Dumplingram.API.StaticWebAssets.Manifest.cache
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\obj\Debug\netcoreapp3.1\staticwebassets\Dumplingram.API.StaticWebAssets.xml
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.pdb
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.genruntimeconfig.cache
