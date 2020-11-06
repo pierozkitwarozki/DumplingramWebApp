@@ -1,22 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NgForm,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.css']
+  styleUrls: ['./register-page.component.css'],
 })
 export class RegisterPageComponent implements OnInit {
-
+  @ViewChild('editForm', { static: true }) editForm: NgForm;
   bsConfig: Partial<BsDatepickerConfig>;
   registerForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    if (this.editForm.dirty) {
+      $event.returnValue = true;
+    }
+  }
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.bsConfig = {
       containerClass: 'theme-default',
-      isAnimated: true
+      isAnimated: true,
     };
     this.createRegisterForm();
   }
@@ -31,13 +45,7 @@ export class RegisterPageComponent implements OnInit {
         dateOfBirth: [null, Validators.required],
         city: ['', Validators.required],
         country: ['', Validators.required],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6)
-          ],
-        ],
+        password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required],
       },
       { validator: this.passwordMatchValidator }
@@ -50,4 +58,7 @@ export class RegisterPageComponent implements OnInit {
       : { mismatch: true };
   }
 
+  login() {
+    this.router.navigate(['']);
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 
@@ -12,7 +13,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private router: Router
   ) {}
 
   ngOnInit() {}
@@ -26,5 +28,9 @@ export class LoginPageComponent implements OnInit {
         this.alertify.error(error);
       }
     );
+  }
+
+  register() {
+    this.router.navigate(['/register']);
   }
 }

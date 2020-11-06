@@ -10,13 +10,17 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { AuthService } from './_services/auth.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from './routes';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavComponent],
   imports: [
     BrowserModule,
     BsDatepickerModule.forRoot(),
     ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,

@@ -1,5 +1,5 @@
 <div id="centered-div">
-  <form id="form-login" [formGroup]="registerForm" class="text-center">
+  <form #editForm="ngForm" id="form-login" [formGroup]="registerForm" class="text-center">
     <h1 class="mt-4">Utwórz konto</h1>
 
     <div class="form-group">
@@ -202,7 +202,7 @@
       </div>
     </div>
     <div id="button-container">
-      <button class="float-left">anuluj</button>
+      <button class="float-left" (click)="login()">anuluj</button>
       <button type="submit" class="float-left ml-1">zarejestruj</button>
     </div>
   </form>
