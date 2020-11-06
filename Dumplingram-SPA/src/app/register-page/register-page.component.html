@@ -1,5 +1,5 @@
 <div id="centered-div">
-  <form #editForm="ngForm" id="form-login" [formGroup]="registerForm" class="text-center">
+  <form #editForm="ngForm" id="form-login" [formGroup]="registerForm" class="text-center" (ngSubmit)="register()">
     <h1 class="mt-4">Utwórz konto</h1>
 
     <div class="form-group">
@@ -201,9 +201,6 @@
         Hasła nie są takie same
       </div>
     </div>
-    <div id="button-container">
-      <button class="float-left" (click)="login()">anuluj</button>
-      <button type="submit" class="float-left ml-1">zarejestruj</button>
-    </div>
+      <button type="submit" [disabled]="!registerForm.valid" registerForm.valid = "!registerForm.valid" >zarejestruj</button>
   </form>
 </div>

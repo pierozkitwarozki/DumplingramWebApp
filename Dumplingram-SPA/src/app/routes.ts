@@ -12,5 +12,5 @@ export const appRoutes: Routes = [
     canDeactivate: [PreventUnsavedChanges],
   },
 
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];

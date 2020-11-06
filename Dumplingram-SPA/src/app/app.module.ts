@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -13,6 +14,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { NavComponent } from './nav/nav.component';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 @NgModule({
   declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavComponent],
@@ -20,12 +22,13 @@ import { NavComponent } from './nav/nav.component';
     BrowserModule,
     BsDatepickerModule.forRoot(),
     ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
   ],
-  providers: [ErrorInterceptorProvider, AuthService],
+  providers: [ErrorInterceptorProvider, AuthService, PreventUnsavedChanges],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

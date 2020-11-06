@@ -1,13 +1,10 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  NgForm,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { User } from '../_models/User';
+import { AlertifyService } from '../_services/alertify.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-register-page',
@@ -16,6 +13,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 })
 export class RegisterPageComponent implements OnInit {
   @ViewChild('editForm', { static: true }) editForm: NgForm;
+  user: User;
   bsConfig: Partial<BsDatepickerConfig>;
   registerForm: FormGroup;
 
@@ -25,7 +23,13 @@ export class RegisterPageComponent implements OnInit {
       $event.returnValue = true;
     }
   }
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService,
+    private alertify: AlertifyService
+  ) {}
 
   ngOnInit(): void {
     this.bsConfig = {
@@ -38,7 +42,6 @@ export class RegisterPageComponent implements OnInit {
   createRegisterForm() {
     this.registerForm = this.fb.group(
       {
-        gender: ['male'],
         username: ['', Validators.required],
         name: ['', Validators.required],
         surname: ['', Validators.required],
@@ -58,7 +61,23 @@ export class RegisterPageComponent implements OnInit {
       : { mismatch: true };
   }
 
-  login() {
-    this.router.navigate(['']);
+  register() {
+    if (this.registerForm.valid) {
+      this.user = Object.assign({}, this.registerForm.value);
+      this.authService.register(this.user).subscribe(
+        () => {
+          this.alertify.success('registered successfully');
+        },
+        (error) => {
+          this.alertify.error(error);
+        },
+        () => {
+          this.authService.login(this.user).subscribe(() => {
+            this.router.navigate(['/login']);
+          });
+        }
+      );
+    }
+    console.log(this.registerForm.value);
   }
 }

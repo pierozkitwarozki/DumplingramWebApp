@@ -76,11 +76,13 @@ button {
 }
 
 button:disabled:hover {
-    background-color: #D1B875;
+    background-color: #6617cb;
+    background-image: linear-gradient(315deg, #6617cb 0%, #cb218e 74%);
 }
 
 button:hover {
-    background-color: #B49D5E
+    background-color: #6247aa;
+    background-image: linear-gradient(316deg, #6247aa 0%, #a594f9 74%);
 }
 
 #login-header {
@@ -99,11 +101,11 @@ button:hover {
     font-family: 'Roboto Slab';
     font-size: medium;
     font-weight: bold;
-    color: #D1B875;
+    color: #6617cb;
 }
 
 #login-register-click:hover {
-    color: #B49D5E;
+    color: #6247aa;
     cursor: pointer;
 }
 

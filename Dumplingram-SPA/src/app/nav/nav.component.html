@@ -1,13 +1,19 @@
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" [routerLink]="['/login']">Dumplingram</a>
-
-    <ul class="navbar-nav mr-auto" >
-      <li class="nav-item" routerLinkActive="active" >
-        <a class="nav-link" [routerLink]="['/register']">Register</a>
-      </li>
-    </ul>
-    </div>
+<!-- Image and text -->
+<nav id="navbar" class="navbar navbar-dark bg-light bg-custom-2">
+  <a class="navbar-brand ml-5" [routerLink]="'/login'"> Dumplingram </a>
+  <div *ngIf="authService.loggedIn()" >
+      <div class="btn-group" dropdown>
+        <h1 id="user" dropdownToggle type="button" class="dropdown-toggle" 
+                aria-controls="dropdown-animated">
+          Witaj {{ authService.decodedToken.unique_name | titlecase }}<span class="caret"></span>
+        </h1>
+        <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu"
+            role="menu" aria-labelledby="button-animated">
+          <li role="menuitem"><a class="dropdown-item" href="#">edytuj profil</a></li>
+          <li role="menuitem"><a class="dropdown-item" (click)="logout()" href="#">wyloguj</a>
+          </li>
+        </ul>
+      </div>
+      <img id="avatar" src="{{ '../../assets/user.png' }}" alt="" />
+  </div>
 </nav>
-

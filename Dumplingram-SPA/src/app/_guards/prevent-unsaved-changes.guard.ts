@@ -6,8 +6,8 @@ import { RegisterPageComponent } from '../register-page/register-page.component'
 export class PreventUnsavedChanges implements CanDeactivate<RegisterPageComponent> {
 
     canDeactivate(component: RegisterPageComponent) {
-        if (component.editForm.dirty) {
-            return confirm('Are you sure you want to continue? Any unsaved changes will be lost.');
+        if (component.editForm.dirty && !component.editForm.valid) {
+            return confirm('Jesteś pewien? Niezapisane zmiany zostaną utracone.');
         }
         return true;
     }
