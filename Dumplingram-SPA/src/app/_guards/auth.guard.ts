@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -21,7 +20,7 @@ export class AuthGuard implements CanActivate {
     }
 
     this.alertifyService.error('You shall not pass!');
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
     return false;
   }
 }
