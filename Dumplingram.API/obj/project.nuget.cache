@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zHf2QeM+wYYtFgWJk2zRLul3/leB+4W5mrbREHxeYp74U7lqkDQaVVc8FSTQTQOwDEkP58GGzvvMvGTXyz/NjQ==",
+  "dgSpecHash": "Dbs8OGyQ8Ka9JxKkX1Orm43bWxhjK8u7XrXp14Qw1aZL54uO7H4Fz5XizBbufLv2CvyjvJWGyLGOAVv4llATCA==",
   "success": true,
-  "projectFilePath": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\dumplingram.api\\Dumplingram.API.csproj",
+  "projectFilePath": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\Dumplingram.API\\Dumplingram.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Bartłomiej\\.nuget\\packages\\automapper\\10.1.0\\automapper.10.1.0.nupkg.sha512",
     "C:\\Users\\Bartłomiej\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.0\\automapper.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",

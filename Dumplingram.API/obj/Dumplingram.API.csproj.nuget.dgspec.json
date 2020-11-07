@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\dumplingram.api\\Dumplingram.API.csproj": {}
+    "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\Dumplingram.API\\Dumplingram.API.csproj": {}
   },
   "projects": {
-    "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\dumplingram.api\\Dumplingram.API.csproj": {
+    "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\Dumplingram.API\\Dumplingram.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\dumplingram.api\\Dumplingram.API.csproj",
+        "projectUniqueName": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\Dumplingram.API\\Dumplingram.API.csproj",
         "projectName": "Dumplingram.API",
-        "projectPath": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\dumplingram.api\\Dumplingram.API.csproj",
+        "projectPath": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\Dumplingram.API\\Dumplingram.API.csproj",
         "packagesPath": "C:\\Users\\Bartłomiej\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\dumplingram.api\\obj\\",
+        "outputPath": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\Dumplingram.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
