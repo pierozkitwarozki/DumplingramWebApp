@@ -15,9 +15,11 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { NavComponent } from './nav/nav.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { HomeComponent } from './home/home.component';
+import { NotAuthGuard } from './_guards/not-auth.guard';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavComponent],
+  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavComponent, HomeComponent],
   imports: [
     BrowserModule,
     BsDatepickerModule.forRoot(),
@@ -28,7 +30,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [ErrorInterceptorProvider, AuthService, PreventUnsavedChanges],
+  providers: [ErrorInterceptorProvider, AuthService, PreventUnsavedChanges, NotAuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

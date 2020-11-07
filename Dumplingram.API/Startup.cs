@@ -44,6 +44,7 @@ namespace Dumplingram.API
             services.AddCors();
             services.AddAutoMapper(typeof(AuthRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDumplingramRepository, DumplingramRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -71,6 +72,7 @@ namespace Dumplingram.API
             app.UseRouting();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

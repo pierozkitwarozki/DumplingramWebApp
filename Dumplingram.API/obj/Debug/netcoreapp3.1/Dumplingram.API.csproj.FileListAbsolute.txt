@@ -218,3 +218,4 @@ D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\dumplingram.api\obj\Debug\netco
 D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\dumplingram.api\obj\Debug\netcoreapp3.1\Dumplingram.API.dll
 D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\dumplingram.api\obj\Debug\netcoreapp3.1\Dumplingram.API.pdb
 D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\dumplingram.api\obj\Debug\netcoreapp3.1\Dumplingram.API.genruntimeconfig.cache
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp\Dumplingram.API\bin\Debug\netcoreapp3.1\Data\UserSeedData.json

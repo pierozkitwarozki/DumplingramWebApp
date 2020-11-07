@@ -73,7 +73,7 @@ export class RegisterPageComponent implements OnInit {
         },
         () => {
           this.authService.login(this.user).subscribe(() => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/home']);
           });
         }
       );

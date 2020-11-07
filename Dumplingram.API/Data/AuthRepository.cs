@@ -18,7 +18,7 @@ namespace Dumplingram.API.Data
         public async Task<User> Login(string username, string password)
         {
             //include photos do dodania, zeby url zdjecia bylo widoczne
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
+            var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.Username == username);
             if (user == null)
             {
                 return null;
