@@ -7,7 +7,7 @@ import { AlertifyService } from '../_services/alertify.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class NotAuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -15,12 +15,12 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   canActivate(): boolean {
-    if (this.authService.loggedIn()) {
+    if (!this.authService.loggedIn()) {
       return true;
     }
 
     this.alertifyService.error('You shall not pass!');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
     return false;
   }
 }

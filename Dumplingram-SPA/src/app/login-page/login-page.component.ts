@@ -23,6 +23,7 @@ export class LoginPageComponent implements OnInit {
     this.authService.login(this.model).subscribe(
       (next) => {
         this.alertify.success('logged in');
+        this.router.navigate(['/home']);
       },
       (error) => {
         this.alertify.error(error);
