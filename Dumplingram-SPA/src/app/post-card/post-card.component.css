@@ -1,73 +1,88 @@
 .col {
-    width: 100%;
-    padding: 0;  
-    margin: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 #user-info {
-    height: 20%; 
-    padding: 2%;
-    margin-bottom: 7%;
+  height: 20%;
+  padding: 4%;
+  margin-bottom: 7%;
+  display: flex;
+  align-items: center;
 }
 
 #avatar {
-    height: 7%;
-    width: 7%;
-    border: #868686;
-    border-style: solid;
-    border-width: 4px;
-    border-radius: 90px;
-    box-shadow: 0px 42px 38px -32px rgba(166,166,166,1);
-    float: left;
-    display: block;
+  height: 9%;
+  width: 9%;
+  border-radius: 90px;
+  float: left;
+  display: block;
 }
 
 #username {
-    display: block;
-    float: left;
-    height: 7%;
-    font-size: x-large;
-    font-weight: bold;
-    font-family: 'Roboto Slab';
+  display: block;
+  float: left;
+  height: 7%;
+  font-size: large;
+  font-weight: bold;
+  font-family: "Roboto Slab";
 }
 
 #post-photo {
-    height: 50%;
-    width: 100%;
-    border: #D1D1D1;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+  height: 50%;
+  width: 100%;
+  border: #d1d1d1;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 #card {
-    border: #D1D1D1;
-    border-style: solid;
-    border-width: 3px;
-    border-radius: 20px;
-    box-shadow: 0px 42px 38px -32px rgba(166,166,166,1);
-    padding-right: 0;
-    padding-left: 0;
-    margin: 0;
+  border: #d1d1d1;
+  border-style: solid;
+  border-width: 1%;
+  border-radius: 20px;
+  box-shadow: 0px 42px 38px -32px rgba(166, 166, 166, 1);
+  padding-right: 0;
+  padding-left: 0;
+  margin: 0;
 }
 
 #likes-container {
-    height: 20%; 
-    padding: 2%;
-    margin-bottom: 7%;
+  height: 20%;
+  padding: 4%;
+  margin-top: 3%;
+  margin-bottom: 7%;
+  display: flex;
+  align-items: center;
 }
 
 #likes {
-    display: block;
-    float: left;
-    height: 100%;
-    font-size: x-large;
-    font-weight: bold;
-    font-family: 'Roboto Slab';
+  display: block;
+  float: left;
+  height: 100%;
+  font-size: large;
+  font-weight: bold;
+  font-family: "Roboto Slab";
 }
 
-.fa.fa-heart {
-    display: block;
-    float: left;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+#like {
+  width: 7%;
+  height: 7%;
+  display: block;
+  float: left;
+  margin-right: 5%;
+}
+
+#description {
+  height: 20%;
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 4%;
+  padding-bottom: 1%;
+}
+
+p {
+  text-align: left;
+  word-break: normal;
+  white-space: normal;
 }

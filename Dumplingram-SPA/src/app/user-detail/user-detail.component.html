@@ -1,0 +1,26 @@
+<div id="main-container" class="container">
+  <div id="profile" class="container col">
+    <div id="avatar-section">
+      <img id="avatar" src="{{ user.photoUrl }}" alt="{{ user.username }}" />
+      <label id="username" for="avatar">{{ user.username }}</label>
+    </div>
+    <hr class="solid">
+    <div class="container mt-4 w-100 text-center">
+        <div class="row">
+          <div class="col-sm">
+            <p>Posty: 6</p>
+          </div>
+          <div class="col-sm">
+            <p>531 obserwujących</p>
+          </div>
+          <div class="col-sm">
+            <p>Obserwowani: 420</p>
+          </div>
+        </div>
+    </div>
+    <hr class="solid">
+    <div class="container mt-4 w-100 text-center">
+        <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+    </div>     
+  </div>
+</div>

@@ -20,6 +20,9 @@ import { NotAuthGuard } from './_guards/not-auth.guard';
 import { PostListResolver } from './_resolvers/post-list.resolver';
 import { JwtModule } from '@auth0/angular-jwt';
 import { PostCardComponent } from './post-card/post-card.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UserDetailResolver } from './_resolvers/user-detail.resolver';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -41,6 +44,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     NavComponent,
     HomeComponent,
     PostCardComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +54,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxGalleryModule,
     FormsModule,
     JwtModule.forRoot({
       config: {
@@ -61,10 +66,10 @@ export class CustomHammerConfig extends HammerGestureConfig {
   ],
   providers: [
     ErrorInterceptorProvider,
-    AuthService,
     PreventUnsavedChanges,
     NotAuthGuard,
     PostListResolver,
+    UserDetailResolver,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
   ],
   bootstrap: [AppComponent],

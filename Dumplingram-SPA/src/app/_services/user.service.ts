@@ -20,4 +20,8 @@ export class UserService {
         return x;
       })));
   }
+
+  getUser(id: number): Observable<User> {
+    return this.http.get<User>(this.baseUrl + 'users/' + id);
+  }
 }

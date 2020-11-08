@@ -1,6 +1,7 @@
 <!-- Image and text -->
 <nav id="navbar" class="navbar navbar-dark bg-light bg-custom-2">
-  <a class="navbar-brand ml-5" [routerLink]="'/login'"> Dumplingram </a>
+  <a class="navbar-brand ml-5" *ngIf="!authService.loggedIn()" [routerLink]="'/login'"> Dumplingram </a>
+  <a class="navbar-brand ml-5" *ngIf="authService.loggedIn()" [routerLink]="'/home'"> Dumplingram </a>
   <div *ngIf="authService.loggedIn()" >
       <div class="btn-group" dropdown>
         <h1 id="user" dropdownToggle type="button" class="dropdown-toggle" 
