@@ -1,0 +1,73 @@
+.col {
+    width: 100%;
+    padding: 0;  
+    margin: 0;
+}
+
+#user-info {
+    height: 20%; 
+    padding: 2%;
+    margin-bottom: 7%;
+}
+
+#avatar {
+    height: 7%;
+    width: 7%;
+    border: #868686;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 90px;
+    box-shadow: 0px 42px 38px -32px rgba(166,166,166,1);
+    float: left;
+    display: block;
+}
+
+#username {
+    display: block;
+    float: left;
+    height: 7%;
+    font-size: x-large;
+    font-weight: bold;
+    font-family: 'Roboto Slab';
+}
+
+#post-photo {
+    height: 50%;
+    width: 100%;
+    border: #D1D1D1;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+
+#card {
+    border: #D1D1D1;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 20px;
+    box-shadow: 0px 42px 38px -32px rgba(166,166,166,1);
+    padding-right: 0;
+    padding-left: 0;
+    margin: 0;
+}
+
+#likes-container {
+    height: 20%; 
+    padding: 2%;
+    margin-bottom: 7%;
+}
+
+#likes {
+    display: block;
+    float: left;
+    height: 100%;
+    font-size: x-large;
+    font-weight: bold;
+    font-family: 'Roboto Slab';
+}
+
+.fa.fa-heart {
+    display: block;
+    float: left;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}

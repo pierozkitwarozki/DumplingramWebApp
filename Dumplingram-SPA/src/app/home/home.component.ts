@@ -23,8 +23,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
-      debugger;
-      this.users = data['users'].body;
+      this.users = data['users'];
     });
   }
 

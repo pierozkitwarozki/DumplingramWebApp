@@ -19,6 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { NotAuthGuard } from './_guards/not-auth.guard';
 import { PostListResolver } from './_resolvers/post-list.resolver';
 import { JwtModule } from '@auth0/angular-jwt';
+import { PostCardComponent } from './post-card/post-card.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -39,6 +40,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     RegisterPageComponent,
     NavComponent,
     HomeComponent,
+    PostCardComponent,
   ],
   imports: [
     BrowserModule,
