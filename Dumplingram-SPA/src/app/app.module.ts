@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { Injectable, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -17,9 +17,29 @@ import { NavComponent } from './nav/nav.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { HomeComponent } from './home/home.component';
 import { NotAuthGuard } from './_guards/not-auth.guard';
+import { PostListResolver } from './_resolvers/post-list.resolver';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+
+@Injectable()
+export class CustomHammerConfig extends HammerGestureConfig {
+  overrides = {
+    pinch: { enable: false },
+    rotate: { enable: false },
+  };
+}
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, RegisterPageComponent, NavComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    LoginPageComponent,
+    RegisterPageComponent,
+    NavComponent,
+    HomeComponent,
+  ],
   imports: [
     BrowserModule,
     BsDatepickerModule.forRoot(),
@@ -29,8 +49,22 @@ import { NotAuthGuard } from './_guards/not-auth.guard';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        allowedDomains: ['localhost:5000'],
+        disallowedRoutes: ['localhost:5000/api/auth'],
+      },
+    }),
   ],
-  providers: [ErrorInterceptorProvider, AuthService, PreventUnsavedChanges, NotAuthGuard],
+  providers: [
+    ErrorInterceptorProvider,
+    AuthService,
+    PreventUnsavedChanges,
+    NotAuthGuard,
+    PostListResolver,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

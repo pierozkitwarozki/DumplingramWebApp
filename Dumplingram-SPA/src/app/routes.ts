@@ -5,6 +5,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { NotAuthGuard } from './_guards/not-auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { PostListResolver } from './_resolvers/post-list.resolver';
 
 export const appRoutes: Routes = [
   {
@@ -23,6 +24,7 @@ export const appRoutes: Routes = [
   {
     path: 'home',
     runGuardsAndResolvers: 'always',
+    resolve: { users: PostListResolver },
     canActivate: [AuthGuard],
     component: HomeComponent,
   },

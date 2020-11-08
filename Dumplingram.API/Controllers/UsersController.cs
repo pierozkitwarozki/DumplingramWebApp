@@ -28,8 +28,9 @@ namespace Dumplingram.API.Controllers
 
         
         [HttpGet]
-        public async Task<IActionResult> GetUsers(UserParams userParams) 
+        public async Task<IActionResult> GetUsers() 
         {
+            var userParams = new UserParams();
             
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 

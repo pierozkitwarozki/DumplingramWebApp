@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { error } from 'protractor';
 import { Observable } from 'rxjs';
+import { map, repeat, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/User';
 
@@ -12,6 +14,12 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseUrl + 'users/');
+    return this.http.get<User[]>(this.baseUrl + 'users', {observe: 'response'})
+      .pipe(map((response => {
+        const x = response.body;
+        debugger;
+        return x;
+      })));
   }
+
 }
