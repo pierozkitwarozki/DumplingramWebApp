@@ -28,13 +28,12 @@ namespace Dumplingram.API.Controllers
 
         
         [HttpGet]
-        public async Task<IActionResult> GetUsers() 
+        public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams) 
         {
-            var userParams = new UserParams();
             
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            var userFromRepo = await _repo.GetUser(currentUserId);
+            var userFromRepo = await _repo.GetUser(currentUserId);            
 
             userParams.UserId = currentUserId;
 
@@ -147,6 +146,19 @@ namespace Dumplingram.API.Controllers
             return BadRequest("Coś poszło nie tak.");
         }
 
+        [HttpGet("dashboard")]
+        public async Task<IActionResult> GetPhotos()
+        {
+           var currentUserId = 
+            int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            
+            var photos = await _repo.GetPhotos(currentUserId);
+
+            if(photos == null)
+                return BadRequest("Coś poszło nie tak.");
+            
+            return Ok(photos);
+        }
         
     }
 }

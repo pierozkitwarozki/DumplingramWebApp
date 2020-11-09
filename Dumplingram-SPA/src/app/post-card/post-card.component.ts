@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Photo } from '../_models/Photo';
 import { User } from '../_models/User';
 
 @Component({
@@ -7,7 +8,7 @@ import { User } from '../_models/User';
   styleUrls: ['./post-card.component.css']
 })
 export class PostCardComponent implements OnInit {
-  @Input() user: User;
+  @Input() photo: Photo;
   constructor() { }
 
   ngOnInit(): void {

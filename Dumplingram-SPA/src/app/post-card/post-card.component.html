@@ -2,24 +2,22 @@
   <div id="user-info" class="col">
     <img
       id="avatar"
-      src="{{ user.photoUrl }}"
-      alt="{{ user.username }}"
+      src="{{ photo.user.description }}"
+      alt="{{ photo.user.username }}"
       class="mr-2"
-      [routerLink]="['/users/', user.id]"
+      [routerLink]="['/users/', photo.user.id]"
     />
-    <h1 id="username">{{ user.username }}</h1>
+    <h1 id="username">{{ photo.user.username }}</h1>
   </div>
   <div class="col">
-    <img id="post-photo" src="{{ user.photoUrl }}" alt="{{ user.username }}" />
+    <img id="post-photo" src="{{ photo.url }}" alt="{{ photo.description }}" />
   </div>
   <div id="description" class="col">
-    <p>Przykładowy opis zdjęcia. Wpisany na sztywno, pozdrawiam serdecznie wszystkich fanów i fanki.</p>
+    <p>{{photo.description}}</p>
   </div>
   <hr class="solid">
   <div id="likes-container" class="col">
     <img id="like" src="../../assets/like.png" alt="like" />
     <h1 id="likes">Liczba polubień: 155 190</h1>
   </div>
-  
-  
 </div>

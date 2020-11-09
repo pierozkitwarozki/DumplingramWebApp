@@ -8,6 +8,7 @@ namespace Dumplingram.API.Data
         public DataContxt(DbContextOptions<DataContxt> options) : base(options) {}
         public DbSet<User> Users { get; set; }   
         public DbSet<Follow> Follow { get; set; }
+        public DbSet<Photo> Photo {get; set;}
 
         protected override void OnModelCreating(ModelBuilder builder) 
         {

@@ -40,7 +40,16 @@ namespace Dumplingram.API.Data
             var users = _context.Users.Include(p => p.Photos)
                 .OrderBy(u => u.Username).AsQueryable();
 
-            users = users.Where(u => u.ID != userParams.UserId);
+            if (string.IsNullOrEmpty(userParams.Word))
+            {
+                users = users.Where(u => u.ID != userParams.UserId);
+            }
+            else
+            {
+                users = users.Where(u => u.ID != userParams.UserId
+                    && (u.Name.ToLower().Contains(userParams.Word.ToLower())) || u.Surname.ToLower().Contains(userParams.Word.ToLower())
+                    || u.Username.ToLower().Contains(userParams.Word.ToLower()));
+            }
 
             return await users.ToListAsync<User>();
         }
@@ -63,7 +72,7 @@ namespace Dumplingram.API.Data
                 .Include(u => u.Follower).ThenInclude(p => p.Photos).Where(f => f.FolloweeId == id).ToListAsync();
 
 
-            foreach(var user in list)
+            foreach (var user in list)
             {
                 user.Follower.PasswordHash = null;
                 user.Follower.PasswordSalt = null;
@@ -80,7 +89,7 @@ namespace Dumplingram.API.Data
             var list = await _context.Follow
                 .Include(u => u.Followee).ThenInclude(p => p.Photos).Where(f => f.FollowerId == id).ToListAsync();
 
-                foreach(var user in list)
+            foreach (var user in list)
             {
                 user.Followee.PasswordHash = null;
                 user.Followee.PasswordSalt = null;
@@ -90,6 +99,21 @@ namespace Dumplingram.API.Data
             }
 
             return list;
+        }
+
+        public async Task<IEnumerable<Photo>> GetPhotos(int id)
+        {
+            var follows = await _context.Follow.Where(f => f.FollowerId == id).Select(u => u.FolloweeId).ToListAsync();
+            var photos = await _context.Photo.Where(p => follows.Contains(p.UserId)).Include(u => u.User).ToListAsync();
+
+            foreach (var photo in photos)
+            {
+                photo.User.PasswordHash = null;
+                photo.User.PasswordSalt = null;
+                photo.User.Description = photos.FirstOrDefault(u => u.UserId == photo.UserId && photo.IsMain == true).Url;
+            }
+
+            return photos.OrderByDescending(d => d.DateAdded);
         }
     }
 }

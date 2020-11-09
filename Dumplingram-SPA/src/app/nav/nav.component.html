@@ -2,7 +2,10 @@
 <nav id="navbar" class="navbar navbar-dark bg-light bg-custom-2">
   <a class="navbar-brand ml-5" *ngIf="!authService.loggedIn()" [routerLink]="'/login'"> Dumplingram </a>
   <a class="navbar-brand ml-5" *ngIf="authService.loggedIn()" [routerLink]="'/home'"> Dumplingram </a>
-  <div *ngIf="authService.loggedIn()" >
+  <div  *ngIf="authService.loggedIn()" class="container w-100 text-center">
+    <button (click)="openSearchedUsers(template)"></button>
+  </div>
+  <div *ngIf="authService.loggedIn()" >    
       <div class="btn-group" dropdown>
         <h1 id="user" dropdownToggle type="button" class="dropdown-toggle" 
                 aria-controls="dropdown-animated">
@@ -18,3 +21,33 @@
       <img id="avatar" src="{{authService.currentUser.photoUrl || '../../assets/user.png' }}" alt="" [routerLink]="'/users/' + authService.decodedToken.nameid" />
   </div>
 </nav>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Wyszukaj</h4>
+    <form class="text-center" (ngSubmit)="loadUsers()">
+      <input (keyup)="onKey($event)">
+    </form>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div id="avatar-section" class="mb-4" *ngFor="let user of searchedUsers">
+      <img
+        id="follow-image"
+        src="{{ user.photoUrl }}"
+        alt=""
+        [routerLink]="['/users/', user.id]"
+        (click)="modalRef.hide()"
+      />
+      <p>{{ user.username }}</p>
+    </div>
+  </div>
+
+</ng-template>

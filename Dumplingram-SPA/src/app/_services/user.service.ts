@@ -1,10 +1,11 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { error } from 'protractor';
 import { Observable } from 'rxjs';
 import { map, repeat, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Follow } from '../_models/Follow';
+import { Photo } from '../_models/Photo';
 import { User } from '../_models/User';
 
 @Injectable({
@@ -14,9 +15,12 @@ export class UserService {
   baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<User[]> {
+  getUsers(word?: string): Observable<User[]> {
+
+    let params = new HttpParams().set('word', word);
+
     return this.http
-      .get<User[]>(this.baseUrl + 'users', { observe: 'response' })
+      .get<User[]>(this.baseUrl + 'users', { observe: 'response', params })
       .pipe(
         map((response) => {
           const x = response.body;
@@ -74,6 +78,17 @@ export class UserService {
       .pipe(
         map((response) => {
           return response.body;
+        })
+      );
+  }
+
+  getPhotos(): Observable<Photo[]> {
+    return this.http
+      .get<Photo[]>(this.baseUrl + 'users/dashboard', { observe: 'response' })
+      .pipe(
+        map((response) => {
+          const x = response.body;
+          return x;
         })
       );
   }

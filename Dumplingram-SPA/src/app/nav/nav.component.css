@@ -13,7 +13,7 @@ a {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 }
 
-img {
+#avatar {
     max-height: 45px;
     border: 1px solid white;
     display: inline;
@@ -42,4 +42,27 @@ a.dropdown-item:focus {
     margin-right: 20px;
 }
 
+#avatar-section {
+    display: flex;
+    align-items: center
+}
+
+#follow-image {
+    float: left;
+    display: inline;
+    margin-right: 5%;
+    width: 15%;
+    height: 15%;
+    border-radius: 90px;
+  }
+
+  p {
+    font-size: large;
+    font-weight: bold;   
+}
+
+.close.pull-right {
+  background: transparent;
+  box-shadow: none;
+}
 

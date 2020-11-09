@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { User } from '../_models/User';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,13 +12,21 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./nav.component.css'],
 })
 export class NavComponent implements OnInit {
+  modalRef: BsModalRef;
+  searchedUsers: User[];
+  word: string;
+
   constructor(
     public authService: AuthService,
     private alertify: AlertifyService,
-    private router: Router
+    private router: Router,
+    private modalService: BsModalService,
+    private userService: UserService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.word = '';
+  }
 
   logout() {
     localStorage.removeItem('token');
@@ -25,4 +36,26 @@ export class NavComponent implements OnInit {
     this.alertify.message('logged out');
     this.router.navigate(['']);
   }
+
+  loadUsers() {
+    this.userService.getUsers(this.word).subscribe(
+      (res: User[]) => {
+        this.searchedUsers = res;
+      },
+      (error) => {
+        this.alertify.error(error);
+      }
+    );
+  }
+
+  openSearchedUsers(template: TemplateRef<any>) {
+    this.loadUsers();
+    this.modalRef = this.modalService.show(template);
+  }
+
+  onKey(event) {
+    this.word = event.target.value;
+    this.loadUsers();
+  }
+
 }

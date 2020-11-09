@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'protractor';
 import { runInThisContext } from 'vm';
+import { Photo } from '../_models/Photo';
 import { User } from '../_models/User';
 import { AlertifyService } from '../_services/alertify.service';
 import { UserService } from '../_services/user.service';
@@ -13,7 +14,7 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  users: User[];
+  photos: Photo[];
 
   constructor(
     private userService: UserService,
@@ -23,17 +24,17 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe((data) => {
-      this.users = data['users'];
+      this.photos = data['users'];
     });
   }
 
   loadUsers() {
     this.userService
-      .getUsers()
+      .getPhotos()
       .pipe()
       .subscribe(
-        (res: User[]) => {
-          this.users = res;
+        (res: Photo[]) => {
+          this.photos = res;
         },
         (error) => {
           this.alertify.error(error);
