@@ -67,7 +67,10 @@ namespace Dumplingram.API.Controllers
             var follow = await _repo.GetFollow(id, followeeId);
 
             if(follow != null)
-                return BadRequest("You already follow this user");
+                return BadRequest("Już obserwujesz tego użytkownika");
+
+            if(followeeId == id)
+                return BadRequest("Samouwielbienie, hatfu.");
             
             if(await _repo.GetUser(followeeId) == null)
                 return NotFound();
