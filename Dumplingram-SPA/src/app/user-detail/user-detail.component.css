@@ -42,7 +42,54 @@
 
 p {
     font-size: large;
-    font-weight: bold;
-    
+    font-weight: bold;   
 }
 
+#description {
+  text-align: left;
+  word-break: normal;
+  font-weight: normal;
+}
+
+#name {
+  text-align: left;
+  word-break: normal;
+}
+
+button {
+  margin-bottom: 7%;
+  border-radius: 20px;
+  width: 30%;
+  height: 10%;
+  background-color: rgb(0, 106, 192);
+  outline: none;
+  border: none;
+}
+
+button:disabled:hover {
+  background-color: #6617cb;
+  background-image: linear-gradient(315deg, #6617cb 0%, #cb218e 74%);
+}
+
+button:hover {
+  background-color: #6247aa;
+  background-image: linear-gradient(316deg, #6247aa 0%, #a594f9 74%);
+}
+
+button:focus {
+  outline: none;
+}
+
+#follow-image {
+  float: left;
+  display: block;
+  margin-right: 5%;
+  width: 15%;
+  height: 15%;
+  border-radius: 90px;
+}
+
+.close.pull-right {
+  background: transparent;
+  box-shadow: none;
+}

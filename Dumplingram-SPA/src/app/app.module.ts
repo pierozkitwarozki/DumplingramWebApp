@@ -23,6 +23,7 @@ import { PostCardComponent } from './post-card/post-card.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -50,6 +51,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     BrowserModule,
     BsDatepickerModule.forRoot(),
     ReactiveFormsModule,
+    ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,

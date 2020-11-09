@@ -4,23 +4,109 @@
       <img id="avatar" src="{{ user.photoUrl }}" alt="{{ user.username }}" />
       <label id="username" for="avatar">{{ user.username }}</label>
     </div>
-    <hr class="solid">
-    <div class="container mt-4 w-100 text-center">
-        <div class="row">
-          <div class="col-sm">
-            <p>Posty: 6</p>
-          </div>
-          <div class="col-sm">
-            <p>531 obserwujących</p>
-          </div>
-          <div class="col-sm">
-            <p>Obserwowani: 420</p>
-          </div>
-        </div>
+    <div class="container w-100 mt-4 text-center">
+      <p id="name">{{ user.name }} {{ user.surname }}</p>
+      <p id="description">
+        {{ user.description }}
+      </p>
     </div>
-    <hr class="solid">
+    <hr class="solid" />
     <div class="container mt-4 w-100 text-center">
-        <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
-    </div>     
+      <div class="row">
+        <div class="col-sm">
+          <p>Posty: {{ countPhotos() }}</p>
+        </div>
+        <div class="col-sm">
+          <p (click)="openFoloweesModal(followers)">
+            {{ countFollowers() }} obserwujących
+          </p>
+        </div>
+        <div class="col-sm">
+          <p (click)="openFoloweesModal(followees)">
+            Obserwowani: {{ countFollowees() }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <hr class="solid" />
+    <div class="container mt-4 w-100 p-2 text-center">
+      <div *ngIf="!isMyProfile()">
+        <button
+          id="follow-button"
+          *ngIf="!follow"
+          (click)="followUser(user.id)"
+          class="btn btn-primary"
+        >
+          obserwuj
+        </button>
+        <button
+          id="unfollow-button"
+          *ngIf="follow"
+          (click)="unfollow(user.id)"
+          class="btn btn-primary"
+        >
+          przestań obserwować
+        </button>
+      </div>
+    </div>
+    <div class="container mt-4 w-100 text-center">
+      <ngx-gallery
+        [options]="galleryOptions"
+        [images]="galleryImages"
+        class="ngx-gallery"
+      ></ngx-gallery>
+    </div>
   </div>
 </div>
+
+<ng-template #followees>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Obserwowani: {{ countFollowees() }}</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div id="avatar-section" class="mb-4" *ngFor="let user of followeeItems">
+      <img
+        id="follow-image"
+        src="{{ user.followee.description }}"
+        alt=""
+        [routerLink]="['/users/', user.followee.id]"
+        (click)="modalRef.hide()"
+      />
+      <p>{{ user.followee.username }}</p>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #followers>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ countFollowers() }} obserwujących</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div id="avatar-section" class="mb-4" *ngFor="let user of followerItems">
+      <img
+        id="follow-image"
+        src="{{ user.follower.description }}"
+        alt=""
+        [routerLink]="['/users/', user.follower.id]"
+        (click)="modalRef.hide()"
+      />
+      <p>{{ user.follower.username }}</p>
+    </div>
+  </div>
+</ng-template>

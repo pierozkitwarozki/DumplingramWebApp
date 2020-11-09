@@ -12,5 +12,8 @@ namespace Dumplingram.API.Data
          Task<bool> SaveAll();
          Task<IEnumerable<User>> GetUsers(UserParams userParams);
          Task<User> GetUser(int id);
+         Task<Follow> GetFollow(int id, int followeeId);
+         Task<IEnumerable<Follow>> GetFollowers(int id);
+         Task<IEnumerable<Follow>> GetFollowees(int id);
     }
 }

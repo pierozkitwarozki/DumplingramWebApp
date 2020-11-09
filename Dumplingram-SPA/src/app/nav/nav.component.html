@@ -15,6 +15,6 @@
           </li>
         </ul>
       </div>
-      <img id="avatar" src="{{ '../../assets/user.png' }}" alt="" />
+      <img id="avatar" src="{{authService.currentUser.photoUrl || '../../assets/user.png' }}" alt="" [routerLink]="'/users/' + authService.decodedToken.nameid" />
   </div>
 </nav>

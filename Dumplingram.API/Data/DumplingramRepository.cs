@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Dumplingram.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Dumplingram.API.Helpers;
+using Dumplingram.API.Dtos;
 
 namespace Dumplingram.API.Data
 {
@@ -25,6 +26,7 @@ namespace Dumplingram.API.Data
             _context.Remove(entity);
         }
 
+
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users.Include(p => p.Photos)
@@ -43,9 +45,51 @@ namespace Dumplingram.API.Data
             return await users.ToListAsync<User>();
         }
 
-        public Task<bool> SaveAll()
+        public async Task<bool> SaveAll()
         {
-            throw new System.NotImplementedException();
+            return await _context.SaveChangesAsync() > 0; //if eq 0 then successful, otherwise no changes
+        }
+
+        public async Task<Follow> GetFollow(int id, int followeeId)
+        {
+            return await _context.Follow
+                .FirstOrDefaultAsync(u =>
+                    u.FollowerId == id && u.FolloweeId == followeeId);
+        }
+
+        public async Task<IEnumerable<Follow>> GetFollowers(int id)
+        {
+            var list = await _context.Follow
+                .Include(u => u.Follower).ThenInclude(p => p.Photos).Where(f => f.FolloweeId == id).ToListAsync();
+
+
+            foreach(var user in list)
+            {
+                user.Follower.PasswordHash = null;
+                user.Follower.PasswordSalt = null;
+                var photo = user.Follower.Photos.FirstOrDefault(p => p.IsMain == true).Url;
+                user.Follower.Description = photo;
+                user.Follower.Photos = null;
+            }
+
+            return list;
+        }
+
+        public async Task<IEnumerable<Follow>> GetFollowees(int id)
+        {
+            var list = await _context.Follow
+                .Include(u => u.Followee).ThenInclude(p => p.Photos).Where(f => f.FollowerId == id).ToListAsync();
+
+                foreach(var user in list)
+            {
+                user.Followee.PasswordHash = null;
+                user.Followee.PasswordSalt = null;
+                var photo = user.Followee.Photos.FirstOrDefault(p => p.IsMain == true).Url;
+                user.Followee.Description = photo;
+                user.Followee.Photos = null;
+            }
+
+            return list;
         }
     }
 }

@@ -3,14 +3,16 @@ using System;
 using Dumplingram.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dumplingram.API.Migrations
 {
     [DbContext(typeof(DataContxt))]
-    partial class DataContxtModelSnapshot : ModelSnapshot
+    [Migration("20201109074524_AddedFollowEntity")]
+    partial class AddedFollowEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
