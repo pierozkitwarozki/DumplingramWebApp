@@ -49,7 +49,6 @@ export class NavComponent implements OnInit {
   }
 
   openSearchedUsers(template: TemplateRef<any>) {
-    this.loadUsers();
     this.modalRef = this.modalService.show(template);
   }
 
@@ -57,5 +56,11 @@ export class NavComponent implements OnInit {
     this.word = event.target.value;
     this.loadUsers();
   }
+
+  close() {
+    this.modalRef.hide();
+    this.searchedUsers = null;
+  }
+
 
 }

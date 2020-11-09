@@ -42,7 +42,8 @@
 
 p {
     font-size: large;
-    font-weight: bold;   
+    font-weight: bold; 
+    
 }
 
 #description {
@@ -92,4 +93,12 @@ button:focus {
 .close.pull-right {
   background: transparent;
   box-shadow: none;
+}
+
+.c-pointer {
+  cursor: pointer;
+}
+
+#name {
+  font-weight: normal;
 }

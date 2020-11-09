@@ -38,16 +38,12 @@ namespace Dumplingram.API.Data
         public async Task<IEnumerable<User>> GetUsers(UserParams userParams)
         {
             var users = _context.Users.Include(p => p.Photos)
-                .OrderBy(u => u.Username).AsQueryable();
+                .OrderBy(u => u.Username).Where(u => u.ID != userParams.UserId).AsQueryable();
 
-            if (string.IsNullOrEmpty(userParams.Word))
+            if (!string.IsNullOrEmpty(userParams.Word))
             {
-                users = users.Where(u => u.ID != userParams.UserId);
-            }
-            else
-            {
-                users = users.Where(u => u.ID != userParams.UserId
-                    && (u.Name.ToLower().Contains(userParams.Word.ToLower())) || u.Surname.ToLower().Contains(userParams.Word.ToLower())
+                users = users.Where(u => (u.Name.ToLower().Contains(userParams.Word.ToLower())) 
+                    || u.Surname.ToLower().Contains(userParams.Word.ToLower())
                     || u.Username.ToLower().Contains(userParams.Word.ToLower()));
             }
 

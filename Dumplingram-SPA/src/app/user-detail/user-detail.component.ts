@@ -27,8 +27,8 @@ export class UserDetailComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   modalRef: BsModalRef;
-  followeeItems: User[];
-  followerItems: User[];
+  followeeItems: any;
+  followerItems: any;
 
   constructor(
     private route: ActivatedRoute,
