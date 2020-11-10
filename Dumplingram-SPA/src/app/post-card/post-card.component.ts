@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Photo } from '../_models/Photo';
 import { PhotoLike } from '../_models/PhotoLike';
@@ -14,6 +14,7 @@ import { PhotoService } from '../_services/photo.service';
 })
 export class PostCardComponent implements OnInit {
   @Input() photo: Photo;
+  @Output() getLikerClicked = new EventEmitter<string>();
   photoLikes: PhotoLike[];
   isLiked: any;
   modalRef: BsModalRef;
@@ -95,6 +96,7 @@ export class PostCardComponent implements OnInit {
   }
 
   openFoloweesModal(template: TemplateRef<any>) {
+    this.getLikerClicked.emit();
     this.modalRef = this.modalService.show(template);
   }
 }

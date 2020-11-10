@@ -1,6 +1,6 @@
 <div id="card" class="container text-center">
   <div id="user-info" class="col">
-    <img
+    <img *ngIf="photo.user.description"
       id="avatar"
       src="{{ photo.user.description }}"
       alt="{{ photo.user.username }}"

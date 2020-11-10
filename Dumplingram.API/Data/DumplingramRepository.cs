@@ -31,7 +31,7 @@ namespace Dumplingram.API.Data
         {
             var user = await _context.Users.Include(p => p.Photos)
                 .FirstOrDefaultAsync(u => u.ID == id);
-
+            user.Photos = user.Photos.OrderByDescending(x => x.DateAdded).ToList();
             return user;
         }
 

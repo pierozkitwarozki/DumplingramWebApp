@@ -1,15 +1,11 @@
+import { PathLocationStrategy } from '@angular/common';
 import { FnParam } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  NgxGalleryOptions,
-  NgxGalleryImage,
-  NgxGalleryAnimation,
-  NgxGalleryImageSize,
-} from '@kolkov/ngx-gallery';
 import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { error } from 'protractor';
 import { Follow } from '../_models/Follow';
+import { Photo } from '../_models/Photo';
 
 import { User } from '../_models/User';
 import { AlertifyService } from '../_services/alertify.service';
@@ -24,11 +20,10 @@ import { UserService } from '../_services/user.service';
 export class UserDetailComponent implements OnInit {
   user: User;
   follow: Follow;
-  galleryOptions: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
   modalRef: BsModalRef;
   followeeItems: any;
   followerItems: any;
+  photo: Photo;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,34 +39,7 @@ export class UserDetailComponent implements OnInit {
       this.getFollowees();
       this.getFollowers();
       this.getFollow(this.user.id);
-      this.galleryImages = this.getImages();
     });
-
-    this.galleryOptions = [
-      {
-        height: '180px',
-        thumbnailsPercent: 25,
-        thumbnails: true,
-        thumbnailsColumns: 3,
-        thumbnailSize: NgxGalleryImageSize.Cover,
-        preview: true,
-        image: false,
-      },
-    ];
-  }
-
-  getImages() {
-    const imageUrls = [];
-    for (const photo of this.user.photos) {
-      imageUrls.push({
-        small: photo.url,
-        medium: photo.url,
-        big: photo.url,
-        description: photo.description,
-      });
-    }
-
-    return imageUrls;
   }
 
   followUser(id: number) {
@@ -196,5 +164,22 @@ export class UserDetailComponent implements OnInit {
     } else {
       return 0;
     }
+  }
+
+  openModalPhotoPreview(template: TemplateRef<any>, photo: Photo) {
+    this.photo = {
+      id: photo.id,
+      dateAdded: photo.dateAdded,
+      user: this.user,
+      isMain: photo.isMain,
+      url: photo.url,
+      description: photo.description,
+    };
+    this.photo.user.description = '';
+    this.modalRef = this.modalService.show(template);
+  }
+
+  closeDialog() {
+    this.modalRef.hide();
   }
 }

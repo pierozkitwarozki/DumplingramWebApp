@@ -49,12 +49,12 @@
         </button>
       </div>
     </div>
-    <div class="container mt-4 w-100 text-center">
-      <ngx-gallery
-        [options]="galleryOptions"
-        [images]="galleryImages"
-        class="ngx-gallery"
-      ></ngx-gallery>
+    <div class="container">
+      <div class="grid">
+        <div *ngFor="let photo of user.photos" class="row">
+          <img id="photo" src="{{photo.url}}" alt="{{photo.description}}" (click)="openModalPhotoPreview(photoPreview, photo)" >  
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -114,5 +114,11 @@
         @{{ user.follower.username }}</b
       >
     </div>
+  </div>
+</ng-template>
+
+<ng-template #photoPreview id="photo-preview">
+  <div class="modal-body">
+    <app-post-card [photo]="photo" (getLikerClicked)="closeDialog()"></app-post-card>
   </div>
 </ng-template>
