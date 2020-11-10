@@ -23,6 +23,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { FileUploadModule } from 'ng2-file-upload';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -54,6 +55,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
+    FileUploadModule,
     HttpClientModule,
     NgxGalleryModule,
     FormsModule,

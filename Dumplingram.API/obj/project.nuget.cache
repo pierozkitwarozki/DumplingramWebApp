@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Dbs8OGyQ8Ka9JxKkX1Orm43bWxhjK8u7XrXp14Qw1aZL54uO7H4Fz5XizBbufLv2CvyjvJWGyLGOAVv4llATCA==",
+  "dgSpecHash": "58lVyxClcvrWzErL4JPzhioe5ON67NAkIUVWtLn5qoUGzbff8XYKl7JSqpokxlajij9fTktO3J7JrqoJbdJ5Mg==",
   "success": true,
   "projectFilePath": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp\\Dumplingram.API\\Dumplingram.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Bartłomiej\\.nuget\\packages\\automapper\\10.1.0\\automapper.10.1.0.nupkg.sha512",
     "C:\\Users\\Bartłomiej\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.0\\automapper.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",
+    "C:\\Users\\Bartłomiej\\.nuget\\packages\\cloudinarydotnet\\1.13.1\\cloudinarydotnet.1.13.1.nupkg.sha512",
     "C:\\Users\\Bartłomiej\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.8\\microsoft.aspnetcore.authentication.jwtbearer.3.1.8.nupkg.sha512",
     "C:\\Users\\Bartłomiej\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.8\\microsoft.aspnetcore.jsonpatch.3.1.8.nupkg.sha512",
     "C:\\Users\\Bartłomiej\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.8\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.8.nupkg.sha512",

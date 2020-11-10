@@ -106,7 +106,7 @@ namespace Dumplingram.API.Data
             {
                 photo.User.PasswordHash = null;
                 photo.User.PasswordSalt = null;
-                photo.User.Description = photos.FirstOrDefault(u => u.UserId == photo.UserId && photo.IsMain == true).Url;
+                photo.User.Description = photos.FirstOrDefault(p => p.UserId == photo.UserId && p.IsMain == true).Url;
             }
 
             return photos.OrderByDescending(d => d.DateAdded);

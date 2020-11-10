@@ -4,8 +4,39 @@
 }
 
 #posts2 {
-    padding-top: 5%;
+    padding-top: 3%;
     padding-left: 40%;
     padding-right: 20%;
 }
 
+input {
+    margin-bottom: 7%;
+    font-size: medium;
+    width: 100%;
+    font-family: 'Roboto Slab';
+    height: 4%;
+    outline: none;
+    padding: 4%;
+    padding-left: 8%;
+    padding-right: 8%;
+}
+
+.card {
+    font-family: 'Roboto Slab';
+    border: #D1D1D1;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    box-shadow: 0px 19px 38px -16px rgba(166,166,166,1);
+    outline: none;
+}
+
+#add-photo {
+    padding-top: 3%;
+    padding-left: 30%;
+    padding-right: 10%;
+}
+
+#new-photo-button {
+    font-size: large;
+}
