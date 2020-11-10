@@ -111,5 +111,24 @@ namespace Dumplingram.API.Data
 
             return photos.OrderByDescending(d => d.DateAdded);
         }
+
+        public async Task<IEnumerable<PhotoLike>> GetPhotoLikes(int id)
+        {
+            var likes =  await _context.PhotoLikes
+                .Where(p => p.PhotoId == id).Include(u => u.Liker).ThenInclude(u => u.Photos).ToListAsync();            
+
+            return likes;
+        }
+
+        public async Task<Photo> GetPhoto(int id)
+        {
+            return await _context.Photo.FirstOrDefaultAsync(x => x.ID == id);
+        }
+
+        public async Task<PhotoLike> GetPhotoLike(int id, int userId)
+        {
+            return await _context.PhotoLikes.FirstOrDefaultAsync(x => x.PhotoId == id && x.UserId == userId);
+        }
+
     }
 }

@@ -86,3 +86,25 @@ p {
   word-break: normal;
   white-space: normal;
 }
+
+#profile-image {
+  float: left;
+  display: block;
+  margin-right: 5%;
+  width: 15%;
+  height: 15%;
+  border-radius: 90px;
+}
+
+.close.pull-right {
+  background: transparent;
+  box-shadow: none;
+}
+
+.c-pointer {
+  cursor: pointer;
+}
+
+#name {
+  font-weight: normal;
+}

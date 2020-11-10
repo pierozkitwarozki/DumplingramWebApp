@@ -82,14 +82,5 @@ export class UserService {
       );
   }
 
-  getPhotos(): Observable<Photo[]> {
-    return this.http
-      .get<Photo[]>(this.baseUrl + 'users/dashboard', { observe: 'response' })
-      .pipe(
-        map((response) => {
-          const x = response.body;
-          return x;
-        })
-      );
-  }
+  
 }

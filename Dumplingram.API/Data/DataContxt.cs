@@ -9,6 +9,7 @@ namespace Dumplingram.API.Data
         public DbSet<User> Users { get; set; }   
         public DbSet<Follow> Follow { get; set; }
         public DbSet<Photo> Photo {get; set;}
+        public DbSet<PhotoLike> PhotoLikes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder) 
         {
@@ -25,6 +26,21 @@ namespace Dumplingram.API.Data
                 .HasOne(u => u.Follower)
                 .WithMany(u => u.Followees)
                 .HasForeignKey(u => u.FollowerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<PhotoLike>()
+                .HasKey(k => new { k.UserId, k.PhotoId });
+
+            builder.Entity<PhotoLike>()
+                .HasOne(u => u.Liker)
+                .WithMany(p => p.SendLikes)
+                .HasForeignKey(u => u.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<PhotoLike>()
+                .HasOne(p => p.Photo)
+                .WithMany(u => u.GottenLikes)
+                .HasForeignKey(p => p.PhotoId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
 

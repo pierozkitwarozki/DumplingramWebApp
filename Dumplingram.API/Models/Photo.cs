@@ -1,6 +1,7 @@
 
 
 using System;
+using System.Collections.Generic;
 
 namespace Dumplingram.API.Models
 {
@@ -14,5 +15,6 @@ namespace Dumplingram.API.Models
         public string PublicId { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
+        public ICollection<PhotoLike> GottenLikes { get; set; }
     }
 }

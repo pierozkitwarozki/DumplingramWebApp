@@ -6,6 +6,7 @@ import { runInThisContext } from 'vm';
 import { Photo } from '../_models/Photo';
 import { User } from '../_models/User';
 import { AlertifyService } from '../_services/alertify.service';
+import { PhotoService } from '../_services/photo.service';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private photoService: PhotoService,
     private alertify: AlertifyService,
     private route: ActivatedRoute
   ) {}
@@ -29,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadUsers() {
-    this.userService
+    this.photoService
       .getPhotos()
       .pipe()
       .subscribe(

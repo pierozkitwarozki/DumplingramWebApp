@@ -16,5 +16,8 @@ namespace Dumplingram.API.Data
          Task<IEnumerable<Follow>> GetFollowers(int id);
          Task<IEnumerable<Follow>> GetFollowees(int id);
          Task<IEnumerable<Photo>> GetPhotos(int id);
+         Task<Photo> GetPhoto(int id);
+         Task<IEnumerable<PhotoLike>> GetPhotoLikes(int id);
+         Task<PhotoLike> GetPhotoLike(int id, int userId);
     }
 }

@@ -17,6 +17,7 @@ namespace Dumplingram.API.Helpers
                 .ForMember(dest => dest.Age, 
                     opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoForDetailed>();
+            CreateMap<PhotoLike, PhotoLikeDto>();
         }
     }
 }
