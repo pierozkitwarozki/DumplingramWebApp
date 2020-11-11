@@ -122,7 +122,8 @@ namespace Dumplingram.API.Data
 
         public async Task<Photo> GetPhoto(int id)
         {
-            return await _context.Photo.FirstOrDefaultAsync(x => x.ID == id);
+            var list = await _context.Photo.Where(x => x.ID == id).Include(x => x.GottenLikes).ToListAsync();
+            return list[0];
         }
 
         public async Task<PhotoLike> GetPhotoLike(int id, int userId)

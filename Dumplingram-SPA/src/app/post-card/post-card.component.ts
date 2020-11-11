@@ -22,6 +22,7 @@ import { PhotoService } from '../_services/photo.service';
 export class PostCardComponent implements OnInit {
   @Input() photo: Photo;
   @Output() getLikerClicked = new EventEmitter<string>();
+  @Output() getPhotoDeleted = new EventEmitter<string>();
   photoLikes: PhotoLike[];
   isLiked: any;
   modalRef: BsModalRef;
@@ -121,7 +122,7 @@ export class PostCardComponent implements OnInit {
         .deletePhoto(this.authService.currentUser.id, this.photo.id)
         .subscribe(
           (data) => {
-            this.getLikerClicked.emit();
+            this.getPhotoDeleted.emit();
           },
           (error) => {
             this.alertify.error(error);

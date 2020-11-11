@@ -27,7 +27,7 @@ namespace Dumplingram.API.Controllers
         private Cloudinary _cloudinary;
         private readonly IMapper _mapper;
 
-        public PhotosController(IDumplingramRepository repo, IMapper mapper,  IOptions<CloudinarySettings> cloudinaryConfig)
+        public PhotosController(IDumplingramRepository repo, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
         {
             _cloudinaryConfig = cloudinaryConfig;
             _mapper = mapper;
@@ -49,7 +49,7 @@ namespace Dumplingram.API.Controllers
 
             var likesToReturn = _mapper.Map<IEnumerable<PhotoLikeDto>>(likes);
 
-            if(likes == null)
+            if (likes == null)
                 return BadRequest("Coś poszło nie tak.");
 
             return Ok(likesToReturn);
@@ -60,20 +60,21 @@ namespace Dumplingram.API.Controllers
         {
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            var photoLike = new PhotoLike {
+            var photoLike = new PhotoLike
+            {
                 UserId = userId,
                 PhotoId = id
             };
 
-            if (await _repo.GetPhoto(photoLike.PhotoId)==null)
+            if (await _repo.GetPhoto(photoLike.PhotoId) == null)
                 return BadRequest("Zdjęcie nie istnieje.");
 
-            if(await _repo.GetPhotoLike(id, userId)!=null)
+            if (await _repo.GetPhotoLike(id, userId) != null)
                 return BadRequest("Już lubisz to zdjęcie");
 
             await _repo.Add(photoLike);
 
-            if(await _repo.SaveAll())
+            if (await _repo.SaveAll())
                 return NoContent();
 
             return BadRequest("Coś poszło nie tak");
@@ -82,14 +83,14 @@ namespace Dumplingram.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPhotos()
         {
-           var currentUserId = 
-            int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            
+            var currentUserId =
+             int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
             var photos = await _repo.GetPhotos(currentUserId);
-        
-            if(photos == null)
+
+            if (photos == null)
                 return BadRequest("Coś poszło nie tak.");
-            
+
             return Ok(photos);
         }
 
@@ -99,7 +100,7 @@ namespace Dumplingram.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var like =  await _repo.GetPhotoLike(photoId, userId);
+            var like = await _repo.GetPhotoLike(photoId, userId);
             return Ok(like);
         }
 
@@ -108,17 +109,17 @@ namespace Dumplingram.API.Controllers
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            
+
             var like = await _repo.GetPhotoLike(id, userId);
 
-            if(like == null)
+            if (like == null)
                 return BadRequest("Nie lubisz tego zdjęcia");
-                
+
             _repo.Delete<PhotoLike>(like);
 
-            if(await _repo.SaveAll())
+            if (await _repo.SaveAll())
                 return NoContent();
-            
+
             return BadRequest("Coś poszło nie tak.");
         }
 
@@ -127,28 +128,30 @@ namespace Dumplingram.API.Controllers
         {
             var photoFromRepo = await _repo.GetPhoto(id);
 
-            if(photoFromRepo == null)
+            if (photoFromRepo == null)
                 return BadRequest("Nie ma takiego zdjęcia");
 
             var photo = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
-            
+
             return Ok(photo);
         }
 
-         [HttpPost("{userId}")]
-        public async Task<IActionResult> AddPhotoForUser(int userId, 
-            [FromForm]PhotoForCreationDto photoForCreationDto)
+        [HttpPost("{userId}")]
+        public async Task<IActionResult> AddPhotoForUser(int userId,
+           [FromForm] PhotoForCreationDto photoForCreationDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            
+
             var userFromRepo = await _repo.GetUser(userId);
 
             var file = photoForCreationDto.File;
 
             var uploadResult = new ImageUploadResult();
 
-            if(file.Length > 0)
+            var photoId = ("user_" + userFromRepo.ID + "-").GeneratePublicId();
+
+            if (file.Length > 0)
             {
                 using (var stream = file.OpenReadStream())
                 {
@@ -156,7 +159,8 @@ namespace Dumplingram.API.Controllers
                     {
                         File = new FileDescription(file.Name, stream),
                         Transformation = new Transformation()
-                            .Width(500).Height(500).Crop("fill").Gravity("face")
+                            .Width(500).Height(500).Crop("fill").Gravity("face"),
+                        PublicId = photoId
                     };
 
                     uploadResult = _cloudinary.Upload(uploadParams);
@@ -168,13 +172,14 @@ namespace Dumplingram.API.Controllers
 
             var photo = _mapper.Map<Photo>(photoForCreationDto);
 
-            if(!userFromRepo.Photos.Any(u => u.IsMain)){
+            if (!userFromRepo.Photos.Any(u => u.IsMain))
+            {
                 photo.IsMain = true;
             }
 
             userFromRepo.Photos.Add(photo);
 
-            if(await _repo.SaveAll())
+            if (await _repo.SaveAll())
             {
                 var photoForReturn = _mapper.Map<PhotoForReturnDto>(photo);
                 return CreatedAtRoute("GetPhoto", new { userId = userId, id = photo.ID }, photoForReturn);
@@ -188,32 +193,43 @@ namespace Dumplingram.API.Controllers
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            
+
             var userFromRepo = await _repo.GetUser(userId);
 
-            if(!userFromRepo.Photos.Any(p => p.ID == id))
+            if (!userFromRepo.Photos.Any(p => p.ID == id))
                 return Unauthorized();
 
             var photoFromRepo = await _repo.GetPhoto(id);
 
+            if (photoFromRepo.GottenLikes != null && photoFromRepo.GottenLikes.Count > 0)
+            {
+                foreach (var like in photoFromRepo.GottenLikes)
+                {
+                    _repo.Delete(like);
+                }
+
+                if (!await _repo.SaveAll())
+                    return BadRequest("Coś poszło nie tak.");
+            }
+
             if (photoFromRepo.IsMain)
-                return BadRequest("You cannot delete your main photo.");
+                return BadRequest("Nie możesz usunąć zdjęcia głównego.");
 
             if (!string.IsNullOrEmpty(photoFromRepo.PublicId))
-            {
-                var deleteParams = new DeletionParams(photoFromRepo.PublicId);
+             {
+                 var deleteParams = new DeletionParams(photoFromRepo.PublicId);
 
-                var result = await _cloudinary.DestroyAsync(deleteParams);
+                 var result = await _cloudinary.DestroyAsync(deleteParams);
 
-                if (result.Result == "ok")
-                    _repo.Delete(photoFromRepo);
-            }
-            else _repo.Delete(photoFromRepo);
-           
+                 if (result.Result == "ok")
+                     _repo.Delete(photoFromRepo);
+             }
+             else _repo.Delete(photoFromRepo);
+
             if (await _repo.SaveAll())
                 return Ok();
 
-            return BadRequest("Failed to delete the photo");
+            return BadRequest("Coś poszło nie tak.");
         }
     }
 }

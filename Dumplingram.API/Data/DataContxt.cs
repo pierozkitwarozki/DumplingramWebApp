@@ -29,7 +29,7 @@ namespace Dumplingram.API.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<PhotoLike>()
-                .HasKey(k => new { k.UserId, k.PhotoId });
+                .HasKey(k => new {k.UserId, k.PhotoId});
 
             builder.Entity<PhotoLike>()
                 .HasOne(u => u.Liker)
@@ -42,6 +42,7 @@ namespace Dumplingram.API.Data
                 .WithMany(u => u.GottenLikes)
                 .HasForeignKey(p => p.PhotoId)
                 .OnDelete(DeleteBehavior.Restrict);
+
         }
 
     }

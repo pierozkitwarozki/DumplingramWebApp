@@ -119,6 +119,6 @@
 
 <ng-template #photoPreview id="photo-preview">
   <div class="modal-body">
-    <app-post-card [photo]="photo" (getLikerClicked)="closeDialog()"></app-post-card>
+    <app-post-card [photo]="photo" (getLikerClicked)="closeDialog()" (getPhotoDeleted)="ngOnInit()"></app-post-card>
   </div>
 </ng-template>
