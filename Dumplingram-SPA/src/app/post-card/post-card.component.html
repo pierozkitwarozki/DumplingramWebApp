@@ -1,13 +1,18 @@
 <div id="card" class="container text-center">
-  <div id="user-info" class="col">
-    <img *ngIf="photo.user.description"
-      id="avatar"
-      src="{{ photo.user.description }}"
-      alt="{{ photo.user.username }}"
-      class="mr-2"
-      [routerLink]="['/users/', photo.user.id]"
-    />
-    <h1 id="username">{{ photo.user.username }}</h1>
+  <div id="user-info" class="col" >
+    <div style="display: flex; justify-content: flex-start; align-items: center">
+      <img 
+        id="avatar"
+        src="{{ photo.user.description || '../../assets/white.png'}}"
+        alt="{{ photo.user.username }}"
+        class="mr-2"
+        [routerLink]="['/users/', photo.user.id]"
+      />
+    <h1 id="username">@{{ photo.user.username }}</h1>
+    </div>   
+    <div *ngIf="isPhotoMine()" style="display: flex; justify-content: flex-end">
+      <i  class="fa fa-trash" ></i>
+    </div>   
   </div>
   <div class="col">
     <img id="post-photo" src="{{ photo.url }}" alt="{{ photo.description }}" (dblclick)="likeOrDislike(photo.id)" />

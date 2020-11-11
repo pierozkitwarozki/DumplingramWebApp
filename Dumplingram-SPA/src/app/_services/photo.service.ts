@@ -29,11 +29,16 @@ export class PhotoService {
   }
 
   getLikes(photoId: number): Observable<PhotoLike[]> {
-    return this.http.get<PhotoLike[]>(this.baseUrl + 'photos/' + photoId + '/likes/', {observe: 'response'})
-      .pipe(map((response => {
-        const x = response.body;
-        return x;
-      })));
+    return this.http
+      .get<PhotoLike[]>(this.baseUrl + 'photos/' + photoId + '/likes/', {
+        observe: 'response',
+      })
+      .pipe(
+        map((response) => {
+          const x = response.body;
+          return x;
+        })
+      );
   }
 
   unlikePhoto(id: number, userId: number) {
@@ -44,13 +49,23 @@ export class PhotoService {
 
   getLike(photoId: number, userId: number): Observable<PhotoLike> {
     return this.http
-      .get<PhotoLike>(this.baseUrl + 'photos/' + photoId + '/getlike/' + userId, {
-        observe: 'response',
-      })
+      .get<PhotoLike>(
+        this.baseUrl + 'photos/' + photoId + '/getlike/' + userId,
+        {
+          observe: 'response',
+        }
+      )
       .pipe(
         map((response) => {
           return response.body;
         })
       );
+  }
+
+  deletePhoto(userId: number, photoId: number) {
+    debugger;
+    return this.http.delete(
+      this.baseUrl + 'photos/' + userId + '/delete/' + photoId
+    );
   }
 }

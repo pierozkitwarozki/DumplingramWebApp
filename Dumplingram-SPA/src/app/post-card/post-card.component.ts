@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Photo } from '../_models/Photo';
 import { PhotoLike } from '../_models/PhotoLike';
@@ -98,5 +105,28 @@ export class PostCardComponent implements OnInit {
   openFoloweesModal(template: TemplateRef<any>) {
     this.getLikerClicked.emit();
     this.modalRef = this.modalService.show(template);
+  }
+
+  isPhotoMine(): boolean {
+    if (this.photo.user.id === this.authService.currentUser.id) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  deletePhoto() {
+    this.alertify.confirm('czy na pewno chcesz usunąć to zdjęcie? ', () => {
+      this.photoService
+        .deletePhoto(this.authService.currentUser.id, this.photo.id)
+        .subscribe(
+          (data) => {
+            this.getLikerClicked.emit();
+          },
+          (error) => {
+            this.alertify.error(error);
+          }
+        );
+    });
   }
 }

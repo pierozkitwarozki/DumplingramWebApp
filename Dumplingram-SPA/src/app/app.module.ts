@@ -21,7 +21,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { PostCardComponent } from './post-card/post-card.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
-import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FileUploadModule } from 'ng2-file-upload';
 
@@ -57,7 +56,6 @@ export class CustomHammerConfig extends HammerGestureConfig {
     BrowserAnimationsModule,
     FileUploadModule,
     HttpClientModule,
-    NgxGalleryModule,
     FormsModule,
     JwtModule.forRoot({
       config: {

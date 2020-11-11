@@ -125,7 +125,7 @@ export class UserDetailComponent implements OnInit {
       );
   }
 
-  isMyProfile(): boolean {
+  isProfileMine(): boolean {
     if (this.user.id === this.authService.currentUser.id) {
       return true;
     } else {

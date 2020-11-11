@@ -21,6 +21,7 @@
       (click)="openSearchedUsers(template)"
     />
   </div>
+  <!--User info section-->
   <div *ngIf="authService.loggedIn()">
     <div class="btn-group" dropdown>
       <h1
@@ -55,6 +56,8 @@
   </div>
 </nav>
 
+
+<!--Searching for users-->
 <ng-template #template>
   <div class="modal-header">
     <div class="container text-center">
