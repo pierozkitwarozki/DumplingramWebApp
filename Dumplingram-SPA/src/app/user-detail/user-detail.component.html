@@ -2,10 +2,13 @@
   <div id="profile" class="container col">
     <div id="avatar-section">
       <img id="avatar" src="{{ user.photoUrl }}" alt="{{ user.username }}" />
-      <label id="username" for="avatar">{{ user.username }}</label>
+      <label id="username" for="avatar">@{{ user.username }}</label>
     </div>
     <div class="container w-100 mt-4 text-center">
       <p id="name">{{ user.name }} {{ user.surname }}</p>
+      <p id="localization">
+        {{ user.city }}, {{ user.country}}
+      </p>
       <p id="description">
         {{ user.description }}
       </p>

@@ -43,9 +43,10 @@ export const appRoutes: Routes = [
       {
         path: 'edit',
         resolve: { user: UserEditResolver },
+        canDeactivate: [PreventUnsavedChanges],
         component: UserEditComponent
       }
     ],
   },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

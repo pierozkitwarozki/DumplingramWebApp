@@ -9,6 +9,7 @@
 #profile {
     border: #d1d1d1;
   border-style: solid;
+  background: rgb(245, 245, 245);
   border-width: 1%;
   border-radius: 20px;
   box-shadow: 0px 42px 38px -32px rgba(166, 166, 166, 1);
@@ -88,6 +89,7 @@ button:focus {
   width: 15%;
   height: 15%;
   border-radius: 90px;
+  cursor: pointer;
 }
 
 .close.pull-right {
@@ -100,7 +102,7 @@ button:focus {
 }
 
 #name {
-  font-weight: normal;
+  font-weight: bold;
 }
 
 #photo {
@@ -108,6 +110,7 @@ button:focus {
   height:250px;
   object-fit:cover;
   margin: 10px;
+  cursor: pointer;
 }
 
 .grid { 
@@ -121,4 +124,9 @@ button:focus {
   border: 1px solid #ccc;
   box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
   max-width: 100%;
+}
+
+#localization {
+  text-align: left;
+  font-weight: normal;
 }

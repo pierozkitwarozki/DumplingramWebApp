@@ -40,3 +40,9 @@ input {
 #new-photo-button {
     font-size: large;
 }
+
+h1 {
+    font-family: 'Roboto Slab';
+    font-weight: bold;
+    font-size: large;
+}

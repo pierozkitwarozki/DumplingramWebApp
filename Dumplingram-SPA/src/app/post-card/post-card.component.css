@@ -19,6 +19,7 @@
   border-radius: 90px;
   float: left;
   display: block;
+  cursor: pointer;
 }
 
 #username {
@@ -41,6 +42,7 @@
   border: #d1d1d1;
   border-style: solid;
   border-width: 1%;
+  background: rgb(245, 245, 245);
   border-radius: 20px;
   box-shadow: 0px 42px 38px -32px rgba(166, 166, 166, 1);
   padding-right: 0;
@@ -64,6 +66,7 @@
   font-size: large;
   font-weight: bold;
   font-family: "Roboto Slab";
+  cursor: pointer;
 }
 
 #like {
@@ -72,6 +75,8 @@
   display: block;
   float: left;
   margin-right: 5%;
+  cursor: pointer;
+  
 }
 
 #description {
@@ -95,6 +100,7 @@ p {
   width: 15%;
   height: 15%;
   border-radius: 90px;
+  cursor: pointer;
 }
 
 .close.pull-right {
@@ -109,4 +115,13 @@ p {
 #name {
   font-weight: normal;
 }
+
+#post-photo {
+  height: 50%;
+  width: 100%;
+  border: #d1d1d1;
+  position: sticky;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
 

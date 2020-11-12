@@ -13,6 +13,7 @@
 <ng-template #addphoto>
     <div class="modal-header">
         <div class="container text-center">
+          <h1 class="mb-2">Co słychać, {{ authService.currentUser.name }}?</h1>
           <form id="input" >             
             <input (keyup)="onKey($event)" placeholder="Dodaj opis..." />
           </form>

@@ -17,8 +17,9 @@
       <i class="fa fa-trash" (click)="deletePhoto()"></i>
     </div>
   </div>
-  <div class="col">
+  <div class="col" >
     <img
+      style="position: relative; top: 0; left: 0"
       id="post-photo"
       src="{{ photo.url }}"
       alt="{{ photo.description }}"
@@ -50,7 +51,7 @@
   </div>
 </div>
 
-<ng-template #template>
+<ng-template #template >
   <div class="modal-header">
     <h4 class="modal-title pull-left">polubienia: {{ countLikes() }}</h4>
     <button

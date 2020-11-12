@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private userService: UserService,
-    private authService: AuthService,
+    public authService: AuthService,
     private photoService: PhotoService,
     private alertify: AlertifyService,
     private route: ActivatedRoute
@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.photos = data['users'];
     });
+    
     this.initializeUploader();
   }
 
