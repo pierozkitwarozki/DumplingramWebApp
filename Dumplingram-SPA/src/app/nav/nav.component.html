@@ -41,7 +41,7 @@
         role="menu"
         aria-labelledby="button-animated"
       >
-        <li role="menuitem"><a class="dropdown-item">edytuj profil</a></li>
+        <li role="menuitem"><a class="dropdown-item" [routerLink]="['/edit']" >edytuj profil</a></li>
         <li role="menuitem">
           <a class="dropdown-item" (click)="logout()">wyloguj</a>
         </li>

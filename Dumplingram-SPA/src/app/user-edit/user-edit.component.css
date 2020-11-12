@@ -1,0 +1,61 @@
+button:disabled:hover {
+  background-color: #6617cb;
+  background-image: linear-gradient(315deg, #6617cb 0%, #cb218e 74%);
+}
+
+button:hover {
+  background-color: #6247aa;
+  background-image: linear-gradient(316deg, #6247aa 0%, #a594f9 74%);
+}
+
+button:focus {
+  outline: none;
+}
+
+.card {
+  border: #d1d1d1;
+  border-style: solid;
+  border-width: 1%;
+  border-radius: 20px;
+  box-shadow: 0px 42px 38px -32px rgba(166, 166, 166, 1);
+  padding: 5%;
+  margin: 0;
+}
+
+.card-footer {
+  background: transparent;
+}
+
+img {
+  border-radius: 90%;
+}
+
+h1 {
+  font-size: auto;
+  font-weight: bold;
+  font-family: "Roboto Slab";
+}
+
+p {
+    font-size: auto;
+  font-weight: normal;
+  font-family: "Roboto Slab";
+}
+
+input {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: medium;
+    font-family: 'Roboto Slab';
+    outline: none;
+}
+
+h4 {
+    font-family: 'Roboto Slab';
+    font-weight: bold;
+    font-size: auto;
+}
+
+strong {
+  font-family: 'Roboto Slab';
+}

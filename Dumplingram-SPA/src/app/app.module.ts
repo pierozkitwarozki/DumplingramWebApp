@@ -23,6 +23,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FileUploadModule } from 'ng2-file-upload';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserEditResolver } from './_resolvers/user-edit.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -45,6 +47,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     HomeComponent,
     PostCardComponent,
     UserDetailComponent,
+    UserEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +74,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     NotAuthGuard,
     PostListResolver,
     UserDetailResolver,
+    UserEditResolver,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
   ],
   bootstrap: [AppComponent],

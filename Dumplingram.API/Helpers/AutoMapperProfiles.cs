@@ -20,6 +20,7 @@ namespace Dumplingram.API.Helpers
             CreateMap<PhotoLike, PhotoLikeDto>();
             CreateMap<PhotoForCreationDto, Photo>();
             CreateMap<Photo, PhotoForReturnDto>();
+            CreateMap<UserForUpdateDto, User>();
         }
     }
 }
