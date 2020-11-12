@@ -63,9 +63,15 @@ export class PhotoService {
   }
 
   deletePhoto(userId: number, photoId: number) {
-    debugger;
     return this.http.delete(
       this.baseUrl + 'photos/' + userId + '/delete/' + photoId
+    );
+  }
+
+  setMainPhoto(userId: number, photoId: number) {
+    return this.http.post(
+      this.baseUrl + 'photos/' + userId + '/setMain/' + photoId,
+      {}
     );
   }
 }

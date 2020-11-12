@@ -9,10 +9,10 @@ import {
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Photo } from '../_models/Photo';
 import { PhotoLike } from '../_models/PhotoLike';
-import { User } from '../_models/User';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { PhotoService } from '../_services/photo.service';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-post-card',
@@ -30,11 +30,15 @@ export class PostCardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private photoService: PhotoService,
+    private userService: UserService,
     private alertify: AlertifyService,
     private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
+    this.userService.getUser(this.photo.user.id).subscribe((data) => {
+      this.photo.user = data;
+    });
     this.getLikes();
     this.doILike();
   }
@@ -117,12 +121,28 @@ export class PostCardComponent implements OnInit {
   }
 
   deletePhoto() {
-    this.alertify.confirm('czy na pewno chcesz usunąć to zdjęcie? ', () => {
+    this.alertify.confirm('Czy na pewno chcesz usunąć to zdjęcie? ', () => {
       this.photoService
         .deletePhoto(this.authService.currentUser.id, this.photo.id)
         .subscribe(
           (data) => {
             this.getPhotoDeleted.emit();
+          },
+          (error) => {
+            this.alertify.error(error);
+          }
+        );
+    });
+  }
+
+  setMain() {
+    this.alertify.confirm('Czy chcesz ustawić to zdjęcie jako główne?', () => {
+      this.photoService
+        .setMainPhoto(this.photo.user.id, this.photo.id)
+        .subscribe(
+          (data) => {
+            this.getPhotoDeleted.emit();
+            this.authService.changeMemberPhoto(this.photo.url);
           },
           (error) => {
             this.alertify.error(error);

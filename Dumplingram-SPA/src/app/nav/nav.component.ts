@@ -15,6 +15,7 @@ export class NavComponent implements OnInit {
   modalRef: BsModalRef;
   searchedUsers: User[];
   word: string;
+  photoUrl: string;
 
   constructor(
     public authService: AuthService,
@@ -26,6 +27,9 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.word = '';
+    this.authService.currentPhotoUrl.subscribe(
+      (photoUrl) => (this.photoUrl = photoUrl)
+    );
   }
 
   logout() {
@@ -61,6 +65,4 @@ export class NavComponent implements OnInit {
     this.modalRef.hide();
     this.searchedUsers = null;
   }
-
-
 }

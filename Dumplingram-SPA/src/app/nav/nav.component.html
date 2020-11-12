@@ -49,7 +49,7 @@
     </div>
     <img
       id="avatar"
-      src="{{ authService.currentUser.photoUrl || '../../assets/user.png' }}"
+      src="{{photoUrl}}"
       alt=""
       [routerLink]="'/users/' + authService.decodedToken.nameid"
     />

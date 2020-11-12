@@ -1,30 +1,52 @@
 <div id="card" class="container text-center">
-  <div id="user-info" class="col" >
-    <div style="display: flex; justify-content: flex-start; align-items: center">
-      <img 
+  <div id="user-info" class="col">
+    <div
+      style="display: flex; justify-content: flex-start; align-items: center"
+    >
+      <img
         id="avatar"
-        src="{{ photo.user.description || '../../assets/white.png'}}"
+        src="{{ photo.user.photoUrl }}"
         alt="{{ photo.user.username }}"
         class="mr-2"
         [routerLink]="['/users/', photo.user.id]"
       />
-    <h1 id="username">@{{ photo.user.username }}</h1>
-    </div>   
+      <h1 id="username">@{{ photo.user.username }}</h1>
+    </div>
     <div *ngIf="isPhotoMine()" style="display: flex; justify-content: flex-end">
-      <i  class="fa fa-trash" (click)="deletePhoto()"></i>
-    </div>   
+      <i class="fa fa-check mr-2" (click)="setMain()"></i>
+      <i class="fa fa-trash" (click)="deletePhoto()"></i>
+    </div>
   </div>
   <div class="col">
-    <img id="post-photo" src="{{ photo.url }}" alt="{{ photo.description }}" (dblclick)="likeOrDislike(photo.id)" />
+    <img
+      id="post-photo"
+      src="{{ photo.url }}"
+      alt="{{ photo.description }}"
+      (dblclick)="likeOrDislike(photo.id)"
+    />
   </div>
   <div id="description" class="col">
-    <p>{{photo.description}}</p>
+    <p>{{ photo.description }}</p>
   </div>
-  <hr class="solid">
+  <hr class="solid" />
   <div id="likes-container" class="col">
-    <img *ngIf="!isLiked" id="like" src="../../assets/like.png" alt="like" (click)="likePhoto(photo.id)"/>
-    <img *ngIf="isLiked" id="like" src="../../assets/liked.png" alt="like" (click)="dislikePhoto(photo.id)"/>
-    <h1 id="likes" (click)="openFoloweesModal(template)">Liczba polubień: {{countLikes()}} </h1>
+    <img
+      *ngIf="!isLiked"
+      id="like"
+      src="../../assets/like.png"
+      alt="like"
+      (click)="likePhoto(photo.id)"
+    />
+    <img
+      *ngIf="isLiked"
+      id="like"
+      src="../../assets/liked.png"
+      alt="like"
+      (click)="dislikePhoto(photo.id)"
+    />
+    <h1 id="likes" (click)="openFoloweesModal(template)">
+      Liczba polubień: {{ countLikes() }}
+    </h1>
   </div>
 </div>
 

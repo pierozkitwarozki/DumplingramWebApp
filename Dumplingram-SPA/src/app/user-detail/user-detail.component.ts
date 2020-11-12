@@ -175,7 +175,6 @@ export class UserDetailComponent implements OnInit {
       url: photo.url,
       description: photo.description,
     };
-    this.photo.user.description = '';
     this.modalRef = this.modalService.show(template);
   }
 
@@ -183,5 +182,15 @@ export class UserDetailComponent implements OnInit {
     this.modalRef.hide();
   }
 
-
+  refreshPage() {
+    this.userService.getUser(this.user.id).subscribe(
+      (res: User) => {
+        this.user = res;
+      },
+      (error) => {
+        this.alertify.error(error);
+      }
+    );
+    this.modalRef.hide();
+  }
 }
