@@ -1,37 +1,92 @@
 <div id="threads" class="card m-5 p-5">
+  <h1
+    style="font-family: 'Roboto Slab'; font-size: xx-large; font-weight: bold"
+    class="mb-5"
+  >
+    Konwersacje prywatne
+  </h1>
   <div id="avatar-section" class="mb-4" *ngFor="let message of messages">
     <!--follow-image-->
-    <div *ngIf="!isLastMessageFromMe(message)">
-      <img id="follow-image" src="{{message.senderPhotoUrl}}" (click)="openConversation(message.senderId, template)">
-      <b class="w-100"
-      ><p id="name">{{ message.content }}</p>
-      @{{ message.senderUsername }}</b
-      
+    <div
+      id="conv"
+      *ngIf="!isLastMessageFromMe(message)"
+      (click)="openConversation(message.senderId, template)"
     >
+      <img id="follow-image" src="{{ message.senderPhotoUrl }}" />
+      <div>
+        <b class="w-100"
+          ><p id="name">{{ message.content }}</p>
+          @{{ message.senderUsername }}</b
+        >
+        <p id="name" style="display: flex; justify-content: flex-end">
+          {{ message.messageSent | date: "mediumDate" }}
+        </p>
+      </div>
     </div>
-  
-    <div *ngIf="isLastMessageFromMe(message)">
-      <img id="follow-image" src="{{message.recipientPhotoUrl}}" (click)="openConversation(message.recipientId, template)">
-      <b class="w-100"
-      ><p id="name">{{ message.content }}</p>
-      @{{ message.recipientUsername }}</b
+
+    <div
+      id="conv"
+      *ngIf="isLastMessageFromMe(message)"
+      (click)="openConversation(message.recipientId, template)"
     >
-    </div>  
+      <img id="follow-image" src="{{ message.recipientPhotoUrl }}" />
+      <div>
+        <b class="w-100"
+          ><p id="name">{{ message.content }}</p>
+          @{{ message.recipientUsername }}</b
+        >
+        <p id="name" style="display: flex; justify-content: flex-end">
+          {{ message.messageSent | date: "mediumDate" }}
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 
 <ng-template #template>
   <div class="modal-header">
-    <button
-      type="button"
-      style="background: transparent;"
-      class="close pull-right"
-      aria-label="Close"
-      (click)="close()"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <div>
+      <img
+        id="avatar"
+        src="{{ user.photoUrl }}"
+        style="width: 14%; height: 14%; border-radius: 90px"
+      />
+      <label
+        for="avatar"
+        style="font-size: large; font-family: 'Roboto Slab'; font-weight: bold"
+        class="ml-2"
+        >{{ user.name }} {{ user.surname }}</label
+      >
+    </div>
   </div>
-  <app-conversation [userId]="selectedUserId"></app-conversation>
-</ng-template>
+  <div class="modal-body">
+    <div
+      class="talk-bubble tri-right left-top"
+      *ngFor="let message of chatMessages"
+    >
+      <div *ngIf="isFromMe(message)" class="mine messages">
+        <div class="message">
+          {{ message.content }}
+        </div>
+      </div>
 
+      <div *ngIf="!isFromMe(message)" class="yours messages">
+        <div class="message">
+          {{ message.content }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="container text-center">
+      <form id="input">
+        <input
+          class="float-left"
+          placeholder="Wiadomość..."
+          (keyup)="onKey($event)"
+        />
+        <button class="float-right" (click)="sendMessage()">Wyślij</button>
+      </form>
+    </div>
+  </div>
+</ng-template>

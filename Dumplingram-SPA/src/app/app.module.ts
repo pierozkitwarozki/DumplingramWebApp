@@ -28,7 +28,7 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { ThreadListComponent } from './thread-list/thread-list.component';
 import { NbButtonModule, NbCardModule, NbChatModule, NbLayoutModule, NbListModule, NbSidebarModule, NbThemeModule, NbUserModule } from '@nebular/theme';
 import { ConversationListResolver } from './_resolvers/conversation-list.resolver';
-import { ConversationComponent } from './conversation/conversation.component';
+
 
 
 export function tokenGetter() {
@@ -54,7 +54,6 @@ export class CustomHammerConfig extends HammerGestureConfig {
     UserDetailComponent,
     UserEditComponent,
     ThreadListComponent,
-    ConversationComponent,
   ],
   imports: [
     BrowserModule,

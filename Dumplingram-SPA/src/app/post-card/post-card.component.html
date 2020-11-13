@@ -13,11 +13,11 @@
       <h1 id="username">@{{ photo.user.username }}</h1>
     </div>
     <div *ngIf="isPhotoMine()" style="display: flex; justify-content: flex-end">
-      <i class="fa fa-check mr-2" (click)="setMain()"></i>
-      <i class="fa fa-trash" (click)="deletePhoto()"></i>
+      <i class="fa fa-check mr-2" style="cursor: pointer;" (click)="setMain()"></i>
+      <i class="fa fa-trash" style="cursor: pointer;" (click)="deletePhoto()"></i>
     </div>
   </div>
-  <div class="col" >
+  <div class="col">
     <img
       style="position: relative; top: 0; left: 0"
       id="post-photo"
@@ -30,7 +30,7 @@
     <p>{{ photo.description }}</p>
   </div>
   <hr class="solid" />
-  <div id="likes-container" class="col">
+  <div id="likes-container" class="col" style="align-items: center;">
     <img
       *ngIf="!isLiked"
       id="like"
@@ -45,37 +45,38 @@
       alt="like"
       (click)="dislikePhoto(photo.id)"
     />
-    <h1 id="likes" (click)="openFoloweesModal(template)">
-      Liczba polubień: {{ countLikes() }}
-    </h1>
+    <div>
+      <h1 id="likes" (click)="openFoloweesModal(template)"  class="w-100">
+        Liczba polubień: {{ countLikes() }}
+      </h1>
+      <p>{{photo.dateAdded | date: 'mediumDate'}}</p>
+    </div>
+
   </div>
 </div>
 
-<ng-template #template >
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">polubienia: {{ countLikes() }}</h4>
-    <button
-      type="button"
-      class="close pull-right"
-      aria-label="Close"
-      (click)="modalRef.hide()"
+<ng-template #template>
+  <div class="modal-header p-5 text-center">
+    <h1
+      style="font-family: 'Roboto Slab'; font-weight: bold; font-size: xx-large"
     >
-      <span aria-hidden="true">&times;</span>
-    </button>
+      Liczba polubień: {{ countLikes() }}
+    </h1>
   </div>
+
   <div class="modal-body">
     <div id="avatar-section" class="mb-4" *ngFor="let like of photoLikes">
-      <img
-        id="profile-image"
-        src="{{ like.liker.photoUrl }}"
-        alt=""
+      <div
+        id="item"
         [routerLink]="['/users/', like.liker.id]"
         (click)="modalRef.hide()"
-      />
-      <b class="w-100"
-        ><p id="name">{{ like.liker.name }} {{ like.liker.surname }}</p>
-        @{{ like.liker.username }}</b
       >
+        <img id="profile-image" src="{{ like.liker.photoUrl }}" alt="" />
+        <b class="w-100"
+          ><p id="name">{{ like.liker.name }} {{ like.liker.surname }}</p>
+          @{{ like.liker.username }}</b
+        >
+      </div>
     </div>
   </div>
 </ng-template>

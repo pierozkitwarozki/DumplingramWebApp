@@ -14,9 +14,8 @@ a {
 }
 
 #avatar {
-    max-height: 45px;
-    border: 1px solid white;
-    display: inline;
+    height: 8%;
+    width: 8%;
     border-radius: 90px;
 }
 
@@ -45,7 +44,6 @@ a.dropdown-item:focus {
 #avatar-section {
     display: flex;
     align-items: center
-    
 }
 
 #follow-image {
@@ -72,7 +70,7 @@ a.dropdown-item:focus {
     font-weight: normal;
 }
 
-input {
+#searchusers {
     margin-bottom: 7%;
     font-size: medium;
     width: 100%;
@@ -86,11 +84,25 @@ input {
 
 #search {
     font-size: medium;
-    width: 100%;
-    height: 4%;
+    width: 60%;
+    height: 40%;
     font-family: 'Roboto Slab';
     outline: none;
-    padding: 4%;
-    padding-left: 8%;
-    padding-right: 8%;
+    padding: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
 }
+
+#item {
+    padding: 10px;
+  }
+  
+  #item:hover {
+    cursor: pointer;
+    background-color: #5555552d;
+    border-radius: 20px;
+  }
+  
+  #item:focus {
+    outline: none;
+  }

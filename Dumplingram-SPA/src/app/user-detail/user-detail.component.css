@@ -61,7 +61,7 @@ p {
 button {
   margin-bottom: 7%;
   border-radius: 20px;
-  width: 30%;
+  width: 28%;
   height: 10%;
   background-color: rgb(0, 106, 192);
   outline: none;
@@ -129,4 +129,30 @@ button:focus {
 #localization {
   text-align: left;
   font-weight: normal;
+}
+
+#item {
+  padding: 10px;
+}
+
+#item:hover {
+  cursor: pointer;
+  background-color: #5555552d;
+  border-radius: 20px;
+}
+
+#item:focus {
+  outline: none;
+}
+
+input {
+  margin-bottom: 7%;
+  font-size: medium;
+  width: 70%;
+  font-family: 'Roboto Slab';
+  height: 4%;
+  outline: none;
+  padding: 4%;
+  padding-left: 8%;
+  padding-right: 8%;
 }

@@ -5,11 +5,13 @@ import { ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { error } from 'protractor';
 import { Follow } from '../_models/Follow';
+import { Message } from '../_models/Message';
 import { Photo } from '../_models/Photo';
 
 import { User } from '../_models/User';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
+import { MessageService } from '../_services/message.service';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -24,13 +26,16 @@ export class UserDetailComponent implements OnInit {
   followeeItems: any;
   followerItems: any;
   photo: Photo;
+  message: string;
+  newMessage: any = {};
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
     private authService: AuthService,
     private alertify: AlertifyService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -192,5 +197,34 @@ export class UserDetailComponent implements OnInit {
       }
     );
     this.modalRef.hide();
+  }
+
+  onKey(event) {
+    this.message = event.target.value;
+  }
+
+  sendMessage() {
+    this.newMessage.recipientId = this.user.id;
+    this.newMessage.content = this.message;
+    if (this.newMessage.content !== "" && this.newMessage.content) {
+      this.messageService
+        .sendMessage(this.authService.currentUser.id, this.newMessage)
+        .subscribe(
+          (message: Message) => {
+            this.newMessage.content = '';
+            this.modalRef.hide();
+            this.alertify.success("Wysłano.");
+          },
+          (error) => {
+            this.alertify.error(error);
+          }
+        );
+    } else {
+      this.alertify.error('Nie wysyłaj pustej wiadomości.');
+    }
+  }
+
+  openCreateMessageModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 }
