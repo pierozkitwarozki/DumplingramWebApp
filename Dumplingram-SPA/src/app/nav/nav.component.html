@@ -3,17 +3,18 @@
   <a
     class="navbar-brand ml-5"
     *ngIf="!authService.loggedIn()"
-    [routerLink]="'/login'"
+    [routerLink]="['/login']"
   >
     Dumplingram
   </a>
   <a
     class="navbar-brand ml-5"
     *ngIf="authService.loggedIn()"
-    [routerLink]="'/home'"
+    [routerLink]="['/home']"
   >
     Dumplingram
   </a>
+  
   <div *ngIf="authService.loggedIn()" class="w-20 text-center">
     <input
       id="search"
@@ -21,6 +22,14 @@
       (click)="openSearchedUsers(template)"
     />
   </div>
+
+  <a
+    class="navbar-brand"
+    *ngIf="authService.loggedIn()"
+    [routerLink]="['/threads']"
+  >
+    <i class="fa fa-comments"></i>
+  </a>
   <!--User info section-->
   <div *ngIf="authService.loggedIn()">
     <div class="btn-group" dropdown>

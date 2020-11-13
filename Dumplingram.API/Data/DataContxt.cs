@@ -10,6 +10,7 @@ namespace Dumplingram.API.Data
         public DbSet<Follow> Follow { get; set; }
         public DbSet<Photo> Photo {get; set;}
         public DbSet<PhotoLike> PhotoLikes { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder) 
         {
@@ -20,13 +21,13 @@ namespace Dumplingram.API.Data
                 .HasOne(u => u.Followee)
                 .WithMany(u => u.Followers)
                 .HasForeignKey(u => u.FolloweeId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Follow>()
                 .HasOne(u => u.Follower)
                 .WithMany(u => u.Followees)
                 .HasForeignKey(u => u.FollowerId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<PhotoLike>()
                 .HasKey(k => new {k.UserId, k.PhotoId});
@@ -35,14 +36,23 @@ namespace Dumplingram.API.Data
                 .HasOne(u => u.Liker)
                 .WithMany(p => p.SendLikes)
                 .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<PhotoLike>()
                 .HasOne(p => p.Photo)
                 .WithMany(u => u.GottenLikes)
                 .HasForeignKey(p => p.PhotoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Message>()
+                .HasOne(s => s.Sender)
+                .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<Message>()
+                .HasOne(r => r.Recipient)
+                .WithMany(m => m.MessagesReceived)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
     }

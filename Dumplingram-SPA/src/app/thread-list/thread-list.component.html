@@ -1,0 +1,37 @@
+<div id="threads" class="card m-5 p-5">
+  <div id="avatar-section" class="mb-4" *ngFor="let message of messages">
+    <!--follow-image-->
+    <div *ngIf="!isLastMessageFromMe(message)">
+      <img id="follow-image" src="{{message.senderPhotoUrl}}" (click)="openConversation(message.senderId, template)">
+      <b class="w-100"
+      ><p id="name">{{ message.content }}</p>
+      @{{ message.senderUsername }}</b
+      
+    >
+    </div>
+  
+    <div *ngIf="isLastMessageFromMe(message)">
+      <img id="follow-image" src="{{message.recipientPhotoUrl}}" (click)="openConversation(message.recipientId, template)">
+      <b class="w-100"
+      ><p id="name">{{ message.content }}</p>
+      @{{ message.recipientUsername }}</b
+    >
+    </div>  
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <button
+      type="button"
+      style="background: transparent;"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="close()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <app-conversation [userId]="selectedUserId"></app-conversation>
+</ng-template>
+

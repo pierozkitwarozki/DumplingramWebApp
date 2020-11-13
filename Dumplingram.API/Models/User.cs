@@ -20,5 +20,7 @@ namespace Dumplingram.API.Models
         public ICollection<Follow> Followees { get; set; }
         public ICollection<Follow> Followers { get; set; }    
         public ICollection<PhotoLike> SendLikes { get; set; }
+        public ICollection<Message> MessagesSent { get; set; }
+        public ICollection<Message> MessagesReceived { get; set; }
     }
 }

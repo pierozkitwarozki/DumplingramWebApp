@@ -5,6 +5,7 @@ using Dumplingram.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Dumplingram.API.Helpers;
 using Dumplingram.API.Dtos;
+using System;
 
 namespace Dumplingram.API.Data
 {
@@ -42,7 +43,7 @@ namespace Dumplingram.API.Data
 
             if (!string.IsNullOrEmpty(userParams.Word))
             {
-                users = users.Where(u => (u.Name.ToLower().Contains(userParams.Word.ToLower())) 
+                users = users.Where(u => (u.Name.ToLower().Contains(userParams.Word.ToLower()))
                     || u.Surname.ToLower().Contains(userParams.Word.ToLower())
                     || u.Username.ToLower().Contains(userParams.Word.ToLower()));
             }
@@ -113,8 +114,8 @@ namespace Dumplingram.API.Data
 
         public async Task<IEnumerable<PhotoLike>> GetPhotoLikes(int id)
         {
-            var likes =  await _context.PhotoLikes
-                .Where(p => p.PhotoId == id).Include(u => u.Liker).ThenInclude(u => u.Photos).ToListAsync();            
+            var likes = await _context.PhotoLikes
+                .Where(p => p.PhotoId == id).Include(u => u.Liker).ThenInclude(u => u.Photos).ToListAsync();
 
             return likes;
         }
@@ -137,5 +138,41 @@ namespace Dumplingram.API.Data
                 .FirstOrDefaultAsync(p => p.IsMain == true);
         }
 
+        public async Task<Message> GetMessage(int id)
+        {
+            return await _context.Messages.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Message>> GetMessagesForUser(int id)
+        {
+            var messages = await _context.Messages
+                .Where(x => x.RecipientId == id || x.SenderId == id).Include(p => p.Sender)
+                .ThenInclude(p => p.Photos).Include(p => p.Recipient).ThenInclude(p => p.Photos)
+                .OrderByDescending(x => x.MessageSent).ToListAsync();
+
+            int otherUserId = 0;
+            var listToReturn = new List<Message>();
+
+            foreach (var message in messages)
+            {
+                if (message.RecipientId == id) otherUserId = message.SenderId;
+                else otherUserId = message.RecipientId;
+
+                if (listToReturn.FirstOrDefault(x => (x.RecipientId == otherUserId || x.SenderId == otherUserId))!=null)
+                    continue;
+                
+                listToReturn.Add(message);
+            }
+
+            return listToReturn;
+        }
+
+        public async Task<IEnumerable<Message>> GetMessageThread(int currentUserId, int recipientId)
+        {
+            var messages = await _context.Messages.Where(x => (x.RecipientId == currentUserId && x.SenderId == recipientId)
+            || (x.SenderId == currentUserId && x.RecipientId == recipientId)).ToListAsync();
+
+            return messages.OrderBy(x => x.MessageSent);
+        }
     }
 }

@@ -201,8 +201,10 @@ namespace Dumplingram.API.Controllers
 
             var photoFromRepo = await _repo.GetPhoto(id);
 
-            if (photoFromRepo.GottenLikes != null && photoFromRepo.GottenLikes.Count > 0)
+            /*if (photoFromRepo.GottenLikes != null && photoFromRepo.GottenLikes.Count > 0)
             {
+                DeleteBehaviour.Cascade deletes all connected to photo likes.
+                
                 foreach (var like in photoFromRepo.GottenLikes)
                 {
                     _repo.Delete(like);
@@ -210,7 +212,7 @@ namespace Dumplingram.API.Controllers
 
                 if (!await _repo.SaveAll())
                     return BadRequest("Coś poszło nie tak.");
-            }
+            }*/
 
             if (photoFromRepo.IsMain)
                 return BadRequest("Nie możesz usunąć zdjęcia głównego.");
