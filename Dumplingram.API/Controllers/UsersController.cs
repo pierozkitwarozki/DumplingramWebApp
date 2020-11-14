@@ -95,6 +95,7 @@ namespace Dumplingram.API.Controllers
                 return Unauthorized();*/
             
             var followers = await _repo.GetFollowers(id);
+            
             if(followers == null)
                 return BadRequest("No followees");
 

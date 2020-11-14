@@ -73,8 +73,16 @@ namespace Dumplingram.API.Data
             {
                 user.Follower.PasswordHash = null;
                 user.Follower.PasswordSalt = null;
-                var photo = user.Follower.Photos.FirstOrDefault(p => p.IsMain == true).Url;
-                user.Follower.Description = photo;
+                var photo = user.Follower.Photos.FirstOrDefault(p => p.IsMain == true);
+                if(photo !=null)
+                {
+                    user.Follower.Description = photo.Url;           
+                }
+                else
+                {
+                    user.Follower.Description = 
+                        "https://i1.sndcdn.com/avatars-000343284505-alo495-t500x500.jpg";  
+                }
                 user.Follower.Photos = null;
             }
 
@@ -90,9 +98,18 @@ namespace Dumplingram.API.Data
             {
                 user.Followee.PasswordHash = null;
                 user.Followee.PasswordSalt = null;
-                var photo = user.Followee.Photos.FirstOrDefault(p => p.IsMain == true).Url;
-                user.Followee.Description = photo;
+                var photo = user.Followee.Photos.FirstOrDefault(p => p.IsMain == true);
+                if(photo !=null)
+                {
+                    user.Followee.Description = photo.Url;           
+                }
+                else
+                {
+                    user.Followee.Description = 
+                        "https://i1.sndcdn.com/avatars-000343284505-alo495-t500x500.jpg";  
+                }
                 user.Followee.Photos = null;
+                
             }
 
             return list;

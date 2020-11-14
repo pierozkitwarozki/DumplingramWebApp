@@ -5,7 +5,7 @@
       <label id="username" for="avatar">@{{ user.username }}</label>
       <span
         *ngIf="
-          (presenceService.onlineUsers$ | async).includes(user.id.toString())
+          (presenceService.onlineUsers$ | async).includes(user.id.toString()) && !isProfileMine()
         "
         style="margin-left: 20px;"
         [class.is-online]="

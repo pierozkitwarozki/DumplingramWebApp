@@ -4,6 +4,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { error } from 'protractor';
+import { take } from 'rxjs/operators';
 import { Follow } from '../_models/Follow';
 import { Message } from '../_models/Message';
 import { Photo } from '../_models/Photo';
@@ -46,10 +47,6 @@ export class UserDetailComponent implements OnInit {
       this.getFollowees();
       this.getFollowers();
       this.getFollow(this.user.id);
-      this.messageService.createHubConnection(
-        this.authService.currentUser,
-        this.user.id.toString()
-      );
     });
   }
 
@@ -211,7 +208,7 @@ export class UserDetailComponent implements OnInit {
 
   sendMessage() {
     this.newMessage.recipientId = this.user.id;
-    this.newMessage.content = this.message;  
+    this.newMessage.content = this.message;
     if (this.newMessage.content !== '' && this.newMessage.content) {
       this.messageService
         .sendMessage(this.authService.currentUser.id, this.newMessage)
@@ -226,7 +223,14 @@ export class UserDetailComponent implements OnInit {
   }
 
   openCreateMessageModal(template: TemplateRef<any>) {
+    this.messageService.createHubConnection(
+      this.authService.currentUser,
+      this.user.id.toString()
+    );
     this.modalRef = this.modalService.show(template);
+    this.modalService.onHide.pipe(take(1)).subscribe(() => {
+      this.messageService.stopConnection();
+    });
   }
 
   ngOnDestroy() {

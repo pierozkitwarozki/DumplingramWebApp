@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { take, takeLast } from 'rxjs/operators';
 import { Message } from '../_models/Message';
 import { User } from '../_models/User';
 import { AlertifyService } from '../_services/alertify.service';
@@ -62,6 +63,9 @@ export class ThreadListComponent implements OnInit {
           this.selectedUserId.toString()
         );
         this.modalRef = this.modalService.show(template);
+        this.modalService.onHide.pipe().subscribe(() => {
+        this.messageService.stopConnection();
+        });
       },
       (error) => {
         this.alertify.error(error);
@@ -70,9 +74,9 @@ export class ThreadListComponent implements OnInit {
   }
 
   close() {
-    this.modalRef.hide();
-    this.messageService.stopConnection();
+    // this.modalRef.hide();
     this.selectedUserId = null;
+    this.messageService.stopConnection();
   }
 
   isFromMe(message: Message): boolean {
@@ -93,11 +97,9 @@ export class ThreadListComponent implements OnInit {
     if (this.message !== '') {
       this.messageService
         .sendMessage(this.authService.currentUser.id, this.newMessage)
-        .then(
-          () => {
-            this.newMessage.content = '';
-          }
-        );
+        .then(() => {
+          this.newMessage.content = '';
+        });
     } else {
       this.alertify.error('Nie wysyłaj pustej wiadomości.');
     }
