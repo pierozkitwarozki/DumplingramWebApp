@@ -3,12 +3,21 @@
     <div id="avatar-section">
       <img id="avatar" src="{{ user.photoUrl }}" alt="{{ user.username }}" />
       <label id="username" for="avatar">@{{ user.username }}</label>
+      <span
+        *ngIf="
+          (presenceService.onlineUsers$ | async).includes(user.id.toString())
+        "
+        style="margin-left: 20px;"
+        [class.is-online]="
+          (presenceService.onlineUsers$ | async).includes(user.id.toString())
+        "
+      >
+        <i class="fa fa-circle"></i>
+      </span>
     </div>
     <div class="container w-100 mt-4 text-center">
       <p id="name">{{ user.name }} {{ user.surname }}</p>
-      <p id="localization">
-        {{ user.city }}, {{ user.country}}
-      </p>
+      <p id="localization">{{ user.city }}, {{ user.country }}</p>
       <p id="description">
         {{ user.description }}
       </p>
@@ -62,7 +71,12 @@
     <div class="container">
       <div class="grid">
         <div *ngFor="let photo of user.photos" class="row">
-          <img id="photo" src="{{photo.url}}" alt="{{photo.description}}" (click)="openModalPhotoPreview(photoPreview, photo)" >  
+          <img
+            id="photo"
+            src="{{ photo.url }}"
+            alt="{{ photo.description }}"
+            (click)="openModalPhotoPreview(photoPreview, photo)"
+          />
         </div>
       </div>
     </div>
@@ -71,59 +85,71 @@
 
 <ng-template #followees>
   <div class="modal-header p-5 text-center">
-    <h1 style="font-family: 'Roboto Slab'; font-weight: bold; font-size: xx-large;">Obserwowani: {{ countFollowees() }}</h1>
+    <h1
+      style="font-family: 'Roboto Slab'; font-weight: bold; font-size: xx-large"
+    >
+      Obserwowani: {{ countFollowees() }}
+    </h1>
   </div>
   <div class="modal-body">
     <div id="avatar-section" class="mb-4" *ngFor="let user of followeeItems">
-      <div id="item" [routerLink]="['/users/', user.followee.id]" (click)="modalRef.hide()">
-        <img
-        id="follow-image"
-        src="{{ user.followee.description }}"
-        alt=""
-        
-      />
-      <b class="w-100"
-        ><p id="name">{{ user.followee.name }} {{ user.followee.surname }}</p>
-        @{{ user.followee.username }}</b
+      <div
+        id="item"
+        [routerLink]="['/users/', user.followee.id]"
+        (click)="modalRef.hide()"
       >
-      </div>    
+        <img id="follow-image" src="{{ user.followee.description }}" alt="" />
+        <b class="w-100"
+          ><p id="name">{{ user.followee.name }} {{ user.followee.surname }}</p>
+          @{{ user.followee.username }}</b
+        >
+      </div>
     </div>
   </div>
 </ng-template>
 
 <ng-template #followers>
   <div class="modal-header p-5 text-center">
-    <h1 style="font-family: 'Roboto Slab'; font-weight: bold; font-size: xx-large;">{{ countFollowers() }} obserwujących</h1>
+    <h1
+      style="font-family: 'Roboto Slab'; font-weight: bold; font-size: xx-large"
+    >
+      {{ countFollowers() }} obserwujących
+    </h1>
   </div>
   <div class="modal-body">
     <div id="avatar-section" class="mb-4" *ngFor="let user of followerItems">
-      <div id="item" [routerLink]="['/users/', user.follower.id]"
-      (click)="modalRef.hide()">
-        <img
-        id="follow-image"
-        src="{{ user.follower.description }}"
-        alt=""
-        
-      />
-      <b class="w-100"
-        ><p id="name">{{ user.follower.name }} {{ user.follower.surname }}</p>
-        @{{ user.follower.username }}</b
+      <div
+        id="item"
+        [routerLink]="['/users/', user.follower.id]"
+        (click)="modalRef.hide()"
       >
+        <img id="follow-image" src="{{ user.follower.description }}" alt="" />
+        <b class="w-100"
+          ><p id="name">{{ user.follower.name }} {{ user.follower.surname }}</p>
+          @{{ user.follower.username }}</b
+        >
       </div>
-      
     </div>
   </div>
 </ng-template>
 
 <ng-template #photoPreview id="photo-preview">
   <div class="modal-body">
-    <app-post-card [photo]="photo" (getLikerClicked)="closeDialog()" (getPhotoDeleted)="refreshPage()"></app-post-card>
+    <app-post-card
+      [photo]="photo"
+      (getLikerClicked)="closeDialog()"
+      (getPhotoDeleted)="refreshPage()"
+    ></app-post-card>
   </div>
 </ng-template>
 
 <ng-template #messageCreate id="message-create">
   <div class="modal-header p-5 text-center">
-    <h1 style="font-family: 'Roboto Slab'; font-weight: bold; font-size: xx-large;">Utwórz wiadomość do @{{ user.username }}</h1>
+    <h1
+      style="font-family: 'Roboto Slab'; font-weight: bold; font-size: xx-large"
+    >
+      Utwórz wiadomość do @{{ user.username }}
+    </h1>
   </div>
   <div class="modal-body">
     <div class="container text-center">

@@ -6,6 +6,7 @@ import { User } from '../_models/User';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { MessageService } from '../_services/message.service';
+import { PresenceService } from '../_services/presence.service';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -19,7 +20,6 @@ export class ThreadListComponent implements OnInit {
   selectedUserId: number;
   modalRef: BsModalRef;
 
-  chatMessages: Message[];
   message: string;
   newMessage: any = {};
   user: any;
@@ -29,14 +29,19 @@ export class ThreadListComponent implements OnInit {
     private alertify: AlertifyService,
     public authService: AuthService,
     private route: ActivatedRoute,
-    private messageService: MessageService,
-    private modalService: BsModalService
+    public messageService: MessageService,
+    private modalService: BsModalService,
+    public presenceService: PresenceService
   ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       this.messages = data['messages'];
     });
+  }
+
+  ngOnDestroy() {
+    this.messageService.stopConnection();
   }
 
   isLastMessageFromMe(message: Message): boolean {
@@ -52,20 +57,11 @@ export class ThreadListComponent implements OnInit {
     this.userService.getUser(this.selectedUserId).subscribe(
       (user: User) => {
         this.user = user;
-        this.messageService
-          .getMessageThread(
-            this.authService.currentUser.id,
-            this.selectedUserId
-          )
-          .subscribe(
-            (res: Message[]) => {
-              this.chatMessages = res;
-              this.modalRef = this.modalService.show(template);
-            },
-            (error) => {
-              this.alertify.error(error);
-            }
-          );
+        this.messageService.createHubConnection(
+          this.authService.currentUser,
+          this.selectedUserId.toString()
+        );
+        this.modalRef = this.modalService.show(template);
       },
       (error) => {
         this.alertify.error(error);
@@ -75,6 +71,7 @@ export class ThreadListComponent implements OnInit {
 
   close() {
     this.modalRef.hide();
+    this.messageService.stopConnection();
     this.selectedUserId = null;
   }
 
@@ -96,18 +93,13 @@ export class ThreadListComponent implements OnInit {
     if (this.message !== '') {
       this.messageService
         .sendMessage(this.authService.currentUser.id, this.newMessage)
-        .subscribe(
-          (message: Message) => {
-            this.chatMessages.push(message);
+        .then(
+          () => {
             this.newMessage.content = '';
-          },
-          (error) => {
-            this.alertify.error(error);
           }
         );
     } else {
       this.alertify.error('Nie wysyłaj pustej wiadomości.');
     }
   }
-
 }

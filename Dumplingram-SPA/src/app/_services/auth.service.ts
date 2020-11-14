@@ -5,6 +5,7 @@ import { User } from '../_models/User';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { PresenceService } from './presence.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class AuthService {
   photoUrl = new BehaviorSubject<string>('../../assets/user.png');
   currentPhotoUrl = this.photoUrl.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private presenceService: PresenceService) {}
 
   changeMemberPhoto(photoUrl: string){
     this.photoUrl.next(photoUrl);
@@ -27,12 +28,14 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'login', model).pipe(
       map((response: any) => {
         const user = response;
-        if (user) {
-          localStorage.setItem('token', user.token);
-          localStorage.setItem('user', JSON.stringify(user.user));
+        if (user) { 
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
           this.currentUser = user.user;
+          this.currentUser.token = user.token;
+          localStorage.setItem('token', user.token);
+          localStorage.setItem('user', JSON.stringify(this.currentUser));
           this.changeMemberPhoto(this.currentUser.photoUrl);
+          this.presenceService.createHubConnection(this.currentUser);
         }
       })
     );

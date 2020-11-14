@@ -12,6 +12,9 @@ namespace Dumplingram.API.Data
         public DbSet<PhotoLike> PhotoLikes { get; set; }
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<Connection> Connections { get; set; }
+        public DbSet<Group> Groups { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder) 
         {
             builder.Entity<Follow>()

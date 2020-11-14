@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Net;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Dumplingram.API.SignalR;
 
 namespace Dumplingram.API
 {
@@ -43,6 +44,8 @@ namespace Dumplingram.API
             });
             services.AddControllers();
             services.AddCors();
+            services.AddSignalR();
+            services.AddSingleton<PresenceTracker>();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(AuthRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
@@ -58,6 +61,21 @@ namespace Dumplingram.API
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
+
+                    options.Events = new JwtBearerEvents 
+                    {
+                        // Signal R Authorization
+                        OnMessageReceived = context => {
+                            var accessToken = context.Request.Query["access_token"];
+                            var paths = context.HttpContext.Request.Path;
+                            if(!string.IsNullOrEmpty(accessToken) && paths.StartsWithSegments("/hubs"))
+                            {
+                                context.Token = accessToken;
+                            }
+
+                            return Task.CompletedTask;
+                        }
+                    };
                 });
         }
 
@@ -72,7 +90,7 @@ namespace Dumplingram.API
             //app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x => x.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowCredentials().AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -80,6 +98,8 @@ namespace Dumplingram.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
+                endpoints.MapHub<MessageHub>("hubs/message");
             });
         }
     }

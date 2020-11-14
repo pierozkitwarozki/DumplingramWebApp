@@ -158,9 +158,9 @@ namespace Dumplingram.API.Data
                 if (message.RecipientId == id) otherUserId = message.SenderId;
                 else otherUserId = message.RecipientId;
 
-                if (listToReturn.FirstOrDefault(x => (x.RecipientId == otherUserId || x.SenderId == otherUserId))!=null)
+                if (listToReturn.FirstOrDefault(x => (x.RecipientId == otherUserId || x.SenderId == otherUserId)) != null)
                     continue;
-                
+
                 listToReturn.Add(message);
             }
 
@@ -174,5 +174,21 @@ namespace Dumplingram.API.Data
 
             return messages.OrderBy(x => x.MessageSent);
         }
+
+        public async Task<Connection> GetConnection(string connectionId)
+        {
+            return await _context.Connections.FindAsync(connectionId);
+        }
+
+        public async Task<IEnumerable<Connection>> GetConnections(string userId)
+        {
+            return await _context.Connections.Where(x => x.UserId == userId).ToListAsync();
+        }
+
+        public async Task<Group> GetGroup(string name)
+        {
+            return await _context.Groups.Include(x => x.Connections).FirstOrDefaultAsync(x => x.Name == name);
+        }
+
     }
 }

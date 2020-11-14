@@ -2,6 +2,7 @@ using AutoMapper;
 using System.Linq;
 using Dumplingram.API.Dtos;
 using Dumplingram.API.Models;
+using System;
 
 namespace Dumplingram.API.Helpers
 {
@@ -26,6 +27,8 @@ namespace Dumplingram.API.Helpers
                     opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
                 .ForMember(dest => dest.RecipientPhotoUrl, opt =>
                     opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
+            
+            CreateMap<DateTime, DateTime>().ConstructUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));
         }
     }
 }

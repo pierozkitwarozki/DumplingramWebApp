@@ -12,4 +12,5 @@ export interface User {
     country: string;
     photoUrl: string;
     photos?: Photo[];
+    token: string;
 }

@@ -57,12 +57,23 @@
         class="ml-2"
         >{{ user.name }} {{ user.surname }}</label
       >
+      <span
+        *ngIf="
+          (presenceService.onlineUsers$ | async).includes(user.id.toString())
+        "
+        style="margin-left: 20px;"
+        [class.is-online]="
+          (presenceService.onlineUsers$ | async).includes(user.id.toString())
+        "
+      >
+        <i class="fa fa-circle"></i>
+      </span>
     </div>
   </div>
   <div class="modal-body">
     <div
       class="talk-bubble tri-right left-top"
-      *ngFor="let message of chatMessages"
+      *ngFor="let message of (messageService.messageThread$ | async)"
     >
       <div *ngIf="isFromMe(message)" class="mine messages">
         <div class="message">
@@ -79,7 +90,7 @@
   </div>
   <div class="modal-footer">
     <div class="container text-center">
-      <form id="input">
+      <form id="input" name="input" ngForm="input">
         <input
           class="float-left"
           placeholder="Wiadomość..."

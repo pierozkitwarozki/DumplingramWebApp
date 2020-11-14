@@ -4,6 +4,8 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { User } from '../_models/User';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
+import { MessageService } from '../_services/message.service';
+import { PresenceService } from '../_services/presence.service';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -22,20 +24,26 @@ export class NavComponent implements OnInit {
     private alertify: AlertifyService,
     private router: Router,
     private modalService: BsModalService,
-    private userService: UserService
+    private userService: UserService,
+    private presenceService: PresenceService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
     this.word = '';
-    this.authService.changeMemberPhoto(this.authService.currentUser.photoUrl);
-    this.authService.currentPhotoUrl.subscribe(
-      (photoUrl) => (this.photoUrl = photoUrl)
-    );
+    if (this.authService.currentUser) {
+      this.authService.changeMemberPhoto(this.authService.currentUser.photoUrl);
+      this.authService.currentPhotoUrl.subscribe(
+        (photoUrl) => (this.photoUrl = photoUrl)
+      );
+    }
   }
 
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    this.presenceService.stopHubConnection();
+    this.messageService.stopConnection();
     this.authService.decodedToken = null;
     this.authService.currentUser = null;
     this.alertify.message('logged out');

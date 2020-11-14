@@ -31,5 +31,10 @@ namespace Dumplingram.API.Data
          Task<Message> GetMessage(int id);
          Task<IEnumerable<Message>> GetMessagesForUser(int id);
          Task<IEnumerable<Message>> GetMessageThread(int currentUserId, int recipientId);
+
+         //
+         Task<Connection> GetConnection(string connectionId);
+         Task<IEnumerable<Connection>> GetConnections(string userId);
+         Task<Group> GetGroup(string name);
     }
 }

@@ -12,6 +12,7 @@ import { User } from '../_models/User';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { MessageService } from '../_services/message.service';
+import { PresenceService } from '../_services/presence.service';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -35,7 +36,8 @@ export class UserDetailComponent implements OnInit {
     private authService: AuthService,
     private alertify: AlertifyService,
     private modalService: BsModalService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    public presenceService: PresenceService
   ) {}
 
   ngOnInit() {
@@ -44,6 +46,10 @@ export class UserDetailComponent implements OnInit {
       this.getFollowees();
       this.getFollowers();
       this.getFollow(this.user.id);
+      this.messageService.createHubConnection(
+        this.authService.currentUser,
+        this.user.id.toString()
+      );
     });
   }
 
@@ -205,20 +211,15 @@ export class UserDetailComponent implements OnInit {
 
   sendMessage() {
     this.newMessage.recipientId = this.user.id;
-    this.newMessage.content = this.message;
-    if (this.newMessage.content !== "" && this.newMessage.content) {
+    this.newMessage.content = this.message;  
+    if (this.newMessage.content !== '' && this.newMessage.content) {
       this.messageService
         .sendMessage(this.authService.currentUser.id, this.newMessage)
-        .subscribe(
-          (message: Message) => {
-            this.newMessage.content = '';
-            this.modalRef.hide();
-            this.alertify.success("Wysłano.");
-          },
-          (error) => {
-            this.alertify.error(error);
-          }
-        );
+        .then(() => {
+          this.newMessage.content = '';
+          this.modalRef.hide();
+          this.alertify.success('Wysłano.');
+        });
     } else {
       this.alertify.error('Nie wysyłaj pustej wiadomości.');
     }
@@ -226,5 +227,9 @@ export class UserDetailComponent implements OnInit {
 
   openCreateMessageModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+  ngOnDestroy() {
+    this.messageService.stopConnection();
   }
 }
