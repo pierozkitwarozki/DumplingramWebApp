@@ -6,6 +6,7 @@ import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Message } from '../_models/Message';
 import { User } from '../_models/User';
+import { PresenceService } from './presence.service';
 
 @Injectable({
   providedIn: 'root',

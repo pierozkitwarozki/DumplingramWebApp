@@ -5,14 +5,14 @@
   >
     Konwersacje prywatne
   </h1>
-  <div id="avatar-section" class="mb-4" *ngFor="let message of messages">
+  <div id="avatar-section" class="mb-4" *ngFor="let message of (presenceService.conversations$ | async)">
     <!--follow-image-->
     <div
       id="conv"
       *ngIf="!isLastMessageFromMe(message)"
       (click)="openConversation(message.senderId, template)"
     >
-      <img id="follow-image" src="{{ message.senderPhotoUrl }}" />
+      <img id="follow-image" src="{{ message.senderPhotoUrl || '../../assets/user.png'}}" />
       <div>
         <b class="w-100"
           ><p id="name">{{ message.content }}</p>
@@ -29,7 +29,7 @@
       *ngIf="isLastMessageFromMe(message)"
       (click)="openConversation(message.recipientId, template)"
     >
-      <img id="follow-image" src="{{ message.recipientPhotoUrl }}" />
+      <img id="follow-image" src="{{ message.recipientPhotoUrl || '../../assets/user.png'}}" />
       <div>
         <b class="w-100"
           ><p id="name">{{ message.content }}</p>
@@ -47,9 +47,11 @@
   <div class="modal-header">
     <div>
       <img
+        [routerLink]="['/users/', user.id]"
         id="avatar"
-        src="{{ user.photoUrl }}"
-        style="width: 14%; height: 14%; border-radius: 90px"
+        src="{{ user.photoUrl || '../../assets/user.png'}}"
+        style="width: 14%; height: 14%; border-radius: 90px; cursor: pointer;"
+        (click)="modalRef.hide()"
       />
       <label
         for="avatar"
@@ -70,8 +72,9 @@
       </span>
     </div>
   </div>
-  <div class="modal-body">
-    <div
+  <div class="modal-body" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+      <div
+      #messages
       class="talk-bubble tri-right left-top"
       *ngFor="let message of (messageService.messageThread$ | async)"
     >
@@ -87,17 +90,17 @@
         </div>
       </div>
     </div>
+    
   </div>
   <div class="modal-footer">
-    <div class="container text-center">
-      <form id="input" name="input" ngForm="input">
+    <div class="container text-center">      
         <input
+        [(ngModel)]="messageContent"
           class="float-left"
           placeholder="Wiadomość..."
           (keyup)="onKey($event)"
         />
-        <button class="float-right" (click)="sendMessage()">Wyślij</button>
-      </form>
+        <button class="float-right" type="submit" (click)="sendMessage()">Wyślij</button>           
     </div>
   </div>
 </ng-template>

@@ -1,7 +1,7 @@
 <div id="main-container" class="container">
   <div id="profile" class="container col">
     <div id="avatar-section">
-      <img id="avatar" src="{{ user.photoUrl }}" alt="{{ user.username }}" />
+      <img id="avatar" src="{{ user.photoUrl || '../../assets/user.png' }}" alt="{{ user.username }}" />
       <label id="username" for="avatar">@{{ user.username }}</label>
       <span
         *ngIf="

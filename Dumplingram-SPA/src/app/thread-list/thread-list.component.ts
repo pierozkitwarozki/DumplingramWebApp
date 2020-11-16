@@ -1,7 +1,11 @@
+import { ViewChild } from '@angular/core';
+import { ElementRef } from '@angular/core';
+import { QueryList } from '@angular/core';
+import { ViewChildren } from '@angular/core';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { take, takeLast } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Message } from '../_models/Message';
 import { User } from '../_models/User';
 import { AlertifyService } from '../_services/alertify.service';
@@ -20,7 +24,7 @@ export class ThreadListComponent implements OnInit {
   messages: Message[];
   selectedUserId: number;
   modalRef: BsModalRef;
-
+  messageContent = '';
   message: string;
   newMessage: any = {};
   user: any;
@@ -64,19 +68,13 @@ export class ThreadListComponent implements OnInit {
         );
         this.modalRef = this.modalService.show(template);
         this.modalService.onHide.pipe().subscribe(() => {
-        this.messageService.stopConnection();
+          this.messageService.stopConnection();
         });
       },
       (error) => {
         this.alertify.error(error);
       }
     );
-  }
-
-  close() {
-    // this.modalRef.hide();
-    this.selectedUserId = null;
-    this.messageService.stopConnection();
   }
 
   isFromMe(message: Message): boolean {
@@ -88,7 +86,11 @@ export class ThreadListComponent implements OnInit {
   }
 
   onKey(event) {
-    this.message = event.target.value;
+    if (event.key === 'Enter') {
+      this.sendMessage();
+    } else {
+      this.message = event.target.value;
+    }
   }
 
   sendMessage() {
@@ -99,6 +101,8 @@ export class ThreadListComponent implements OnInit {
         .sendMessage(this.authService.currentUser.id, this.newMessage)
         .then(() => {
           this.newMessage.content = '';
+          this.message = null;
+          this.messageContent = null;
         });
     } else {
       this.alertify.error('Nie wysyłaj pustej wiadomości.');
