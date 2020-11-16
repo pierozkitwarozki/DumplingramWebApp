@@ -91,7 +91,7 @@
       Obserwowani: {{ countFollowees() }}
     </h1>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" style="max-height: calc(100vh - 400px); overflow-y: auto">
     <div id="avatar-section" class="mb-4" *ngFor="let user of followeeItems">
       <div
         id="item"
@@ -116,7 +116,7 @@
       {{ countFollowers() }} obserwujących
     </h1>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" style="max-height: calc(100vh - 400px); overflow-y: auto">
     <div id="avatar-section" class="mb-4" *ngFor="let user of followerItems">
       <div
         id="item"
@@ -155,10 +155,11 @@
     <div class="container text-center">
       <form id="input">
         <input
+          #newMessage
           class="float-left"
           placeholder="Wiadomość..."
           (keyup)="onKey($event)"
-        />
+        /> {{ newMessage.focus() }}
         <button class="float-right" (click)="sendMessage()">Wyślij</button>
       </form>
     </div>

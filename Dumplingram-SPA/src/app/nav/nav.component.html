@@ -1,90 +1,120 @@
 <!-- Image and text -->
-<nav id="navbar" class="navbar navbar-dark bg-light bg-custom-2" style="align-items: center;">
-  <div class="row w-100" style="align-items: center;">
+<nav
+  id="navbar"
+  class="navbar navbar-dark bg-light bg-custom-2"
+  style="align-items: center"
+>
+  <div class="row w-100" style="align-items: center">
     <div class="col">
       <a
-    class="navbar-brand ml-5"
-    *ngIf="!authService.loggedIn()"
-    [routerLink]="['/login']"
-  >
-    Dumplingram
-  </a>
-  <a
-    class="navbar-brand ml-5"
-    *ngIf="authService.loggedIn()"
-    [routerLink]="['/home']"
-  >
-    Dumplingram
-  </a>
+        class="navbar-brand ml-5"
+        *ngIf="!authService.loggedIn()"
+        [routerLink]="['/login']"
+      >
+        Dumplingram
+      </a>
+      <a
+        class="navbar-brand ml-5"
+        *ngIf="authService.loggedIn()"
+        [routerLink]="['/home']"
+      >
+        Dumplingram
+      </a>
     </div>
     <div class="col" *ngIf="authService.loggedIn()">
       <input
-      id="search"
-      placeholder="Wyszukaj..."
-      (click)="openSearchedUsers(template)"
-    />
+        id="search"
+        placeholder="Wyszukaj..."
+        (click)="openSearchedUsers(template)"
+      />
     </div>
-    <div class="col" *ngIf="authService.loggedIn()" style="display: flex; justify-content: flex-end">
-    <div class="btn-group" style="align-items: center;" dropdown>
-      <h1
-        id="user"
-        dropdownToggle
-        type="button"
-        class="dropdown-toggle"
-        aria-controls="dropdown-animated"
-      >
-        Witaj {{ authService.currentUser.name | titlecase
-        }}<span class="caret"></span>
-      </h1>
-      <ul
-        id="dropdown-animated"
-        *dropdownMenu
-        class="dropdown-menu"
-        role="menu"
-        aria-labelledby="button-animated"
-      >
-        <li role="menuitem"><a class="dropdown-item" [routerLink]="['/threads']" ><i class="fa fa-comments mr-2"></i>Wiadomości</a></li>
-        <li role="menuitem"><a class="dropdown-item" [routerLink]="['/users/', authService.currentUser.id]" ><i class="fa fa-user mr-2"></i>Twoje konto</a></li>
-        <li role="menuitem"><a class="dropdown-item" [routerLink]="['/edit']" ><i class="fa fa-wrench mr-2"></i>Edytuj profil</a></li>
-        <li role="menuitem">
-          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out mr-2"></i>Wyloguj się</a>
-        </li>
-      </ul>
+    <div
+      class="col"
+      *ngIf="authService.loggedIn()"
+      style="display: flex; justify-content: flex-end"
+    >
+      <div class="btn-group" style="align-items: center" dropdown>
+        <h1
+          id="user"
+          dropdownToggle
+          type="button"
+          class="dropdown-toggle"
+          aria-controls="dropdown-animated"
+        >
+          Witaj {{ authService.currentUser.name | titlecase
+          }}<span class="caret"></span>
+        </h1>
+        <ul
+          id="dropdown-animated"
+          *dropdownMenu
+          class="dropdown-menu"
+          role="menu"
+          aria-labelledby="button-animated"
+        >
+          <li role="menuitem">
+            <a class="dropdown-item" [routerLink]="['/threads']"
+              ><i class="fa fa-comments mr-2"></i>Wiadomości</a
+            >
+          </li>
+          <li role="menuitem">
+            <a
+              class="dropdown-item"
+              [routerLink]="['/users/', authService.currentUser.id]"
+              ><i class="fa fa-user mr-2"></i>Twoje konto</a
+            >
+          </li>
+          <li role="menuitem">
+            <a class="dropdown-item" [routerLink]="['/edit']"
+              ><i class="fa fa-wrench mr-2"></i>Edytuj profil</a
+            >
+          </li>
+          <li role="menuitem">
+            <a class="dropdown-item" (click)="logout()"
+              ><i class="fa fa-sign-out mr-2"></i>Wyloguj się</a
+            >
+          </li>
+        </ul>
+      </div>
+      <img
+        id="avatar"
+        style="cursor: pointer"
+        src="{{ photoUrl }}"
+        alt=""
+        [routerLink]="'/users/' + authService.decodedToken.nameid"
+      />
     </div>
-    <img
-      id="avatar"
-      style="cursor: pointer;"
-      src="{{photoUrl}}"
-      alt=""
-      [routerLink]="'/users/' + authService.decodedToken.nameid"
-    />
-   
-  </div>
   </div>
 </nav>
 
-
 <!--Searching for users-->
-<ng-template #template autofocus>
+<ng-template #template>
   <div class="modal-header">
     <div class="container text-center">
-      <form id="input" (ngSubmit)="loadUsers()">
-        <input id="searchusers" (keyup)="onKey($event)" placeholder="Wyszukaj..."/>
-      </form>
+      <input
+      #searchUsers
+        id="searchusers"
+        (keyup)="onKey($event)"
+        placeholder="Wyszukaj..."
+        autofocus
+      />{{ searchUsers.focus() }}
     </div>
   </div>
-  <div class="modal-body">
+  <div
+    class="modal-body"
+    style="max-height: calc(100vh - 400px); overflow-y: auto"
+  >
     <div id="avatar-section" class="mb-4" *ngFor="let user of searchedUsers">
-      <div id="item" [routerLink]="['/users/', user.id]" (click)="close()"><img
-        id="follow-image"
-        src="{{ user.photoUrl }}"
-        alt=""             
-      />
-      <b class="w-100"
-        ><p id="name">{{ user.name }} {{ user.surname }}</p>
-        @{{ user.username }}</b
-      ></div>
-      
+      <div id="item" [routerLink]="['/users/', user.id]" (click)="close()">
+        <img
+          id="follow-image"
+          src="{{ user.photoUrl || '../../assets/user.png' }}"
+          alt=""
+        />
+        <b class="w-100"
+          ><p id="name">{{ user.name }} {{ user.surname }}</p>
+          @{{ user.username }}</b
+        >
+      </div>
     </div>
   </div>
 </ng-template>

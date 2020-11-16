@@ -18,8 +18,6 @@ export class NotAuthGuard implements CanActivate {
     if (!this.authService.loggedIn()) {
       return true;
     }
-
-    this.alertifyService.error('You shall not pass!');
     this.router.navigate(['/home']);
     return false;
   }

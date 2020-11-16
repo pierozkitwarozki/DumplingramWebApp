@@ -207,5 +207,29 @@ namespace Dumplingram.API.Data
             return await _context.Groups.Include(x => x.Connections).FirstOrDefaultAsync(x => x.Name == name);
         }
 
+        public Task ClearUserData(int UserId)
+        {
+            var follows = _context.Follow.Where(x => x.FolloweeId == UserId || x.FollowerId == UserId);
+            var messages = _context.Messages.Where(x => x.SenderId == UserId || x.RecipientId == UserId);
+            var photos = _context.Photo.Where(x => x.UserId == UserId);
+            var photoLikes = _context.PhotoLikes.Where(x => x.UserId == UserId);
+
+            foreach(var follow in follows) this.Delete(follow);
+            foreach(var message in messages) this.Delete(message);
+            foreach(var photo in photos) this.Delete(photo);
+            foreach(var like in photoLikes) this.Delete(like);
+
+            return Task.CompletedTask;
+        }
+
+        public async Task<User> GetUserToDelete(int userId)
+        {
+            var list = await _context.Users.Where(x => x.ID == userId)
+                .Include(p => p.Photos).Include(f => f.Followees).Include(f => f.Followers)
+                .Include(l => l.SendLikes).Include(x => x.MessagesSent).Include(x => x.MessagesReceived).ToListAsync();
+                
+            return list[0];
+        }
+
     }
 }

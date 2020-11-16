@@ -48,8 +48,7 @@ export class NavComponent implements OnInit {
     this.messageService.stopConnection();
     this.authService.decodedToken = null;
     this.authService.currentUser = null;
-    this.alertify.message('logged out');
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
   }
 
   loadUsers() {

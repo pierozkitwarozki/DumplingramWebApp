@@ -298,3 +298,8 @@ D:\Users\Bart\VS_Code_Projects\DumplingramWebApp_\Dumplingram.API\obj\Debug\netc
 D:\Users\Bart\VS_Code_Projects\DumplingramWebApp_\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.dll
 D:\Users\Bart\VS_Code_Projects\DumplingramWebApp_\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.pdb
 D:\Users\Bart\VS_Code_Projects\DumplingramWebApp_\Dumplingram.API\obj\Debug\netcoreapp3.1\Dumplingram.API.genruntimeconfig.cache
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp_\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp_\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp_\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp_\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
+D:\Users\Bart\VS_Code_Projects\DumplingramWebApp_\Dumplingram.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
