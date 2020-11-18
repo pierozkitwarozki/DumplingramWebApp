@@ -95,13 +95,13 @@
     <div id="avatar-section" class="mb-4" *ngFor="let user of followeeItems">
       <div
         id="item"
-        [routerLink]="['/users/', user.followee.id]"
+        [routerLink]="['/users/', user.id]"
         (click)="modalRef.hide()"
       >
-        <img id="follow-image" src="{{ user.followee.description }}" alt="" />
+        <img id="follow-image" src="{{ user.photoUrl || '../../assets/user.png' }}" alt="" />
         <b class="w-100"
-          ><p id="name">{{ user.followee.name }} {{ user.followee.surname }}</p>
-          @{{ user.followee.username }}</b
+          ><p id="name">{{ user.name }} {{ user.surname }}</p>
+          @{{ user.username }}</b
         >
       </div>
     </div>
@@ -120,13 +120,13 @@
     <div id="avatar-section" class="mb-4" *ngFor="let user of followerItems">
       <div
         id="item"
-        [routerLink]="['/users/', user.follower.id]"
+        [routerLink]="['/users/', user.id]"
         (click)="modalRef.hide()"
       >
-        <img id="follow-image" src="{{ user.follower.description }}" alt="" />
+        <img id="follow-image" src="{{ user.photoUrl || '../../assets/user.png'}}" alt="" />
         <b class="w-100"
-          ><p id="name">{{ user.follower.name }} {{ user.follower.surname }}</p>
-          @{{ user.follower.username }}</b
+          ><p id="name">{{ user.name }} {{ user.surname }}</p>
+          @{{ user.username }}</b
         >
       </div>
     </div>

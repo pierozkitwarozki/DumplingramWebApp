@@ -99,7 +99,9 @@ namespace Dumplingram.API.Controllers
             if(followers == null)
                 return BadRequest("No followees");
 
-            return Ok(followers);
+            var followersToReturn = _mapper.Map<IEnumerable<FollowerForReturn>>(followers);
+
+            return Ok(followersToReturn);
         }
 
         [HttpGet("{id}/followees")]
@@ -113,7 +115,9 @@ namespace Dumplingram.API.Controllers
             if(followees == null)
                 return BadRequest("No followees");
 
-            return Ok(followees);
+            var followeesToReturn = _mapper.Map<IEnumerable<FolloweeToReturn>>(followees);
+
+            return Ok(followeesToReturn);
         }
 
         [HttpGet("{id}/getfollow/{followeeId}")]

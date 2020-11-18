@@ -15,6 +15,6 @@ namespace Dumplingram.API.Dtos
         public string Country { get; set; } 
         public string PhotoUrl { get; set; }
         public ICollection<PhotoForDetailed> Photos { get; set; } 
-        public ICollection<PhotoLikeDto> SendLikes { get; set; }
+        //public ICollection<PhotoLikeDto> SendLikes { get; set; }
     }
 }

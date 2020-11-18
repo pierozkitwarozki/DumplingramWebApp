@@ -111,11 +111,16 @@ namespace Dumplingram.API.SignalR
             {
                 await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
 
-                if (connections != null && connectionsForSender != null)
+                if (connections != null) 
                 {
                     // to refresh private conversation list
 
                     await _presenceHub.Clients.Clients(connections).SendAsync("NewMessageReceivedNoNotification");
+                    
+                }
+
+                if(connectionsForSender != null)
+                {
                     await _presenceHub.Clients.Clients(connectionsForSender).SendAsync("NewMessageReceivedNoNotification");
                 }
             }

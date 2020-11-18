@@ -29,6 +29,30 @@ namespace Dumplingram.API.Helpers
                     opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
             
             CreateMap<DateTime, DateTime>().ConstructUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));
+
+            CreateMap<Follow, FollowerForReturn>()
+                .ForMember(dest => dest.Id, opt => 
+                    opt.MapFrom(src => src.Follower.ID))
+                .ForMember(dest => dest.Name, opt => 
+                    opt.MapFrom(src => src.Follower.Name))
+                .ForMember(dest => dest.Surname, opt => 
+                    opt.MapFrom(src => src.Follower.Surname))
+                .ForMember(dest => dest.Username, opt => 
+                    opt.MapFrom(src => src.Follower.Username))
+                .ForMember(dest => dest.PhotoUrl, opt => 
+                    opt.MapFrom(src => src.Follower.Photos.FirstOrDefault(x => x.IsMain == true).Url));
+
+            CreateMap<Follow, FolloweeToReturn>()
+                .ForMember(dest => dest.Id, opt => 
+                    opt.MapFrom(src => src.Followee.ID))
+                .ForMember(dest => dest.Name, opt => 
+                    opt.MapFrom(src => src.Followee.Name))
+                .ForMember(dest => dest.Surname, opt => 
+                    opt.MapFrom(src => src.Followee.Surname))
+                .ForMember(dest => dest.Username, opt => 
+                    opt.MapFrom(src => src.Followee.Username))
+                .ForMember(dest => dest.PhotoUrl, opt => 
+                    opt.MapFrom(src => src.Followee.Photos.FirstOrDefault(x => x.IsMain == true).Url));
         }
     }
 }

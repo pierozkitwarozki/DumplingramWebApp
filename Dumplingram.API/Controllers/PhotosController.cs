@@ -84,12 +84,13 @@ namespace Dumplingram.API.Controllers
         public async Task<IActionResult> GetPhotos()
         {
             var currentUserId =
-             int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             var photos = await _repo.GetPhotos(currentUserId);
 
             if (photos == null)
                 return BadRequest("Coś poszło nie tak.");
+
 
             return Ok(photos);
         }

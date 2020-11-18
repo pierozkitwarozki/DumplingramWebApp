@@ -68,24 +68,6 @@ namespace Dumplingram.API.Data
             var list = await _context.Follow
                 .Include(u => u.Follower).ThenInclude(p => p.Photos).Where(f => f.FolloweeId == id).ToListAsync();
 
-
-            foreach (var user in list)
-            {
-                user.Follower.PasswordHash = null;
-                user.Follower.PasswordSalt = null;
-                var photo = user.Follower.Photos.FirstOrDefault(p => p.IsMain == true);
-                if(photo !=null)
-                {
-                    user.Follower.Description = photo.Url;           
-                }
-                else
-                {
-                    user.Follower.Description = 
-                        "https://i1.sndcdn.com/avatars-000343284505-alo495-t500x500.jpg";  
-                }
-                user.Follower.Photos = null;
-            }
-
             return list;
         }
 
@@ -93,25 +75,6 @@ namespace Dumplingram.API.Data
         {
             var list = await _context.Follow
                 .Include(u => u.Followee).ThenInclude(p => p.Photos).Where(f => f.FollowerId == id).ToListAsync();
-
-            foreach (var user in list)
-            {
-                user.Followee.PasswordHash = null;
-                user.Followee.PasswordSalt = null;
-                var photo = user.Followee.Photos.FirstOrDefault(p => p.IsMain == true);
-                if(photo !=null)
-                {
-                    user.Followee.Description = photo.Url;           
-                }
-                else
-                {
-                    user.Followee.Description = 
-                        "https://i1.sndcdn.com/avatars-000343284505-alo495-t500x500.jpg";  
-                }
-                user.Followee.Photos = null;
-                
-            }
-
             return list;
         }
 
@@ -205,30 +168,6 @@ namespace Dumplingram.API.Data
         public async Task<Group> GetGroup(string name)
         {
             return await _context.Groups.Include(x => x.Connections).FirstOrDefaultAsync(x => x.Name == name);
-        }
-
-        public Task ClearUserData(int UserId)
-        {
-            var follows = _context.Follow.Where(x => x.FolloweeId == UserId || x.FollowerId == UserId);
-            var messages = _context.Messages.Where(x => x.SenderId == UserId || x.RecipientId == UserId);
-            var photos = _context.Photo.Where(x => x.UserId == UserId);
-            var photoLikes = _context.PhotoLikes.Where(x => x.UserId == UserId);
-
-            foreach(var follow in follows) this.Delete(follow);
-            foreach(var message in messages) this.Delete(message);
-            foreach(var photo in photos) this.Delete(photo);
-            foreach(var like in photoLikes) this.Delete(like);
-
-            return Task.CompletedTask;
-        }
-
-        public async Task<User> GetUserToDelete(int userId)
-        {
-            var list = await _context.Users.Where(x => x.ID == userId)
-                .Include(p => p.Photos).Include(f => f.Followees).Include(f => f.Followers)
-                .Include(l => l.SendLikes).Include(x => x.MessagesSent).Include(x => x.MessagesReceived).ToListAsync();
-                
-            return list[0];
         }
 
     }

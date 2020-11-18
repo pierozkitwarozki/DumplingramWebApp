@@ -37,8 +37,5 @@ namespace Dumplingram.API.Data
          Task<IEnumerable<Connection>> GetConnections(string userId);
          Task<Group> GetGroup(string name);
 
-         //
-         Task ClearUserData(int UserId);
-         Task<User> GetUserToDelete(int userId);
     }
 }
