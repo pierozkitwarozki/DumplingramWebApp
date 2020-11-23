@@ -1,11 +1,4 @@
 import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import {
   Component,
   EventEmitter,
   Input,
@@ -14,8 +7,8 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Photo } from '../_models/Photo';
-import { PhotoLike } from '../_models/PhotoLike';
+import { Photo } from '../_models/photo';
+import { PhotoLike } from '../_models/photoLike';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { PhotoService } from '../_services/photo.service';
@@ -27,7 +20,7 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./post-card.component.css'],
 })
 export class PostCardComponent implements OnInit {
-  @Input() photo: Photo;
+  @Input() photo: any;
   @Output() getLikerClicked = new EventEmitter<string>();
   @Output() getPhotoDeleted = new EventEmitter<string>();
   photoLikes: PhotoLike[];
@@ -43,9 +36,9 @@ export class PostCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.getUser(this.photo.user.id).subscribe((data) => {
-      this.photo.user = data;
-    });
+    // this.userService.getUser(this.photo.userid).subscribe((data) => {
+    //   this.photo.user = data;
+    // });
     this.getLikes();
     this.doILike();
   }
@@ -68,6 +61,7 @@ export class PostCardComponent implements OnInit {
       .pipe()
       .subscribe(
         (res: PhotoLike[]) => {
+          debugger;
           this.photoLikes = res;
         },
         (error) => {
@@ -85,11 +79,9 @@ export class PostCardComponent implements OnInit {
   }
 
   doILike() {
-    this.photoService
-      .getLike(this.photo.id, this.authService.currentUser.id)
-      .subscribe((res: any) => {
-        this.isLiked = res;
-      });
+    this.photoService.getLike(this.photo.id).subscribe((res: any) => {
+      this.isLiked = res;
+    });
   }
 
   dislikePhoto(photoId: number) {
@@ -120,7 +112,7 @@ export class PostCardComponent implements OnInit {
   }
 
   isPhotoMine(): boolean {
-    if (this.photo.user.id === this.authService.currentUser.id) {
+    if (this.photo.userId === this.authService.currentUser.id) {
       return true;
     } else {
       return false;
@@ -129,32 +121,29 @@ export class PostCardComponent implements OnInit {
 
   deletePhoto() {
     this.alertify.confirm('Czy na pewno chcesz usunąć to zdjęcie? ', () => {
-      this.photoService
-        .deletePhoto(this.authService.currentUser.id, this.photo.id)
-        .subscribe(
-          (data) => {
-            this.getPhotoDeleted.emit();
-          },
-          (error) => {
-            this.alertify.error(error);
-          }
-        );
+      this.photoService.deletePhoto(this.photo.id).subscribe(
+        (data) => {
+          this.getPhotoDeleted.emit();
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
     });
   }
 
   setMain() {
+    debugger;
     this.alertify.confirm('Czy chcesz ustawić to zdjęcie jako główne?', () => {
-      this.photoService
-        .setMainPhoto(this.photo.user.id, this.photo.id)
-        .subscribe(
-          (data) => {
-            this.getPhotoDeleted.emit();
-            this.authService.changeMemberPhoto(this.photo.url);
-          },
-          (error) => {
-            this.alertify.error(error);
-          }
-        );
+      this.photoService.setMainPhoto(this.photo.id).subscribe(
+        (next) => {
+          this.getPhotoDeleted.emit();
+          this.authService.changeMemberPhoto(this.photo.url);
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
     });
   }
 }

@@ -1,4 +1,4 @@
-<div id="main-container" class="container">
+<div id="main-container" class="container" style="margin-top: 80px;">
   <div id="profile" class="container col">
     <div id="avatar-section">
       <img id="avatar" src="{{ user.photoUrl || '../../assets/user.png' }}" alt="{{ user.username }}" />
@@ -70,7 +70,7 @@
     </div>
     <div class="container">
       <div class="grid">
-        <div *ngFor="let photo of user.photos" class="row">
+        <div *ngFor="let photo of photos" class="row">
           <img
             id="photo"
             src="{{ photo.url }}"

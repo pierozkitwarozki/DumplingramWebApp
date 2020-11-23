@@ -11,6 +11,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using Dumplingram.API.Services;
 
 namespace Dumplingram.API.Controllers
 {
@@ -18,78 +19,38 @@ namespace Dumplingram.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthRepository _repo;
-        private readonly IMapper _mapper;
-        private readonly IConfiguration _config;
+        private readonly IAuthService _authService;
 
-        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
+        public AuthController(IAuthService authService)
         {
-            _repo = repo;
-            _mapper = mapper;
-            _config = config;
+            _authService = authService;
+
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
-            if (await _repo.UserExists(userForRegisterDto.Username))
-                return BadRequest("Username has been taken.");
-            
-            var userForCreation = _mapper.Map<User>(userForRegisterDto);
-
-            var createdUser = await _repo.Register(userForCreation, userForRegisterDto.Password);
-
-            var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
-
-            //return CreatedAtRoute("GetUser", new { controller = "Users", id = createdUser.ID }, userToReturn );
-            return Ok(userToReturn); 
+            try
+            {
+                return Ok(await _authService.Register(userForRegisterDto));
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserForLoginDto userForLogin)
+        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            var userFromRepo = await _repo.Login(userForLogin.Username.ToLower(), userForLogin.Password);
-
-            if (userFromRepo == null)
-                return Unauthorized();
-
-            var claims = new[]
+            try 
             {
-                new Claim(ClaimTypes.NameIdentifier, userFromRepo.ID.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.Username)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8
-                .GetBytes(_config.GetSection("AppSettings:Token").Value));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
+                return Ok(await _authService.Login(userForLoginDto));
+            }
+            catch(Exception e)
             {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = creds
-            };
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            //var user = _mapper.Map<UserForListDto>(userFromRepo);
-            var user = _mapper.Map<UserForDetailedDto>(userFromRepo);
-
-            return Ok(new
-            {
-                token = tokenHandler.WriteToken(token),
-                user
-            });
+                return BadRequest(e.Message);
+            }
         }
-
-        
-
-
-
-        
     }
 }

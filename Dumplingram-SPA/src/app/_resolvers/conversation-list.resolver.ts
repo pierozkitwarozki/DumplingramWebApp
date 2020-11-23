@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Message } from '../_models/Message';
-import { User } from '../_models/User';
+import { Message } from '../_models/message';
+import { User } from '../_models/user';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { MessageService } from '../_services/message.service';
@@ -19,7 +19,7 @@ export class ConversationListResolver implements Resolve<Message[]> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<Message[]> {
-    return this.messageSerivce.getMessages(this.authService.currentUser.id).pipe(
+    return this.messageSerivce.getMessages().pipe(
       catchError((error) => {
         this.alertifyService.error('Problem retrieving data');
         this.router.navigate(['/home']);

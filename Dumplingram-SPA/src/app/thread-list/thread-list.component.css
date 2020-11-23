@@ -30,6 +30,7 @@
 .card {
     border: #d1d1d1;
     border-style: solid;
+    background: rgb(245, 245, 245);
     width: 50%;
     border-width: 1%;
     border-radius: 20px;
@@ -128,7 +129,7 @@ button:hover {
 
 #conv {
     padding: 10px;
-    width: 700px;
+    width: 70%;
 }
 
 #conv:hover {

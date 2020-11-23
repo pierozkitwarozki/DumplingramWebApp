@@ -5,14 +5,15 @@ import { ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { error } from 'protractor';
 import { take } from 'rxjs/operators';
-import { Follow } from '../_models/Follow';
-import { Message } from '../_models/Message';
-import { Photo } from '../_models/Photo';
+import { Follow } from '../_models/follow';
+import { Message } from '../_models/message';
+import { Photo } from '../_models/photo';
 
-import { User } from '../_models/User';
+import { User } from '../_models/user';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { MessageService } from '../_services/message.service';
+import { PhotoService } from '../_services/photo.service';
 import { PresenceService } from '../_services/presence.service';
 import { UserService } from '../_services/user.service';
 
@@ -27,7 +28,8 @@ export class UserDetailComponent implements OnInit {
   modalRef: BsModalRef;
   followeeItems: any;
   followerItems: any;
-  photo: Photo;
+  photo: any;
+  photos: any[];
   message: string;
   newMessage: any = {};
 
@@ -35,6 +37,7 @@ export class UserDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private authService: AuthService,
+    private photoService: PhotoService,
     private alertify: AlertifyService,
     private modalService: BsModalService,
     private messageService: MessageService,
@@ -44,6 +47,7 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.user = data['user'];
+      this.loadPhotos();
       this.getFollowees();
       this.getFollowers();
       this.getFollow(this.user.id);
@@ -69,7 +73,7 @@ export class UserDetailComponent implements OnInit {
 
   getFollow(id: number) {
     this.userService
-      .getFollow(this.authService.decodedToken.nameid, id)
+      .getFollow(id)
       .pipe()
       .subscribe(
         (res: Follow) => {
@@ -86,17 +90,15 @@ export class UserDetailComponent implements OnInit {
       'czy na pewno chcesz przestać obserwować użytkownika ' +
         this.user.username,
       () => {
-        this.userService
-          .unfollow(this.authService.decodedToken.nameid, id)
-          .subscribe(
-            (data) => {
-              this.getFollow(id);
-              this.getFollowers();
-            },
-            (error) => {
-              this.alertify.error(error);
-            }
-          );
+        this.userService.unfollow(id).subscribe(
+          (data) => {
+            this.getFollow(id);
+            this.getFollowers();
+          },
+          (error) => {
+            this.alertify.error(error);
+          }
+        );
       }
     );
   }
@@ -165,24 +167,18 @@ export class UserDetailComponent implements OnInit {
 
   countPhotos(): number {
     if (
-      typeof this.user.photos !== 'undefined' &&
-      this.user.photos.length > 0
+      typeof this.photos !== 'undefined' &&
+      this.photos.length > 0
     ) {
-      return this.user.photos.length;
+      return this.photos.length;
     } else {
       return 0;
     }
   }
 
-  openModalPhotoPreview(template: TemplateRef<any>, photo: Photo) {
-    this.photo = {
-      id: photo.id,
-      dateAdded: photo.dateAdded,
-      user: this.user,
-      isMain: photo.isMain,
-      url: photo.url,
-      description: photo.description,
-    };
+  openModalPhotoPreview(template: TemplateRef<any>, photo: any) {
+    this.photo = photo;
+
     this.modalRef = this.modalService.show(template);
   }
 
@@ -194,6 +190,7 @@ export class UserDetailComponent implements OnInit {
     this.userService.getUser(this.user.id).subscribe(
       (res: User) => {
         this.user = res;
+        this.loadPhotos();
       },
       (error) => {
         this.alertify.error(error);
@@ -231,6 +228,17 @@ export class UserDetailComponent implements OnInit {
     this.modalService.onHide.pipe(take(1)).subscribe(() => {
       this.messageService.stopConnection();
     });
+  }
+
+  loadPhotos() {
+    this.photoService.getPhotosForUser(this.user.id).subscribe(
+      (data: any[]) => {
+        this.photos = data;
+      },
+      (error) => {
+        this.alertify.error(error);
+      }
+    );
   }
 
   ngOnDestroy() {

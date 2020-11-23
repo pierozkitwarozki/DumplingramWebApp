@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Dumplingram.API.Helpers;
 using Dumplingram.API.Models;
+using Dumplingram.API.Services;
 
 namespace Dumplingram.API.Controllers
 {
@@ -17,154 +18,138 @@ namespace Dumplingram.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IDumplingramRepository _repo;
-        private readonly IMapper _mapper;
+        private readonly IUsersService _usersService;
 
-        public UsersController(IDumplingramRepository repo, IMapper mapper)
+        public UsersController(IUsersService usersService)
         {
-            _mapper = mapper;
-            _repo = repo;
+            _usersService = usersService;
         }
 
-        
         [HttpGet]
-        public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams) 
+        public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
         {
-            
-            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            try
+            {
+                var id =
+                    int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            var userFromRepo = await _repo.GetUser(currentUserId);            
-
-            userParams.UserId = currentUserId;
-
-            var users = await _repo.GetUsers(userParams);
-
-            var usersToReturn = _mapper.Map<IEnumerable<UserForDetailedDto>>(users);
-
-            //Response.AddPagination(users.CurrentPage, users.PageSize,
-             //   users.TotalCount, users.TotalPages);
-
-            return Ok(usersToReturn);
+                return Ok(await _usersService.GetUsers(userParams, id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser(int id) 
+        public async Task<IActionResult> GetUser(int id)
         {
-            var user = await _repo.GetUser(id);
-
-            var usersToReturn = _mapper.Map<UserForDetailedDto>(user);
-
-            return Ok(usersToReturn);
+            try
+            {
+                return Ok(await _usersService.GetUser(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpPost("{id}/follow/{followeeId}")]
-        public async Task<IActionResult> FollowUser(int id, int followeeId)
-        {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
-
-            var follow = await _repo.GetFollow(id, followeeId);
-
-            if(follow != null)
-                return BadRequest("Już obserwujesz tego użytkownika");
-
-            if(followeeId == id)
-                return BadRequest("Samouwielbienie, hatfu.");
-            
-            if(await _repo.GetUser(followeeId) == null)
-                return NotFound();
-
-            follow = new Follow
+        [HttpPost("follow/{followeeId}")]
+        public async Task<IActionResult> FollowUser(int followeeId)
+        {          
+            try
             {
-                FollowerId = id,
-                FolloweeId = followeeId
-            };
+                var id = 
+                    int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            await _repo.Add<Follow>(follow);
+                await _usersService.FollowUser(id, followeeId);
 
-            if(await _repo.SaveAll())
                 return Ok();
-            
-            return BadRequest("Failed to like user");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpGet("{id}/followers")]
         public async Task<IActionResult> GetFollowers(int id)
         {
-            /*if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();*/
-            
-            var followers = await _repo.GetFollowers(id);
-            
-            if(followers == null)
-                return BadRequest("No followees");
-
-            var followersToReturn = _mapper.Map<IEnumerable<FollowerForReturn>>(followers);
-
-            return Ok(followersToReturn);
+            try
+            {
+                return Ok(await _usersService.GetFollowers(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpGet("{id}/followees")]
         public async Task<IActionResult> GetFollowees(int id)
         {
-            /*if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();*/
-            
-            var followees = await _repo.GetFollowees(id);
-
-            if(followees == null)
-                return BadRequest("No followees");
-
-            var followeesToReturn = _mapper.Map<IEnumerable<FolloweeToReturn>>(followees);
-
-            return Ok(followeesToReturn);
+            try
+            {
+                return Ok(await _usersService.GetFollowees(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpGet("{id}/getfollow/{followeeId}")]
-        public async Task<IActionResult> GetFollow(int id, int followeeId)
-        {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+        [HttpGet("getfollow/{followeeId}")]
+        public async Task<IActionResult> GetFollow(int followeeId)
+        {            
+            try
+            {
+                var id = 
+                    int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            var follow = await _repo.GetFollow(id, followeeId);
-            
-            return Ok(follow);
+                return Ok(await _usersService.GetFollow(id, followeeId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
 
-        [HttpDelete("{id}/unfollow/{followeeId}")]
-        public async Task<IActionResult> Unfollow(int id, int followeeId)
+        [HttpDelete("unfollow/{followeeId}")]
+        public async Task<IActionResult> Unfollow(int followeeId)
         {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+            try
+            {
+                var id = 
+                    int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            var follow = await _repo.GetFollow(id, followeeId);
+                await _usersService.Unfollow(id, followeeId);
 
-            if(follow == null)
-                return BadRequest("Nie obserwujesz tego użytkownika.");
-            
-            _repo.Delete<Follow>(follow);
-
-            if(await _repo.SaveAll())
                 return NoContent();
-            
-            return BadRequest("Coś poszło nie tak.");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
-        {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser(UserForUpdateDto userForUpdateDto)
+        {     
+            try 
+            {
+                var id = 
+                    int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            var userFromRepo = await _repo.GetUser(id);
+                await _usersService.UpdateUser(id, userForUpdateDto);
 
-            _mapper.Map(userForUpdateDto, userFromRepo);
-
-            if (await _repo.SaveAll())
                 return NoContent();
 
-            throw new Exception($"Updating user with {id} failed on save");
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
     }

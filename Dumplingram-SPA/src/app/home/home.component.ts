@@ -6,8 +6,8 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { error } from 'protractor';
 import { environment } from 'src/environments/environment';
 import { runInThisContext } from 'vm';
-import { Photo } from '../_models/Photo';
-import { User } from '../_models/User';
+import { Photo } from '../_models/photo';
+import { User } from '../_models/user';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { PhotoService } from '../_services/photo.service';
@@ -18,7 +18,7 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  photos: Photo[];
+  photos: any[];
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
       .getPhotos()
       .pipe()
       .subscribe(
-        (res: Photo[]) => {
+        (res: any[]) => {
           this.photos = res;
         },
         (error) => {
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
 
   initializeUploader() {
     this.uploader = new FileUploader({
-      url: this.baseUrl + 'photos/' + this.authService.decodedToken.nameid,
+      url: this.baseUrl + 'photos',
       authToken: 'Bearer ' + localStorage.getItem('token'),
       additionalParameter: { description: this.photoDescription },
       isHTML5: true,

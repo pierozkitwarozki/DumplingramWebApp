@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Message } from '../_models/Message';
-import { User } from '../_models/User';
+import { Message } from '../_models/message';
+import { User } from '../_models/user';
 import { AlertifyService } from './alertify.service';
 import { AuthService } from './auth.service';
 import { MessageService } from './message.service';
@@ -35,7 +35,7 @@ export class PresenceService {
       .build();
 
     this.hubConnection.start().then(() => {
-      this.messageService.getMessages(user.id)
+      this.messageService.getMessages()
         .subscribe((res: Message[]) => {
           this.conversations.next(res);
         });
@@ -47,14 +47,14 @@ export class PresenceService {
 
     this.hubConnection.on('NewMessageReceived', ({ username }) => {
       this.alertify.warning('@' + username + ' wysłał Ci wiadomość.');
-      this.messageService.getMessages(user.id)
+      this.messageService.getMessages()
         .subscribe((res: Message[]) => {
           this.conversations.next(res);
         });
     });
 
     this.hubConnection.on('NewMessageReceivedNoNotification', () => {
-      this.messageService.getMessages(user.id)
+      this.messageService.getMessages()
         .subscribe((res: Message[]) => {
           this.conversations.next(res);
         });

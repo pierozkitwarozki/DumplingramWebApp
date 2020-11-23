@@ -4,8 +4,8 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Message } from '../_models/Message';
-import { User } from '../_models/User';
+import { Message } from '../_models/message';
+import { User } from '../_models/user';
 import { PresenceService } from './presence.service';
 
 @Injectable({
@@ -47,24 +47,11 @@ export class MessageService {
     }
   }
 
-  getMessages(userId: number): Observable<Message[]> {
+  getMessages(): Observable<Message[]> {
     return this.http
-      .get<Message[]>(this.baseUrl + 'messages/' + userId + '/received', {
+      .get<Message[]>(this.baseUrl + 'messages/received', {
         observe: 'response',
       })
-      .pipe(
-        map((response) => {
-          return response.body;
-        })
-      );
-  }
-
-  getMessageThread(userId: number, recipientId: number): Observable<Message[]> {
-    return this.http
-      .get<Message[]>(
-        this.baseUrl + 'messages/' + userId + '/thread/' + recipientId,
-        { observe: 'response' }
-      )
       .pipe(
         map((response) => {
           return response.body;

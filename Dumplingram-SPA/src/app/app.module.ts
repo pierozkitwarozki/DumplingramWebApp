@@ -1,4 +1,8 @@
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  HammerGestureConfig,
+  HAMMER_GESTURE_CONFIG,
+} from '@angular/platform-browser';
 import { Injectable, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,10 +30,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { ThreadListComponent } from './thread-list/thread-list.component';
-import { NbButtonModule, NbCardModule, NbChatModule, NbLayoutModule, NbListModule, NbSidebarModule, NbThemeModule, NbUserModule } from '@nebular/theme';
 import { ConversationListResolver } from './_resolvers/conversation-list.resolver';
-
-
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -62,15 +63,6 @@ export class CustomHammerConfig extends HammerGestureConfig {
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    NbThemeModule.forRoot(),
-    NbLayoutModule,
-    NbSidebarModule.forRoot(), // NbSidebarModule.forRoot(), //if this is your app.module
-    NbListModule,
-    NbUserModule,
-    NbChatModule,
-    NbCardModule,
-    NbListModule,
-    NbButtonModule,
     BrowserAnimationsModule,
     FileUploadModule,
     HttpClientModule,

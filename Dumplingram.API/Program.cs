@@ -17,21 +17,6 @@ namespace Dumplingram.API
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            /*using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    var context = services.GetRequiredService<DataContxt>();
-                    context.Database.Migrate();
-                    Seed.SeedUsers(context);
-                }
-                catch(Exception exception)
-                {   
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(exception, "Error occured during migration"); 
-                }
-            }*/
             host.Run();
         }
 

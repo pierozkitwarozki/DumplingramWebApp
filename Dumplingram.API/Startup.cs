@@ -21,6 +21,7 @@ using System.Net;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Dumplingram.API.SignalR;
+using Dumplingram.API.Services;
 
 namespace Dumplingram.API
 {
@@ -49,6 +50,10 @@ namespace Dumplingram.API
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(AuthRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IDumplingramRepository, DumplingramRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

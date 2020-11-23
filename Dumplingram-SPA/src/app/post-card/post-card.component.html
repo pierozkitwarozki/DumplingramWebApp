@@ -5,12 +5,12 @@
     >
       <img
         id="avatar"
-        src="{{ photo.user.photoUrl }}"
-        alt="{{ photo.user.username }}"
+        src="{{ photo.userPhotoUrl }}"
+        alt="{{ photo.username }}"
         class="mr-2"
-        [routerLink]="['/users/', photo.user.id]"
+        [routerLink]="['/users/', photo.userId]"
       />
-      <h1 id="username">@{{ photo.user.username }}</h1>
+      <h1 id="username">@{{ photo.username }}</h1>
     </div>
     <div *ngIf="isPhotoMine()" style="display: flex; justify-content: flex-end">
       <i class="fa fa-check mr-2" style="cursor: pointer;" (click)="setMain()"></i>
@@ -34,6 +34,7 @@
     <img
       *ngIf="!isLiked"
       id="like"
+      class="fa-pulse"
       src="../../assets/like.png"
       alt="like"
       (click)="likePhoto(photo.id)"
@@ -41,6 +42,7 @@
     <img
       *ngIf="isLiked"
       id="like"
+      class="fa-bounce"
       src="../../assets/liked.png"
       alt="like"
       (click)="dislikePhoto(photo.id)"
@@ -68,13 +70,13 @@
     <div id="avatar-section" class="mb-4" *ngFor="let like of photoLikes">
       <div
         id="item"
-        [routerLink]="['/users/', like.liker.id]"
+        [routerLink]="['/users/', like.userId]"
         (click)="modalRef.hide()"
       >
-        <img id="profile-image" src="{{ like.liker.photoUrl || '../../assets/user.png'}}" alt="" />
+        <img id="profile-image" src="{{ like.userPhotoUrl || '../../assets/user.png'}}" alt="" />
         <b class="w-100"
-          ><p id="name">{{ like.liker.name }} {{ like.liker.surname }}</p>
-          @{{ like.liker.username }}</b
+          ><p id="name">{{ like.name }} {{ like.surname }}</p>
+          @{{ like.username }}</b
         >
       </div>
     </div>

@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Photo } from '../_models/Photo';
-import { PhotoLike } from '../_models/PhotoLike';
+import { Photo } from '../_models/photo';
+import { PhotoLike } from '../_models/photoLike';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +13,9 @@ export class PhotoService {
   baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
-  getPhotos(): Observable<Photo[]> {
+  getPhotos(): Observable<any[]> {
     return this.http
-      .get<Photo[]>(this.baseUrl + 'photos/', { observe: 'response' })
+      .get<any[]>(this.baseUrl + 'photos/', { observe: 'response' })
       .pipe(
         map((response) => {
           const x = response.body;
@@ -47,14 +47,11 @@ export class PhotoService {
     );
   }
 
-  getLike(photoId: number, userId: number): Observable<PhotoLike> {
+  getLike(photoId: number): Observable<PhotoLike> {
     return this.http
-      .get<PhotoLike>(
-        this.baseUrl + 'photos/' + photoId + '/getlike/' + userId,
-        {
-          observe: 'response',
-        }
-      )
+      .get<PhotoLike>(this.baseUrl + 'photos/' + photoId + '/getlike', {
+        observe: 'response',
+      })
       .pipe(
         map((response) => {
           return response.body;
@@ -62,16 +59,29 @@ export class PhotoService {
       );
   }
 
-  deletePhoto(userId: number, photoId: number) {
+  deletePhoto(photoId: number) {
     return this.http.delete(
-      this.baseUrl + 'photos/' + userId + '/delete/' + photoId
+      this.baseUrl + 'photos/delete/' + photoId
     );
   }
 
-  setMainPhoto(userId: number, photoId: number) {
+  setMainPhoto(photoId: number) {
     return this.http.post(
-      this.baseUrl + 'photos/' + userId + '/setMain/' + photoId,
+      this.baseUrl + 'photos/setMain/' + photoId,
       {}
     );
+  }
+
+  getPhotosForUser(id: number): Observable<any[]> {
+    return this.http
+      .get<any[]>(this.baseUrl + 'photos/forUser/' + id, {
+        observe: 'response',
+      })
+      .pipe(
+        map((repsponse) => {
+          const x = repsponse.body;
+          return x;
+        })
+      );
   }
 }

@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '../_models/User';
+import { User } from '../_models/user';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { UserService } from '../_services/user.service';
@@ -37,7 +37,7 @@ export class UserEditComponent implements OnInit {
 
   updateUser() {
     this.userService
-      .updateUser(this.authService.decodedToken.nameid, this.user)
+      .updateUser(this.user)
       .subscribe(
         (next) => {
           this.alertify.success('Zaktualizowano.');

@@ -1,46 +1,62 @@
-<div id="posts" class="col-sm">
-    <div id="add-photo" class="container text-center">
-        <button id="new-photo-button" class="w-100 h-20" (click)="openAddPhotoModal(addphoto)">
-            <span class="fa fa-upload mr-10"></span> 
-            Dodaj zdjęcie
-        </button>
-    </div>
+<div id="posts" class="col-sm" style="margin-top: 80px">
+  <div id="add-photo" class="container text-center">
+    <button
+      id="new-photo-button"
+      class="w-100 h-20"
+      (click)="openAddPhotoModal(addphoto)"
+    >
+      <span class="fa fa-upload mr-10"></span>
+      Dodaj zdjęcie
+    </button>
+  </div>
   <div id="posts2" *ngFor="let photo of photos">
     <app-post-card [photo]="photo"></app-post-card>
   </div>
 </div>
 
 <ng-template #addphoto>
-    <div class="modal-header">
-        <div class="container text-center">
-          <h1 class="mb-2">Co słychać, {{ authService.currentUser.name }}?</h1>
-          <form id="input" >             
-            <input (keyup)="onKey($event)" placeholder="Dodaj opis..." />
-          </form>
-        </div>
+  <div class="modal-header">
+    <div class="container text-center">
+      <h1 class="mb-2">Co słychać, {{ authService.currentUser.name }}?</h1>
+      <form id="input">
+        <input (keyup)="onKey($event)" placeholder="Dodaj opis..." />
+      </form>
     </div>
-    <div class="modal-body text-center">
-        <div
-        ng2FileDrop
-        [ngClass]="{ 'nv-file-over': hasBaseDropZoneOver }"
-        (fileOver)="fileOverBase($event)"
-        [uploader]="uploader"
-        class="card bg-faded p-3 text-center mb-3 my-drop-zone"
-      >
-        <i class="fa fa-upload fa-3x"></i>
-        Upuść zdjęcia
-      </div>
-      lub
-    <input id="file-upload" type="file" ng2FileSelect [uploader]="uploader" />
-    </div>
-
+  </div>
+  <div class="modal-body text-center" style="max-height: max-content">
     <div
+      ng2FileDrop
+      [ngClass]="{ 'nv-file-over': hasBaseDropZoneOver }"
+      (fileOver)="fileOverBase($event)"
+      [uploader]="uploader"
+      class="card bg-faded p-3 text-center mb-3 my-drop-zone"
+    >
+      <i class="fa fa-upload fa-3x"></i>
+      Upuść zdjęcia
+    </div>
+    lub
+    <input
+      style="
+        height: 50px;
+        display: flex;
+        align-content: center;
+        width: 100%;
+        padding: 10px;
+        padding-inline: 25px;
+      "
+      id="file-upload"
+      type="file"
+      ng2FileSelect
+      [uploader]="uploader"
+    />
+  </div>
+
+  <div
     class="modal-body text-center"
     style="margin-bottom: 40px"
     *ngIf="uploader?.queue?.length"
-    >     
+  >
     <div class="text-center m-0">
-
       <button
         type="button"
         class="w-100"
@@ -49,7 +65,12 @@
       >
         <span class="fa fa-upload"></span> dodaj
       </button>
-
+      <div>
+        Queue progress:
+        <div class="progress" style="background-color: teal;">
+            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+        </div>
+    </div>
     </div>
   </div>
 </ng-template>

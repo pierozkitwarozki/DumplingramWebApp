@@ -83,12 +83,12 @@ namespace Dumplingram.API.Data
             var follows = await _context.Follow.Where(f => f.FollowerId == id).Select(u => u.FolloweeId).ToListAsync();
             var photos = await _context.Photo.Where(p => follows.Contains(p.UserId)).Include(u => u.User).ToListAsync();
 
-            foreach (var photo in photos)
-            {
-                photo.User.PasswordHash = null;
-                photo.User.PasswordSalt = null;
-            }
+            return photos.OrderByDescending(d => d.DateAdded);
+        }
 
+        public async Task<IEnumerable<Photo>> GetPhotosForUser(int id)
+        {
+            var photos = await _context.Photo.Where(x => x.UserId == id).Include(x => x.User).ToListAsync();
             return photos.OrderByDescending(d => d.DateAdded);
         }
 

@@ -4,9 +4,9 @@ import { error } from 'protractor';
 import { Observable } from 'rxjs';
 import { map, repeat, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Follow } from '../_models/Follow';
-import { Photo } from '../_models/Photo';
-import { User } from '../_models/User';
+import { Follow } from '../_models/follow';
+import { Photo } from '../_models/photo';
+import { User } from '../_models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class UserService {
 
   getUsers(word?: string): Observable<User[]> {
 
-    let params = new HttpParams().set('word', word);
+    const params = new HttpParams().set('word', word);
 
     return this.http
       .get<User[]>(this.baseUrl + 'users', { observe: 'response', params })
@@ -35,14 +35,14 @@ export class UserService {
 
   followUser(id: number, followeeId: number) {
     return this.http.post(
-      this.baseUrl + 'users/' + id + '/follow/' + followeeId,
+      this.baseUrl + 'users/follow/' + followeeId,
       {}
     );
   }
 
-  getFollow(id: number, followeeId: number): Observable<Follow> {
+  getFollow(followeeId: number): Observable<Follow> {
     return this.http
-      .get<Follow>(this.baseUrl + 'users/' + id + '/getfollow/' + followeeId, {
+      .get<Follow>(this.baseUrl + 'users/getfollow/' + followeeId, {
         observe: 'response',
       })
       .pipe(
@@ -52,9 +52,9 @@ export class UserService {
       );
   }
 
-  unfollow(id: number, followeeId: number) {
+  unfollow(followeeId: number) {
     return this.http.delete(
-      this.baseUrl + 'users/' + id + '/unfollow/' + followeeId
+      this.baseUrl + 'users/unfollow/' + followeeId
     );
   }
 
@@ -82,7 +82,7 @@ export class UserService {
       );
   }
 
-  updateUser(id: number, user: User) {
-    return this.http.put(this.baseUrl + 'users/' + id, user);
+  updateUser(user: User) {
+    return this.http.put(this.baseUrl + 'users', user);
   }
 }

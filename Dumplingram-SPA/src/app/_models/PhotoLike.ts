@@ -1,7 +1,10 @@
-import { User } from './User';
+import { User } from './user';
 
 export interface PhotoLike {
     userId: number;
     photoId: number;
-    liker: User;
+    userPhotoUrl: string;
+    username: string;
+    name: string;
+    surname: string;
 }
