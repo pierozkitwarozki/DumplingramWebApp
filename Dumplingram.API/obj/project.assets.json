@@ -1882,11 +1882,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp_\\Dumplingram.API\\Dumplingram.API.csproj",
+      "projectUniqueName": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp_\\Dumplingram.API\\Dumplingram.API.csproj",
       "projectName": "Dumplingram.API",
-      "projectPath": "d:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp_\\Dumplingram.API\\Dumplingram.API.csproj",
+      "projectPath": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp_\\Dumplingram.API\\Dumplingram.API.csproj",
       "packagesPath": "C:\\Users\\Bartłomiej\\.nuget\\packages\\",
-      "outputPath": "d:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp_\\Dumplingram.API\\obj\\",
+      "outputPath": "D:\\Users\\Bart\\VS_Code_Projects\\DumplingramWebApp_\\Dumplingram.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

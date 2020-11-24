@@ -22,7 +22,6 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Dumplingram.API.SignalR;
 using Dumplingram.API.Services;
-
 namespace Dumplingram.API
 {
     public class Startup
@@ -43,6 +42,7 @@ namespace Dumplingram.API
                 opt.SerializerSettings.ReferenceLoopHandling =
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
+
             services.AddControllers();
             services.AddCors();
             services.AddSignalR();
@@ -55,6 +55,7 @@ namespace Dumplingram.API
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IDumplingramRepository, DumplingramRepository>();
+           
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -82,6 +83,9 @@ namespace Dumplingram.API
                         }
                     };
                 });
+
+            
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,7 +99,7 @@ namespace Dumplingram.API
             //app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(x => x.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowCredentials().AllowAnyHeader());
+            app.UseCors(x => x.AllowAnyMethod().AllowCredentials().AllowAnyHeader().WithOrigins("http://localhost:4200"));
 
             app.UseAuthentication();
             app.UseAuthorization();
