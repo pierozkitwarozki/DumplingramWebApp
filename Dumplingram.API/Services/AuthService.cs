@@ -25,25 +25,25 @@ namespace Dumplingram.API.Services
             _config = config;
         }
 
-        public async Task<UserForDetailedDto> Register(UserForRegisterDto userForRegisterDto)
+        public async Task<UserForDetailedDto> RegisterAsync(UserForRegisterDto userForRegisterDto)
         {
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
             
-            if (await _repo.UserExists(userForRegisterDto.Username))
+            if (await _repo.UserExistsAsync(userForRegisterDto.Username))
                 throw new Exception("Username has been taken.");
             
             var userForCreation = _mapper.Map<User>(userForRegisterDto);
 
-            var createdUser = await _repo.Register(userForCreation, userForRegisterDto.Password);
+            var createdUser = await _repo.RegisterAsync(userForCreation, userForRegisterDto.Password);
 
             var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
 
             return userToReturn; 
         }
 
-        public async Task<object> Login(UserForLoginDto userForLogin)
+        public async Task<object> LoginAsync(UserForLoginDto userForLogin)
         {
-            var userFromRepo = await _repo.Login(userForLogin.Username.ToLower(), userForLogin.Password);
+            var userFromRepo = await _repo.LoginAsync(userForLogin.Username.ToLower(), userForLogin.Password);
 
             if (userFromRepo == null)
                 throw new Exception("Zły login lub hasło.");

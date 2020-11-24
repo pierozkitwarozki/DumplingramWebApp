@@ -9,13 +9,13 @@ namespace Dumplingram.API.Services
 {
     public interface IUsersService
     {
-         Task<IEnumerable<UserForDetailedDto>> GetUsers(UserParams userParams, int currentUserId);
-         Task<UserForDetailedDto> GetUser(int id);
-         Task<IAsyncResult> FollowUser(int id, int followeeId);
-         Task<IEnumerable<FollowerForReturn>> GetFollowers(int id);
-         Task<IEnumerable<FolloweeToReturn>> GetFollowees(int id);
-         Task<Follow> GetFollow(int id, int followeeId);
-         Task<IAsyncResult> Unfollow(int id, int followeeId);
-         Task<IAsyncResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto);
+         Task<IEnumerable<UserForDetailedDto>> GetUsersAsync(UserParams userParams, int currentUserId);
+         Task<UserForDetailedDto> GetUserAsync(int id);
+         Task<IAsyncResult> FollowUserAsync(int id, int followeeId);
+         Task<IEnumerable<FollowerForReturn>> GetFollowersAsync(int id);
+         Task<IEnumerable<FolloweeToReturn>> GetFolloweesAsync(int id);
+         Task<Follow> GetFollowAsync(int id, int followeeId);
+         Task<IAsyncResult> UnfollowAsync(int id, int followeeId);
+         Task<IAsyncResult> UpdateUserAsync(int id, UserForUpdateDto userForUpdateDto);
     }
 }

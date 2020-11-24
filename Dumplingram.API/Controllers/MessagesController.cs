@@ -37,7 +37,7 @@ namespace Dumplingram.API.Controllers
                 var id =
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                return Ok(await _messageService.GetMessagesForUser(id));
+                return Ok(await _messageService.GetMessagesForUserAsync(id));
             }
             catch (Exception e)
             {

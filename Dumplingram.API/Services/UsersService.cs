@@ -19,33 +19,33 @@ namespace Dumplingram.API.Services
             _repo = repo;
         }
 
-        public async Task<IEnumerable<UserForDetailedDto>> GetUsers(UserParams userParams, int currentUserId)
+        public async Task<IEnumerable<UserForDetailedDto>> GetUsersAsync(UserParams userParams, int currentUserId)
         {
 
-            var userFromRepo = await _repo.GetUser(currentUserId);
+            var userFromRepo = await _repo.GetUserAsync(currentUserId);
 
             userParams.UserId = currentUserId;
 
-            var users = await _repo.GetUsers(userParams);
+            var users = await _repo.GetUsersAsync(userParams);
 
             var usersToReturn = _mapper.Map<IEnumerable<UserForDetailedDto>>(users);
 
             return usersToReturn;
         }
 
-        public async Task<UserForDetailedDto> GetUser(int id)
+        public async Task<UserForDetailedDto> GetUserAsync(int id)
         {
-            var user = await _repo.GetUser(id);
+            var user = await _repo.GetUserAsync(id);
 
             var usersToReturn = _mapper.Map<UserForDetailedDto>(user);
 
             return usersToReturn;
         }
 
-        public async Task<IAsyncResult> FollowUser(int id, int followeeId)
+        public async Task<IAsyncResult> FollowUserAsync(int id, int followeeId)
         {
 
-            var follow = await _repo.GetFollow(id, followeeId);
+            var follow = await _repo.GetFollowAsync(id, followeeId);
 
             if (follow != null)
                 throw new Exception("Już obserwujesz tego użytkownika");
@@ -53,7 +53,7 @@ namespace Dumplingram.API.Services
             if (followeeId == id)
                 throw new Exception("Samouwielbienie, hatfu.");
 
-            if (await _repo.GetUser(followeeId) == null)
+            if (await _repo.GetUserAsync(followeeId) == null)
                 throw new Exception("Nie znaleziono użytkownika");
 
             follow = new Follow
@@ -62,61 +62,61 @@ namespace Dumplingram.API.Services
                 FolloweeId = followeeId
             };
 
-            await _repo.Add<Follow>(follow);
+            await _repo.AddAsync<Follow>(follow);
 
-            if (await _repo.SaveAll())
+            if (await _repo.SaveAllAsync())
                 return Task.CompletedTask;
 
             throw new Exception("Niepowodzenie.");
         }
 
-        public async Task<IEnumerable<FollowerForReturn>> GetFollowers(int id)
+        public async Task<IEnumerable<FollowerForReturn>> GetFollowersAsync(int id)
         {
-            var followers = await _repo.GetFollowers(id);
+            var followers = await _repo.GetFollowersAsync(id);
 
             var followersToReturn = _mapper.Map<IEnumerable<FollowerForReturn>>(followers);
 
             return followersToReturn;
         }
 
-        public async Task<IEnumerable<FolloweeToReturn>> GetFollowees(int id)
+        public async Task<IEnumerable<FolloweeToReturn>> GetFolloweesAsync(int id)
         {
-            var followees = await _repo.GetFollowees(id);
+            var followees = await _repo.GetFolloweesAsync(id);
 
             var followeesToReturn = _mapper.Map<IEnumerable<FolloweeToReturn>>(followees);
 
             return followeesToReturn;
         }
 
-        public async Task<Follow> GetFollow(int id, int followeeId)
+        public async Task<Follow> GetFollowAsync(int id, int followeeId)
         {
-            var follow = await _repo.GetFollow(id, followeeId);
+            var follow = await _repo.GetFollowAsync(id, followeeId);
 
             return follow;
         }
 
-        public async Task<IAsyncResult> Unfollow(int id, int followeeId)
+        public async Task<IAsyncResult> UnfollowAsync(int id, int followeeId)
         {
-            var follow = await _repo.GetFollow(id, followeeId);
+            var follow = await _repo.GetFollowAsync(id, followeeId);
 
             if (follow == null)
                 throw new Exception("Nie obserwujesz tego użytkownika.");
 
             _repo.Delete<Follow>(follow);
 
-            if (await _repo.SaveAll())
+            if (await _repo.SaveAllAsync())
                 return Task.CompletedTask;
 
             throw new Exception("Coś poszło nie tak.");
         }
 
-        public async Task<IAsyncResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
+        public async Task<IAsyncResult> UpdateUserAsync(int id, UserForUpdateDto userForUpdateDto)
         {
-            var userFromRepo = await _repo.GetUser(id);
+            var userFromRepo = await _repo.GetUserAsync(id);
 
             _mapper.Map(userForUpdateDto, userFromRepo);
 
-            if (await _repo.SaveAll())
+            if (await _repo.SaveAllAsync())
                 return Task.CompletedTask;
 
             throw new Exception($"Edycja użytkownika: {id} zakończona niepowodzeniem.");

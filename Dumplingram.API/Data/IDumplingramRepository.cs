@@ -7,36 +7,36 @@ namespace Dumplingram.API.Data
 {
     public interface IDumplingramRepository
     {
-         Task Add<T>(T entity) where T: class;
+         Task AddAsync<T>(T entity) where T: class;
          void Delete<T>(T entity) where T: class;
-         Task<bool> SaveAll();
+         Task<bool> SaveAllAsync();
 
          // Users
-         Task<IEnumerable<User>> GetUsers(UserParams userParams);
-         Task<User> GetUser(int id);
+         Task<IEnumerable<User>> GetUsersAsync(UserParams userParams);
+         Task<User> GetUserAsync(int id);
 
          //Follows
-         Task<Follow> GetFollow(int id, int followeeId);
-         Task<IEnumerable<Follow>> GetFollowers(int id);
-         Task<IEnumerable<Follow>> GetFollowees(int id);
+         Task<Follow> GetFollowAsync(int id, int followeeId);
+         Task<IEnumerable<Follow>> GetFollowersAsync(int id);
+         Task<IEnumerable<Follow>> GetFolloweesAsync(int id);
 
          // Photos
-         Task<IEnumerable<Photo>> GetPhotos(int id);
-         Task<Photo> GetPhoto(int id);
-         Task<IEnumerable<PhotoLike>> GetPhotoLikes(int id);
-         Task<PhotoLike> GetPhotoLike(int id, int userId);
-         Task<Photo> GetMainPhotoForUser(int userId);
-         Task<IEnumerable<Photo>> GetPhotosForUser(int id);
+         Task<IEnumerable<Photo>> GetPhotosAsync(int id); 
+         Task<Photo> GetPhotoAsync(int id);
+         Task<IEnumerable<PhotoLike>> GetPhotoLikesAsync(int id);
+         Task<PhotoLike> GetPhotoLikeAsync(int id, int userId);
+         Task<Photo> GetMainPhotoForUserAsync(int userId);
+         Task<IEnumerable<Photo>> GetPhotosForUserAsync(int id);
 
          //Messages
-         Task<Message> GetMessage(int id);
-         Task<IEnumerable<Message>> GetMessagesForUser(int id);
-         Task<IEnumerable<Message>> GetMessageThread(int currentUserId, int recipientId);
+         Task<Message> GetMessageAsync(int id);
+         Task<IEnumerable<Message>> GetMessagesForUserAsync(int id);
+         Task<IEnumerable<Message>> GetMessageThreadAsync(int currentUserId, int recipientId);
 
          //
-         Task<Connection> GetConnection(string connectionId);
-         Task<IEnumerable<Connection>> GetConnections(string userId);
-         Task<Group> GetGroup(string name);
+         Task<Connection> GetConnectionAsync(string connectionId);
+         Task<IEnumerable<Connection>> GetConnectionsAsync(string userId);
+         Task<Group> GetGroupAsync(string name);
 
     }
 }

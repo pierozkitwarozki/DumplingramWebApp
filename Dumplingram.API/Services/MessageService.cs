@@ -17,11 +17,11 @@ namespace Dumplingram.API.Services
             _repo = repo;
         }
 
-        public async Task<IEnumerable<MessageDto>> GetMessagesForUser(int id)
+        public async Task<IEnumerable<MessageDto>> GetMessagesForUserAsync(int id)
         {
             // For returning last message of each conversation
             
-            var messages = await _repo.GetMessagesForUser(id);
+            var messages = await _repo.GetMessagesForUserAsync(id);
 
             if (messages == null)
                 throw new Exception("Nie znaleziono.");

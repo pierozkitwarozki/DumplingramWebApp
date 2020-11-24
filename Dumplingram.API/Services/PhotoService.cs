@@ -35,16 +35,16 @@ namespace Dumplingram.API.Services
             _cloudinary = new Cloudinary(acc);
         }
 
-        public async Task<IEnumerable<PhotoLikeDto>> GetPhotoLikes(int id)
+        public async Task<IEnumerable<PhotoLikeDto>> GetPhotoLikesAsync(int id)
         {
-            var likes = await _repo.GetPhotoLikes(id);
+            var likes = await _repo.GetPhotoLikesAsync(id);
 
             var likesToReturn = _mapper.Map<IEnumerable<PhotoLikeDto>>(likes);
 
             return likesToReturn;
         }
 
-        public async Task<IAsyncResult> LikePhoto(int userId, int id)
+        public async Task<IAsyncResult> LikePhotoAsync(int userId, int id)
         {
             var photoLike = new PhotoLike
             {
@@ -52,54 +52,54 @@ namespace Dumplingram.API.Services
                 PhotoId = id
             };
 
-            if (await _repo.GetPhoto(photoLike.PhotoId) == null)
+            if (await _repo.GetPhotoAsync(photoLike.PhotoId) == null)
                 throw new Exception("Zdjęcie nie istnieje.");
 
-            if (await _repo.GetPhotoLike(id, userId) != null)
+            if (await _repo.GetPhotoLikeAsync(id, userId) != null)
                 throw new Exception("Już lubisz to zdjęcie");
 
-            await _repo.Add(photoLike);
+            await _repo.AddAsync(photoLike);
 
-            if (await _repo.SaveAll())
+            if (await _repo.SaveAllAsync())
                 return Task.CompletedTask;
 
             throw new Exception("Coś poszło nie tak");
         }
 
-        public async Task<IEnumerable<PhotoForDashboardDto>> GetPhotos(int currentUserId)
+        public async Task<IEnumerable<PhotoForDashboardDto>> GetPhotosAsync(int currentUserId)
         {
-            var photos = await _repo.GetPhotos(currentUserId);
+            var photos = await _repo.GetPhotosAsync(currentUserId);
 
             var photosToReturn = _mapper.Map<IEnumerable<PhotoForDashboardDto>>(photos);
 
             return photosToReturn;
         }
 
-        public async Task<PhotoLike> GetPhotoLike(int photoId, int userId)
+        public async Task<PhotoLike> GetPhotoLikeAsync(int photoId, int userId)
         {
-            var like = await _repo.GetPhotoLike(photoId, userId);
+            var like = await _repo.GetPhotoLikeAsync(photoId, userId);
             return like;
         }
 
-        public async Task<IAsyncResult> UnlikePhoto(int id, int userId)
+        public async Task<IAsyncResult> UnlikePhotoAsync(int id, int userId)
         {
 
-            var like = await _repo.GetPhotoLike(id, userId);
+            var like = await _repo.GetPhotoLikeAsync(id, userId);
 
             if (like == null)
                 throw new Exception("Nie lubisz tego zdjęcia");
 
             _repo.Delete<PhotoLike>(like);
 
-            if (await _repo.SaveAll())
+            if (await _repo.SaveAllAsync())
                 return Task.CompletedTask;
 
             throw new Exception("Coś poszło nie tak.");
         }
 
-        public async Task<PhotoForReturnDto> GetPhoto(int id)
+        public async Task<PhotoForReturnDto> GetPhotoAsync(int id)
         {
-            var photoFromRepo = await _repo.GetPhoto(id);
+            var photoFromRepo = await _repo.GetPhotoAsync(id);
 
             if (photoFromRepo == null)
                 throw new Exception("Nie ma takiego zdjęcia");
@@ -109,10 +109,10 @@ namespace Dumplingram.API.Services
             return photo;
         }
 
-        public async Task<PhotoForReturnDto> AddPhotoForUser(int userId,
+        public async Task<PhotoForReturnDto> AddPhotoForUserAsync(int userId,
            PhotoForCreationDto photoForCreationDto)
         {
-            var userFromRepo = await _repo.GetUser(userId);
+            var userFromRepo = await _repo.GetUserAsync(userId);
 
             var file = photoForCreationDto.File;
 
@@ -148,7 +148,7 @@ namespace Dumplingram.API.Services
 
             userFromRepo.Photos.Add(photo);
 
-            if (await _repo.SaveAll())
+            if (await _repo.SaveAllAsync())
             {
                 var photoForReturn = _mapper.Map<PhotoForReturnDto>(photo);
                 return photoForReturn;
@@ -157,24 +157,24 @@ namespace Dumplingram.API.Services
             throw new Exception("Coś poszło nie tak.");
         }
 
-        public async Task<IEnumerable<PhotoForDashboardDto>> GetPhotosForUser(int userId)
+        public async Task<IEnumerable<PhotoForDashboardDto>> GetPhotosForUserAsync(int userId)
         {
-            var photos = await _repo.GetPhotosForUser(userId);
+            var photos = await _repo.GetPhotosForUserAsync(userId);
 
             var photosToReturn = _mapper.Map<IEnumerable<PhotoForDashboardDto>>(photos);
 
             return photosToReturn;
         }
 
-        public async Task<IAsyncResult> DeletePhoto(int userId, int id)
+        public async Task<IAsyncResult> DeletePhotoAsync(int userId, int id)
         {
 
-            var userFromRepo = await _repo.GetUser(userId);
+            var userFromRepo = await _repo.GetUserAsync(userId);
 
             if (!userFromRepo.Photos.Any(p => p.ID == id))
                 throw new Exception();
 
-            var photoFromRepo = await _repo.GetPhoto(id);
+            var photoFromRepo = await _repo.GetPhotoAsync(id);
 
             if (photoFromRepo.IsMain)
                 throw new Exception("Nie możesz usunąć zdjęcia głównego.");
@@ -190,30 +190,30 @@ namespace Dumplingram.API.Services
             }
             else _repo.Delete(photoFromRepo);
 
-            if (await _repo.SaveAll())
+            if (await _repo.SaveAllAsync())
                 return Task.CompletedTask;
 
             throw new Exception("Coś poszło nie tak.");
         }
 
-        public async Task<IAsyncResult> SetMainPhoto(int userId, int id)
+        public async Task<IAsyncResult> SetMainPhotoAsync(int userId, int id)
         {
-            var userFromRepo = await _repo.GetUser(userId);
+            var userFromRepo = await _repo.GetUserAsync(userId);
 
             if (!userFromRepo.Photos.Any(p => p.ID == id))
                 throw new Exception();
 
-            var photoFromRepo = await _repo.GetPhoto(id);
+            var photoFromRepo = await _repo.GetPhotoAsync(id);
 
             if (photoFromRepo.IsMain)
                 throw new Exception("To zdjęcie jest już zdjęciem głównym.");
 
-            var currentMainPhoto = await _repo.GetMainPhotoForUser(userId);
+            var currentMainPhoto = await _repo.GetMainPhotoForUserAsync(userId);
 
             currentMainPhoto.IsMain = false;
             photoFromRepo.IsMain = true;
 
-            if (await _repo.SaveAll())
+            if (await _repo.SaveAllAsync())
                 return Task.CompletedTask;
 
             throw new Exception("Coś poszło nie tak.");

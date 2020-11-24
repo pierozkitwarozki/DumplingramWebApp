@@ -33,7 +33,7 @@ namespace Dumplingram.API.Controllers
                 var id =
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                return Ok(await _usersService.GetUsers(userParams, id));
+                return Ok(await _usersService.GetUsersAsync(userParams, id));
             }
             catch (Exception e)
             {
@@ -46,7 +46,7 @@ namespace Dumplingram.API.Controllers
         {
             try
             {
-                return Ok(await _usersService.GetUser(id));
+                return Ok(await _usersService.GetUserAsync(id));
             }
             catch (Exception e)
             {
@@ -62,7 +62,7 @@ namespace Dumplingram.API.Controllers
                 var id = 
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _usersService.FollowUser(id, followeeId);
+                await _usersService.FollowUserAsync(id, followeeId);
 
                 return Ok();
             }
@@ -77,7 +77,7 @@ namespace Dumplingram.API.Controllers
         {
             try
             {
-                return Ok(await _usersService.GetFollowers(id));
+                return Ok(await _usersService.GetFollowersAsync(id));
             }
             catch (Exception e)
             {
@@ -90,7 +90,7 @@ namespace Dumplingram.API.Controllers
         {
             try
             {
-                return Ok(await _usersService.GetFollowees(id));
+                return Ok(await _usersService.GetFolloweesAsync(id));
             }
             catch (Exception e)
             {
@@ -106,7 +106,7 @@ namespace Dumplingram.API.Controllers
                 var id = 
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                return Ok(await _usersService.GetFollow(id, followeeId));
+                return Ok(await _usersService.GetFollowAsync(id, followeeId));
             }
             catch (Exception e)
             {
@@ -123,7 +123,7 @@ namespace Dumplingram.API.Controllers
                 var id = 
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _usersService.Unfollow(id, followeeId);
+                await _usersService.UnfollowAsync(id, followeeId);
 
                 return NoContent();
             }
@@ -141,7 +141,7 @@ namespace Dumplingram.API.Controllers
                 var id = 
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _usersService.UpdateUser(id, userForUpdateDto);
+                await _usersService.UpdateUserAsync(id, userForUpdateDto);
 
                 return NoContent();
 

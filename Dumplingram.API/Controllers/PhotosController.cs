@@ -34,7 +34,7 @@ namespace Dumplingram.API.Controllers
         {
             try
             {
-                return Ok(await _photoService.GetPhotoLikes(id));
+                return Ok(await _photoService.GetPhotoLikesAsync(id));
             }
             catch (Exception e)
             {
@@ -50,7 +50,7 @@ namespace Dumplingram.API.Controllers
                 var userId =
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _photoService.LikePhoto(userId, id);
+                await _photoService.LikePhotoAsync(userId, id);
                 return NoContent();
             }
             catch (Exception e)
@@ -67,7 +67,7 @@ namespace Dumplingram.API.Controllers
                 var currentUserId =
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                return Ok(await _photoService.GetPhotos(currentUserId));
+                return Ok(await _photoService.GetPhotosAsync(currentUserId));
             }
             catch (Exception e)
             {
@@ -84,7 +84,7 @@ namespace Dumplingram.API.Controllers
                 var id =
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                return Ok(await _photoService.GetPhotoLike(photoId, id));
+                return Ok(await _photoService.GetPhotoLikeAsync(photoId, id));
             }
             catch (Exception e)
             {
@@ -100,7 +100,7 @@ namespace Dumplingram.API.Controllers
                 var myId =
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _photoService.UnlikePhoto(id, myId);
+                await _photoService.UnlikePhotoAsync(id, myId);
 
                 return NoContent();
             }
@@ -115,7 +115,7 @@ namespace Dumplingram.API.Controllers
         {
             try
             {
-                return Ok(await _photoService.GetPhoto(id));
+                return Ok(await _photoService.GetPhotoAsync(id));
             }
             catch (Exception e)
             {
@@ -128,7 +128,7 @@ namespace Dumplingram.API.Controllers
         {
             try
             {
-                return Ok(await _photoService.GetPhotosForUser(id));
+                return Ok(await _photoService.GetPhotosForUserAsync(id));
             }
             catch (Exception e)
             {
@@ -145,7 +145,7 @@ namespace Dumplingram.API.Controllers
                 var myID =
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                return Ok(await _photoService.AddPhotoForUser(myID, photoForCreationDto));
+                return Ok(await _photoService.AddPhotoForUserAsync(myID, photoForCreationDto));
             }
             catch (Exception e)
             {
@@ -161,7 +161,7 @@ namespace Dumplingram.API.Controllers
                 var userId =
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _photoService.DeletePhoto(userId, id);
+                await _photoService.DeletePhotoAsync(userId, id);
 
                 return NoContent();
             }
@@ -180,7 +180,7 @@ namespace Dumplingram.API.Controllers
                 var userId =
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-                await _photoService.SetMainPhoto(userId, id);
+                await _photoService.SetMainPhotoAsync(userId, id);
 
                 return NoContent();
             }

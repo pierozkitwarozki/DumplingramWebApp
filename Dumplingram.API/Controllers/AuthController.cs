@@ -32,7 +32,7 @@ namespace Dumplingram.API.Controllers
         {
             try
             {
-                return Ok(await _authService.Register(userForRegisterDto));
+                return Ok(await _authService.RegisterAsync(userForRegisterDto));
             }
             catch(Exception e)
             {
@@ -45,7 +45,7 @@ namespace Dumplingram.API.Controllers
         {
             try 
             {
-                return Ok(await _authService.Login(userForLoginDto));
+                return Ok(await _authService.LoginAsync(userForLoginDto));
             }
             catch(Exception e)
             {

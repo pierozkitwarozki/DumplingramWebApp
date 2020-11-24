@@ -42,7 +42,7 @@ namespace Dumplingram.API.SignalR
             await AddToGroup(groupName);
 
             var messages =
-                await _repo.GetMessageThread(int.Parse(id), int.Parse(otherUser));
+                await _repo.GetMessageThreadAsync(int.Parse(id), int.Parse(otherUser));
 
             await Clients.Group(groupName).SendAsync("RecieveMessageThread", messages);
         }
@@ -58,7 +58,7 @@ namespace Dumplingram.API.SignalR
             if(string.IsNullOrEmpty(createMessageDto.Content)) return;
 
             var userId = int.Parse(Context.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var recipient = await _repo.GetUser(createMessageDto.RecipientId);
+            var recipient = await _repo.GetUserAsync(createMessageDto.RecipientId);
 
             if (recipient == null)
                 throw new HubException("Użytkownik nie istnieje.");
@@ -66,7 +66,7 @@ namespace Dumplingram.API.SignalR
             if (userId == recipient.ID)
                 throw new HubException("Nie możesz wysłać wiadomości do samego siebie.");
 
-            var sender = await _repo.GetUser(userId);
+            var sender = await _repo.GetUserAsync(userId);
 
             var message = new Message
             {
@@ -79,7 +79,7 @@ namespace Dumplingram.API.SignalR
 
 
             var groupName = GetGroupName(userId.ToString(), recipient.ID.ToString());
-            var group = await _repo.GetGroup(groupName);
+            var group = await _repo.GetGroupAsync(groupName);
 
 
             var connections = await _presenceTracker.GetConnectionsForUser(recipient.ID.ToString());
@@ -105,9 +105,9 @@ namespace Dumplingram.API.SignalR
                 }
             }
 
-            await _repo.Add(message);
+            await _repo.AddAsync(message);
 
-            if (await _repo.SaveAll())
+            if (await _repo.SaveAllAsync())
             {
                 await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
 
@@ -137,30 +137,30 @@ namespace Dumplingram.API.SignalR
         {
             string id = Context.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var group = await _repo.GetGroup(groupName);
+            var group = await _repo.GetGroupAsync(groupName);
             var connection = new Connection(Context.ConnectionId, id);
 
             if (group == null)
             {
                 group = new Group(groupName);
-                await _repo.Add(group);
+                await _repo.AddAsync(group);
             }
 
             group.Connections.Add(connection);
 
-            return await _repo.SaveAll();
+            return await _repo.SaveAllAsync();
         }
 
         private async Task RemoveFromGroup()
         {
-            var connections = await _repo.GetConnections(Context.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var connections = await _repo.GetConnectionsAsync(Context.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             foreach (var connection in connections)
             {
                 _repo.Delete(connection);
             }
 
-            await _repo.SaveAll();
+            await _repo.SaveAllAsync();
         }
     }
 }

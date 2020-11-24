@@ -8,15 +8,15 @@ namespace Dumplingram.API.Services
 {
     public interface IPhotoService
     {
-         Task<IEnumerable<PhotoLikeDto>> GetPhotoLikes(int id);
-         Task<IAsyncResult> LikePhoto(int userId, int id);
-         Task<IEnumerable<PhotoForDashboardDto>> GetPhotos(int currentUserId);
-         Task<PhotoLike> GetPhotoLike(int photoId, int userId);
-         Task<IAsyncResult> UnlikePhoto(int id, int userId);
-         Task<PhotoForReturnDto> GetPhoto(int id);
-         Task<PhotoForReturnDto> AddPhotoForUser(int userId, PhotoForCreationDto photoForCreationDto);
-         Task<IEnumerable<PhotoForDashboardDto>> GetPhotosForUser(int userId);
-         Task<IAsyncResult> DeletePhoto(int userId, int id);
-         Task<IAsyncResult> SetMainPhoto(int userId, int id);
+         Task<IEnumerable<PhotoLikeDto>> GetPhotoLikesAsync(int id);
+         Task<IAsyncResult> LikePhotoAsync(int userId, int id);
+         Task<IEnumerable<PhotoForDashboardDto>> GetPhotosAsync(int currentUserId);
+         Task<PhotoLike> GetPhotoLikeAsync(int photoId, int userId);
+         Task<IAsyncResult> UnlikePhotoAsync(int id, int userId);
+         Task<PhotoForReturnDto> GetPhotoAsync(int id);
+         Task<PhotoForReturnDto> AddPhotoForUserAsync(int userId, PhotoForCreationDto photoForCreationDto);
+         Task<IEnumerable<PhotoForDashboardDto>> GetPhotosForUserAsync(int userId);
+         Task<IAsyncResult> DeletePhotoAsync(int userId, int id);
+         Task<IAsyncResult> SetMainPhotoAsync(int userId, int id);
     }
 }

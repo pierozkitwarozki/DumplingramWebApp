@@ -5,7 +5,7 @@ namespace Dumplingram.API.Services
 {
     public interface IAuthService
     {
-         Task<UserForDetailedDto> Register(UserForRegisterDto userForRegisterDto);
-         Task<object> Login(UserForLoginDto userForLogin);
+         Task<UserForDetailedDto> RegisterAsync(UserForRegisterDto userForRegisterDto);
+         Task<object> LoginAsync(UserForLoginDto userForLogin);
     }
 }

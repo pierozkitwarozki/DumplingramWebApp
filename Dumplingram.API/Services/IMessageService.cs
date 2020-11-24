@@ -6,6 +6,6 @@ namespace Dumplingram.API.Services
 {
     public interface IMessageService
     {
-         Task<IEnumerable<MessageDto>> GetMessagesForUser(int id);
+         Task<IEnumerable<MessageDto>> GetMessagesForUserAsync(int id);
     }
 }

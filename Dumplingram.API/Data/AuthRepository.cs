@@ -15,7 +15,7 @@ namespace Dumplingram.API.Data
             _context = context;
         }
 
-        public async Task<User> Login(string username, string password)
+        public async Task<User> LoginAsync(string username, string password)
         {
             //include photos do dodania, zeby url zdjecia bylo widoczne
             var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.Username == username);
@@ -30,7 +30,7 @@ namespace Dumplingram.API.Data
             return user;
         }
 
-        public async Task<User> Register(User user, string password)
+        public async Task<User> RegisterAsync(User user, string password)
         {
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
@@ -57,7 +57,7 @@ namespace Dumplingram.API.Data
             return true;
         }
 
-        public async Task<bool> UserExists(string username)
+        public async Task<bool> UserExistsAsync(string username)
         {
             if (await _context.Users.AnyAsync(x => x.Username == username)) return true;
             else return false;
