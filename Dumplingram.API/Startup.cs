@@ -1,23 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Dumplingram.API.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
 using Dumplingram.API.Helpers;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Net;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Dumplingram.API.SignalR;
@@ -51,10 +42,13 @@ namespace Dumplingram.API
             services.AddAutoMapper(typeof(AuthRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IMessageService, MessageService>();
-            services.AddScoped<IDumplingramRepository, DumplingramRepository>();
+            services.AddScoped<IConnectionGroupRepository, ConnectionGroupRepository>();
            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

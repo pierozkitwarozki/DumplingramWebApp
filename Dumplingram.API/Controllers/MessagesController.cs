@@ -1,17 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Dumplingram.API.Helpers;
-using Dumplingram.API.Models;
-using Microsoft.Extensions.Options;
-using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using System.Linq;
-using Dumplingram.API.Dtos;
-using Dumplingram.API.Data;
-using AutoMapper;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Dumplingram.API.Services;
 using System;
 

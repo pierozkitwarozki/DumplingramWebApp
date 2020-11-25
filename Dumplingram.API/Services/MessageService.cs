@@ -9,9 +9,9 @@ namespace Dumplingram.API.Services
 {
     public class MessageService : IMessageService
     {
-        private readonly IDumplingramRepository _repo;
+        private readonly IMessageRepository _repo;
         private readonly IMapper _mapper;
-        public MessageService(IDumplingramRepository repo, IMapper mapper)
+        public MessageService(IMessageRepository repo, IMapper mapper)
         {
             _mapper = mapper;
             _repo = repo;

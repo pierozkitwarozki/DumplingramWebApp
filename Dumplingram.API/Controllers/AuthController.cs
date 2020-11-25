@@ -1,16 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using AutoMapper;
 using Dumplingram.API.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Dumplingram.API.Data;
-using Dumplingram.API.Models;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Microsoft.Extensions.Configuration;
 using Dumplingram.API.Services;
 
 namespace Dumplingram.API.Controllers

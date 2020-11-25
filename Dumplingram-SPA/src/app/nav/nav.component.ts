@@ -32,8 +32,11 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.word = '';
 
-    if (this.authService.currentUser.photoUrl) {
-      this.authService.changeMemberPhoto(this.authService.currentUser.photoUrl);
+    if (this.authService.loggedIn()) {
+      const url = localStorage.getItem('photoUrl');
+      if (url) {
+        this.authService.changeMemberPhoto(url);
+      }
     }
 
     this.authService.currentPhotoUrl.subscribe(

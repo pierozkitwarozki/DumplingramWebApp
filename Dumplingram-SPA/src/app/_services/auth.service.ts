@@ -18,9 +18,13 @@ export class AuthService {
   photoUrl = new BehaviorSubject<string>('../../assets/user.png');
   currentPhotoUrl = this.photoUrl.asObservable();
 
-  constructor(private http: HttpClient, private presenceService: PresenceService) {}
+  constructor(
+    private http: HttpClient,
+    private presenceService: PresenceService
+  ) {}
 
-  changeMemberPhoto(photoUrl: string){
+  changeMemberPhoto(photoUrl: string) {
+    localStorage.setItem('photoUrl', photoUrl);
     this.photoUrl.next(photoUrl);
   }
 
@@ -28,13 +32,18 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'login', model).pipe(
       map((response: any) => {
         const user = response;
-        if (user) { 
+        if (user) {
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
           this.currentUser = user.user;
           this.currentUser.token = user.token;
           localStorage.setItem('token', user.token);
           localStorage.setItem('user', JSON.stringify(this.currentUser));
-          this.changeMemberPhoto(this.currentUser.photoUrl);
+
+          if (this.currentUser.photoUrl) {
+            localStorage.setItem('photoUrl', this.currentUser.photoUrl);
+            this.changeMemberPhoto(this.currentUser.photoUrl);
+          }
+
           this.presenceService.createHubConnection(this.currentUser);
         }
       })

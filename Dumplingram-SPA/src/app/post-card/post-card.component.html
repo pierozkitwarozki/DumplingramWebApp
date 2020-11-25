@@ -1,20 +1,33 @@
 <div id="card" class="container text-center">
   <div id="user-info" class="col">
     <div
-      style="display: flex; justify-content: flex-start; align-items: center"
+      [routerLink]="['/users/', photo.userId]"
+      style="
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        cursor: pointer;
+      "
     >
       <img
         id="avatar"
         src="{{ photo.userPhotoUrl }}"
         alt="{{ photo.username }}"
         class="mr-2"
-        [routerLink]="['/users/', photo.userId]"
       />
       <h1 id="username">@{{ photo.username }}</h1>
     </div>
     <div *ngIf="isPhotoMine()" style="display: flex; justify-content: flex-end">
-      <i class="fa fa-check mr-2" style="cursor: pointer;" (click)="setMain()"></i>
-      <i class="fa fa-trash" style="cursor: pointer;" (click)="deletePhoto()"></i>
+      <i
+        class="fa fa-check mr-2"
+        style="cursor: pointer"
+        (click)="setMain()"
+      ></i>
+      <i
+        class="fa fa-trash"
+        style="cursor: pointer"
+        (click)="deletePhoto()"
+      ></i>
     </div>
   </div>
   <div class="col">
@@ -30,7 +43,7 @@
     <p>{{ photo.description }}</p>
   </div>
   <hr class="solid" />
-  <div id="likes-container" class="col" style="align-items: center;">
+  <div id="likes-container" class="col" style="align-items: center">
     <img
       *ngIf="!isLiked"
       id="like"
@@ -48,12 +61,11 @@
       (click)="dislikePhoto(photo.id)"
     />
     <div>
-      <h1 id="likes" (click)="openFoloweesModal(template)"  class="w-100">
+      <h1 id="likes" (click)="openFoloweesModal(template)" class="w-100">
         Liczba polubień: {{ countLikes() }}
       </h1>
-      <p>{{photo.dateAdded | date: 'mediumDate'}}</p>
+      <p>{{ photo.dateAdded | date: "mediumDate" }}</p>
     </div>
-
   </div>
 </div>
 
@@ -66,14 +78,21 @@
     </h1>
   </div>
 
-  <div class="modal-body" style="max-height: calc(100vh - 400px); overflow-y: auto">
+  <div
+    class="modal-body"
+    style="max-height: calc(100vh - 400px); overflow-y: auto"
+  >
     <div id="avatar-section" class="mb-4" *ngFor="let like of photoLikes">
       <div
         id="item"
         [routerLink]="['/users/', like.userId]"
         (click)="modalRef.hide()"
       >
-        <img id="profile-image" src="{{ like.userPhotoUrl || '../../assets/user.png'}}" alt="" />
+        <img
+          id="profile-image"
+          src="{{ like.userPhotoUrl || '../../assets/user.png' }}"
+          alt=""
+        />
         <b class="w-100"
           ><p id="name">{{ like.name }} {{ like.surname }}</p>
           @{{ like.username }}</b

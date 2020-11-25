@@ -11,22 +11,23 @@ namespace Dumplingram.API.Services
 {
     public class UsersService : IUsersService
     {
-        private readonly IDumplingramRepository _repo;
+
+        private readonly IUserRepository _usersRepo;
         private readonly IMapper _mapper;
-        public UsersService(IDumplingramRepository repo, IMapper mapper)
+        public UsersService(IMapper mapper, IUserRepository userRepo)
         {
             _mapper = mapper;
-            _repo = repo;
+            _usersRepo = userRepo;
         }
 
         public async Task<IEnumerable<UserForDetailedDto>> GetUsersAsync(UserParams userParams, int currentUserId)
         {
 
-            var userFromRepo = await _repo.GetUserAsync(currentUserId);
+            var userFromRepo = await _usersRepo.GetUserAsync(currentUserId);
 
             userParams.UserId = currentUserId;
 
-            var users = await _repo.GetUsersAsync(userParams);
+            var users = await _usersRepo.GetUsersAsync(userParams);
 
             var usersToReturn = _mapper.Map<IEnumerable<UserForDetailedDto>>(users);
 
@@ -35,7 +36,7 @@ namespace Dumplingram.API.Services
 
         public async Task<UserForDetailedDto> GetUserAsync(int id)
         {
-            var user = await _repo.GetUserAsync(id);
+            var user = await _usersRepo.GetUserAsync(id);
 
             var usersToReturn = _mapper.Map<UserForDetailedDto>(user);
 
@@ -45,7 +46,7 @@ namespace Dumplingram.API.Services
         public async Task<IAsyncResult> FollowUserAsync(int id, int followeeId)
         {
 
-            var follow = await _repo.GetFollowAsync(id, followeeId);
+            var follow = await _usersRepo.GetFollowAsync(id, followeeId);
 
             if (follow != null)
                 throw new Exception("Już obserwujesz tego użytkownika");
@@ -53,7 +54,7 @@ namespace Dumplingram.API.Services
             if (followeeId == id)
                 throw new Exception("Samouwielbienie, hatfu.");
 
-            if (await _repo.GetUserAsync(followeeId) == null)
+            if (await _usersRepo.GetUserAsync(followeeId) == null)
                 throw new Exception("Nie znaleziono użytkownika");
 
             follow = new Follow
@@ -62,9 +63,9 @@ namespace Dumplingram.API.Services
                 FolloweeId = followeeId
             };
 
-            await _repo.AddAsync<Follow>(follow);
+            await _usersRepo.AddAsync<Follow>(follow);
 
-            if (await _repo.SaveAllAsync())
+            if (await _usersRepo.SaveAllAsync())
                 return Task.CompletedTask;
 
             throw new Exception("Niepowodzenie.");
@@ -72,7 +73,7 @@ namespace Dumplingram.API.Services
 
         public async Task<IEnumerable<FollowerForReturn>> GetFollowersAsync(int id)
         {
-            var followers = await _repo.GetFollowersAsync(id);
+            var followers = await _usersRepo.GetFollowersAsync(id);
 
             var followersToReturn = _mapper.Map<IEnumerable<FollowerForReturn>>(followers);
 
@@ -81,7 +82,7 @@ namespace Dumplingram.API.Services
 
         public async Task<IEnumerable<FolloweeToReturn>> GetFolloweesAsync(int id)
         {
-            var followees = await _repo.GetFolloweesAsync(id);
+            var followees = await _usersRepo.GetFolloweesAsync(id);
 
             var followeesToReturn = _mapper.Map<IEnumerable<FolloweeToReturn>>(followees);
 
@@ -90,21 +91,21 @@ namespace Dumplingram.API.Services
 
         public async Task<Follow> GetFollowAsync(int id, int followeeId)
         {
-            var follow = await _repo.GetFollowAsync(id, followeeId);
+            var follow = await _usersRepo.GetFollowAsync(id, followeeId);
 
             return follow;
         }
 
         public async Task<IAsyncResult> UnfollowAsync(int id, int followeeId)
         {
-            var follow = await _repo.GetFollowAsync(id, followeeId);
+            var follow = await _usersRepo.GetFollowAsync(id, followeeId);
 
             if (follow == null)
                 throw new Exception("Nie obserwujesz tego użytkownika.");
 
-            _repo.Delete<Follow>(follow);
+            _usersRepo.Delete<Follow>(follow);
 
-            if (await _repo.SaveAllAsync())
+            if (await _usersRepo.SaveAllAsync())
                 return Task.CompletedTask;
 
             throw new Exception("Coś poszło nie tak.");
@@ -112,11 +113,11 @@ namespace Dumplingram.API.Services
 
         public async Task<IAsyncResult> UpdateUserAsync(int id, UserForUpdateDto userForUpdateDto)
         {
-            var userFromRepo = await _repo.GetUserAsync(id);
+            var userFromRepo = await _usersRepo.GetUserAsync(id);
 
             _mapper.Map(userForUpdateDto, userFromRepo);
 
-            if (await _repo.SaveAllAsync())
+            if (await _usersRepo.SaveAllAsync())
                 return Task.CompletedTask;
 
             throw new Exception($"Edycja użytkownika: {id} zakończona niepowodzeniem.");

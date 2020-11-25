@@ -1,14 +1,10 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using System;
-using AutoMapper;
-using Dumplingram.API.Data;
 using Dumplingram.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Dumplingram.API.Helpers;
-using Dumplingram.API.Models;
 using Dumplingram.API.Services;
 
 namespace Dumplingram.API.Controllers

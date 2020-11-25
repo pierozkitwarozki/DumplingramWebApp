@@ -1,18 +1,12 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using System;
 using AutoMapper;
-using Dumplingram.API.Data;
 using Dumplingram.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Dumplingram.API.Helpers;
-using Dumplingram.API.Models;
 using Microsoft.Extensions.Options;
-using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using System.Linq;
 using Dumplingram.API.Services;
 
 namespace Dumplingram.API.Controllers
@@ -24,7 +18,7 @@ namespace Dumplingram.API.Controllers
     {
         private readonly IPhotoService _photoService;
 
-        public PhotosController(IPhotoService photoService, IDumplingramRepository repo, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
+        public PhotosController(IPhotoService photoService, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
         {
             _photoService = photoService;
         }
