@@ -76,6 +76,14 @@ namespace Dumplingram.API.Helpers
                     opt.MapFrom(src => src.User.Photos.FirstOrDefault(x => x.IsMain == true).Url))
                 .ForMember(dest => dest.Username, opt =>
                     opt.MapFrom(src => src.User.Username));
+
+
+            CreateMap<CommentForAddDto, PhotoComment>();
+            CreateMap<PhotoComment, CommentForReturnDto>()
+                .ForMember(dest => dest.CommenterUsername, opt =>
+                opt.MapFrom(src => src.Commenter.Username));
         }
+
+
     }
 }

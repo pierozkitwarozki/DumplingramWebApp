@@ -33,29 +33,28 @@ namespace Dumplingram.API.Data
         public async Task<IEnumerable<Photo>> GetPhotosAsync(int id)
         {
             var follows = await _context.Follow.Where(f => f.FollowerId == id).Select(u => u.FolloweeId).ToListAsync();
-            var photos = await _context.Photo.Where(p => follows.Contains(p.UserId)).Include(u => u.User).ToListAsync();
-
-            return photos.OrderByDescending(d => d.DateAdded);
+            return await _context.Photo
+                .Where(p => follows.Contains(p.UserId))
+                .Include(u => u.User)
+                .OrderByDescending(d => d.DateAdded).ToListAsync();
         }
 
         public async Task<IEnumerable<Photo>> GetPhotosForUserAsync(int id)
         {
-            var photos = await _context.Photo.Where(x => x.UserId == id).Include(x => x.User).ToListAsync();
-            return photos.OrderByDescending(d => d.DateAdded);
+            return await _context.Photo.Where(x => x.UserId == id)
+                .Include(x => x.User)
+                .OrderByDescending(d => d.DateAdded).ToListAsync();
         }
 
         public async Task<IEnumerable<PhotoLike>> GetPhotoLikesAsync(int id)
         {
-            var likes = await _context.PhotoLikes
+            return await _context.PhotoLikes
                 .Where(p => p.PhotoId == id).Include(u => u.Liker).ThenInclude(u => u.Photos).ToListAsync();
-
-            return likes;
         }
 
         public async Task<Photo> GetPhotoAsync(int id)
         {
-            var list = await _context.Photo.Where(x => x.ID == id).Include(x => x.GottenLikes).ToListAsync();
-            return list[0];
+            return await _context.Photo.Include(x => x.GottenLikes).FirstOrDefaultAsync(x => x.ID == id);
         }
 
         public async Task<PhotoLike> GetPhotoLikeAsync(int id, int userId)
@@ -68,6 +67,19 @@ namespace Dumplingram.API.Data
             return await _context.Photo
                 .Where(u => u.UserId == userId)
                 .FirstOrDefaultAsync(p => p.IsMain == true);
+        }
+
+        public async Task<IEnumerable<PhotoComment>> GetCommentsForPhotosAsync(int photoId)
+        {
+           return await _context.PhotoComment
+                .Include(x => x.Commenter)
+                .Where(x => x.PhotoId == photoId)
+                .OrderByDescending(x => x.Date).ToListAsync(); 
+        }
+
+        public async Task<PhotoComment> GetPhotoCommentAsync(int commentId)
+        {
+            return await _context.PhotoComment.FindAsync(commentId);
         }
     }
 }

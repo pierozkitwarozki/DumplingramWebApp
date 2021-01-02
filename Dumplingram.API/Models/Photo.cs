@@ -16,5 +16,6 @@ namespace Dumplingram.API.Models
         public User User { get; set; }
         public int UserId { get; set; }
         public ICollection<PhotoLike> GottenLikes { get; set; }
+        public ICollection<PhotoComment> Comments { get; set; }
     }
 }

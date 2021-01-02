@@ -1,4 +1,4 @@
-<div id="posts" class="col-sm" style="margin-top: 80px">
+<div id="posts" class="col-sm" style="margin-top: 10px">
   <div id="add-photo" class="container text-center">
     <button
       id="new-photo-button"
@@ -19,7 +19,7 @@
     <div class="container text-center">
       <h1 class="mb-2">Co słychać, {{ authService.currentUser.name }}?</h1>
       <form id="input">
-        <input (keyup)="onKey($event)" placeholder="Dodaj opis..." />
+        <input (keyup)="onKey($event)" placeholder="Dodaj opis..."/>
       </form>
     </div>
   </div>

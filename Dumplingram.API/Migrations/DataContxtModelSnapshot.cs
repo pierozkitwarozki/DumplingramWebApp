@@ -132,6 +132,33 @@ namespace Dumplingram.API.Migrations
                     b.ToTable("Photo");
                 });
 
+            modelBuilder.Entity("Dumplingram.API.Models.PhotoComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CommenterId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PhotoId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommenterId");
+
+                    b.HasIndex("PhotoId");
+
+                    b.ToTable("PhotoComment");
+                });
+
             modelBuilder.Entity("Dumplingram.API.Models.PhotoLike", b =>
                 {
                     b.Property<int>("UserId")
@@ -215,13 +242,13 @@ namespace Dumplingram.API.Migrations
                     b.HasOne("Dumplingram.API.Models.User", "Recipient")
                         .WithMany("MessagesReceived")
                         .HasForeignKey("RecipientId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dumplingram.API.Models.User", "Sender")
                         .WithMany("MessagesSent")
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -230,6 +257,21 @@ namespace Dumplingram.API.Migrations
                     b.HasOne("Dumplingram.API.Models.User", "User")
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Dumplingram.API.Models.PhotoComment", b =>
+                {
+                    b.HasOne("Dumplingram.API.Models.User", "Commenter")
+                        .WithMany("Comments")
+                        .HasForeignKey("CommenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Dumplingram.API.Models.Photo", "Photo")
+                        .WithMany("Comments")
+                        .HasForeignKey("PhotoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

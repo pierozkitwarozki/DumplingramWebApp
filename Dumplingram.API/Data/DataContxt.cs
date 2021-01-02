@@ -11,7 +11,7 @@ namespace Dumplingram.API.Data
         public DbSet<Photo> Photo {get; set;}
         public DbSet<PhotoLike> PhotoLikes { get; set; }
         public DbSet<Message> Messages { get; set; }
-
+        public DbSet<PhotoComment> PhotoComment { get; set; }
         public DbSet<Connection> Connections { get; set; }
         public DbSet<Group> Groups { get; set; }
 
@@ -47,15 +47,27 @@ namespace Dumplingram.API.Data
                 .HasForeignKey(p => p.PhotoId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<PhotoComment>()
+                .HasOne(u => u.Commenter)
+                .WithMany(p => p.Comments)
+                .HasForeignKey(u => u.CommenterId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<PhotoComment>()
+                .HasOne(p => p.Photo)
+                .WithMany(u => u.Comments)
+                .HasForeignKey(p => p.PhotoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Message>()
                 .HasOne(s => s.Sender)
                 .WithMany(m => m.MessagesSent)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Message>()
                 .HasOne(r => r.Recipient)
                 .WithMany(m => m.MessagesReceived)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
     }

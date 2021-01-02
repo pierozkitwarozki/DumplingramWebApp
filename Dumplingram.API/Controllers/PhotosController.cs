@@ -183,5 +183,46 @@ namespace Dumplingram.API.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("{photoId}/comments")]
+        public async Task<IActionResult> GetComments(int photoId)
+        {
+            try
+            {
+                return Ok(await _photoService.GetCommentsForPhoto(photoId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("{photoId}/comments/delete")]
+        public async Task<IActionResult> DeleteComment(int photoId)
+        {
+            try
+            {
+                await _photoService.DeleteCommentAsync(photoId);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost("comments")]
+        public async Task<IActionResult> AddComment(CommentForAddDto commentForAddDto)
+        {
+            try
+            {
+                await _photoService.AddCommentAsync(commentForAddDto);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

@@ -9,14 +9,32 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dumplingram.API.Migrations
 {
     [DbContext(typeof(DataContxt))]
-    [Migration("20201113082334_MessagesAdded")]
-    partial class MessagesAdded
+    [Migration("20210102165743_Date")]
+    partial class Date
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8");
+
+            modelBuilder.Entity("Dumplingram.API.Models.Connection", b =>
+                {
+                    b.Property<string>("ConnectionId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GroupName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ConnectionId");
+
+                    b.HasIndex("GroupName");
+
+                    b.ToTable("Connections");
+                });
 
             modelBuilder.Entity("Dumplingram.API.Models.Follow", b =>
                 {
@@ -31,6 +49,16 @@ namespace Dumplingram.API.Migrations
                     b.HasIndex("FolloweeId");
 
                     b.ToTable("Follow");
+                });
+
+            modelBuilder.Entity("Dumplingram.API.Models.Group", b =>
+                {
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Name");
+
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("Dumplingram.API.Models.Message", b =>
@@ -106,6 +134,33 @@ namespace Dumplingram.API.Migrations
                     b.ToTable("Photo");
                 });
 
+            modelBuilder.Entity("Dumplingram.API.Models.PhotoComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CommenterId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PhotoId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommenterId");
+
+                    b.HasIndex("PhotoId");
+
+                    b.ToTable("PhotoComment");
+                });
+
             modelBuilder.Entity("Dumplingram.API.Models.PhotoLike", b =>
                 {
                     b.Property<int>("UserId")
@@ -162,6 +217,13 @@ namespace Dumplingram.API.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Dumplingram.API.Models.Connection", b =>
+                {
+                    b.HasOne("Dumplingram.API.Models.Group", null)
+                        .WithMany("Connections")
+                        .HasForeignKey("GroupName");
+                });
+
             modelBuilder.Entity("Dumplingram.API.Models.Follow", b =>
                 {
                     b.HasOne("Dumplingram.API.Models.User", "Followee")
@@ -182,13 +244,13 @@ namespace Dumplingram.API.Migrations
                     b.HasOne("Dumplingram.API.Models.User", "Recipient")
                         .WithMany("MessagesReceived")
                         .HasForeignKey("RecipientId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Dumplingram.API.Models.User", "Sender")
                         .WithMany("MessagesSent")
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -197,6 +259,21 @@ namespace Dumplingram.API.Migrations
                     b.HasOne("Dumplingram.API.Models.User", "User")
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Dumplingram.API.Models.PhotoComment", b =>
+                {
+                    b.HasOne("Dumplingram.API.Models.User", "Commenter")
+                        .WithMany("Comments")
+                        .HasForeignKey("CommenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Dumplingram.API.Models.Photo", "Photo")
+                        .WithMany("Comments")
+                        .HasForeignKey("PhotoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

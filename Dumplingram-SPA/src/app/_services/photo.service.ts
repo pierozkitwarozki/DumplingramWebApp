@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { PhotoComment } from '../_models/Comment';
 import { Photo } from '../_models/photo';
 import { PhotoLike } from '../_models/photoLike';
 
@@ -83,5 +84,26 @@ export class PhotoService {
           return x;
         })
       );
+  }
+
+  commentPhoto(model: any) {
+    return this.http.post(this.baseUrl + 'photos/comments', model);
+  }
+
+  getComments(photoId: number) : Observable<PhotoComment[]> {
+    return this.http
+      .get<PhotoComment[]>(this.baseUrl + 'photos/' + photoId + '/comments', {
+        observe: 'response',
+      })
+      .pipe(
+        map((repsponse) => {
+          const x = repsponse.body;
+          return x;
+        })
+      );
+  }
+  
+  deleteComment(photoId: number) {
+    return this.http.delete(this.baseUrl + 'photos/' + photoId + '/comments/delete');
   }
 }

@@ -1,4 +1,4 @@
-<div id="login-page-content" style="margin-top: 60px;">
+<div id="login-page-content">
   <div id="login-page-content-img" class="col-sm">
       <img src='../../assets/login-page-photo-3.png' alt="Zdjecie główne" />
   </div>
@@ -23,7 +23,7 @@
           [(ngModel)]="model.password"
           required
         />
-        <button [disabled]="!loginForm.valid" type="submit">
+        <button [disabled]="!loginForm.valid" type="submit" style="height: 40px;">
           zaloguj się
         </button>
         <h1 id="login-register-click" class="float-right ml-2" (click)="register()">dołącz</h1>

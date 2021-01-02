@@ -18,5 +18,9 @@ namespace Dumplingram.API.Services
          Task<IEnumerable<PhotoForDashboardDto>> GetPhotosForUserAsync(int userId);
          Task<IAsyncResult> DeletePhotoAsync(int userId, int id);
          Task<IAsyncResult> SetMainPhotoAsync(int userId, int id);
+         Task<IAsyncResult> DeleteCommentAsync(int commentId);
+         Task<IAsyncResult> AddCommentAsync(CommentForAddDto commentForAddDto);
+         Task<IEnumerable<CommentForReturnDto>> GetCommentsForPhoto(int photoId);
+         
     }
 }

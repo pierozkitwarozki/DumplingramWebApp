@@ -1,4 +1,4 @@
-<div id="main-container" class="container" style="margin-top: 80px;">
+<div id="main-container" class="container">
   <div id="profile" class="container col">
     <div id="avatar-section">
       <img id="avatar" src="{{ user.photoUrl || '../../assets/user.png' }}" alt="{{ user.username }}" />
@@ -133,8 +133,8 @@
   </div>
 </ng-template>
 
-<ng-template #photoPreview id="photo-preview">
-  <div class="modal-body">
+<ng-template #photoPreview id="photo-preview" [ngStyle]="{ backgroundColor: 'red' }">
+  <div class="modal-body" style="padding: 0px;">
     <app-post-card
       [photo]="photo"
       (getLikerClicked)="closeDialog()"

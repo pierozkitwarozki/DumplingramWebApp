@@ -2,10 +2,11 @@
   id="threads"
   class="card p-5"
   style="
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 100px);
     overflow-y: auto;
-    margin: 80px;
-    width: 60%;
+    margin-inline: 80px;
+    margin-top: 10px;
+    width: auto;
   "
 >
   <h1
@@ -133,13 +134,13 @@
     >
       <div *ngIf="isFromMe(message)" class="mine messages">
         <div class="message">
-          {{ message.content }}
+          <p style="font-weight: normal; margin: auto;">{{ message.content }}</p>
         </div>
       </div>
 
       <div *ngIf="!isFromMe(message)" class="yours messages">
         <div class="message">
-          {{ message.content }}
+          <p style="font-weight: normal; margin: auto;">{{ message.content }}</p>
         </div>
       </div>
     </div>
@@ -150,11 +151,12 @@
         #message
         [(ngModel)]="messageContent"
         class="float-left"
+        style="height: 50px;"
         placeholder="Wiadomość..."
         (keyup)="onKey($event)"
       />
       {{ message.focus() }}
-      <button class="float-right" type="submit" (click)="sendMessage()">
+      <button class="float-right" style="height: 50px;" type="submit" (click)="sendMessage()" [disabled]="messageContent.length==0">
         Wyślij
       </button>
     </div>

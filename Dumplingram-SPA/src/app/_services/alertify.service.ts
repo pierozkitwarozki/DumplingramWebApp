@@ -8,12 +8,13 @@ export class AlertifyService {
   constructor() {}
 
   confirm(message: string, okCallback: () => any) {
+    
     alertify.confirm(message, (e: any) => {
       if (e) {
         okCallback();
       } else {
       }
-    });
+    }).setHeader('Wiadomość od Dumplingram');;
   }
 
   success(message: string) {

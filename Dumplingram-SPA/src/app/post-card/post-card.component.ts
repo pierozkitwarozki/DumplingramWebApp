@@ -7,8 +7,10 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { PhotoComment } from '../_models/Comment';
 import { Photo } from '../_models/photo';
 import { PhotoLike } from '../_models/photoLike';
+import { User } from '../_models/user';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { PhotoService } from '../_services/photo.service';
@@ -24,8 +26,12 @@ export class PostCardComponent implements OnInit {
   @Output() getLikerClicked = new EventEmitter<string>();
   @Output() getPhotoDeleted = new EventEmitter<string>();
   photoLikes: PhotoLike[];
+  currentUser: User;
   isLiked: any;
   modalRef: BsModalRef;
+  comments: PhotoComment[] = [];
+  isCollapsed = false;
+  commentContent = '';
 
   constructor(
     private authService: AuthService,
@@ -39,8 +45,47 @@ export class PostCardComponent implements OnInit {
     // this.userService.getUser(this.photo.userid).subscribe((data) => {
     //   this.photo.user = data;
     // });
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
     this.getLikes();
     this.doILike();
+    this.getComments();
+  }
+
+  getComments() {
+    this.photoService.getComments(this.photo.id).subscribe((data) => {
+      this.comments = data;
+      debugger;
+    },
+    error => {
+      console.log(error);
+    })
+  }
+
+  addComment() {
+    let comment = { 
+      commenterId: this.currentUser.id,
+      photoId: this.photo.id,
+      content: this.commentContent 
+    };
+    
+    this.photoService.commentPhoto(comment).subscribe((next) => {
+      this.getComments();
+      this.commentContent = '';
+    },
+    error => {
+      this.alertify.error(error);
+    })
+  }
+
+  deleteComment(commentId: number) {
+    this.alertify.confirm("Czy na pewno chcesz usunąć ten komentarz?", () => {
+      this.photoService.deleteComment(commentId).subscribe((next) => {
+        this.getComments();
+      },
+      error => {
+        this.alertify.error(error);
+      })
+    })
   }
 
   likePhoto(photoId: number) {
@@ -61,7 +106,6 @@ export class PostCardComponent implements OnInit {
       .pipe()
       .subscribe(
         (res: PhotoLike[]) => {
-          debugger;
           this.photoLikes = res;
         },
         (error) => {

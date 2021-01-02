@@ -17,5 +17,7 @@ namespace Dumplingram.API.Data
          Task<PhotoLike> GetPhotoLikeAsync(int id, int userId);
          Task<Photo> GetMainPhotoForUserAsync(int userId);
          Task<IEnumerable<Photo>> GetPhotosForUserAsync(int id);
+         Task<IEnumerable<PhotoComment>> GetCommentsForPhotosAsync(int photoId);
+         Task<PhotoComment> GetPhotoCommentAsync(int photoId);
     }
 }

@@ -66,7 +66,7 @@ export class NavComponent implements OnInit {
   }
 
   openSearchedUsers(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
   }
 
   onKey(event) {

@@ -66,7 +66,7 @@ export class ThreadListComponent implements OnInit {
           this.authService.currentUser,
           this.selectedUserId.toString()
         );
-        this.modalRef = this.modalService.show(template);
+        this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
         this.modalService.onHide.pipe().subscribe(() => {
           this.messageService.stopConnection();
         });

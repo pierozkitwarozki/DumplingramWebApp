@@ -221,5 +221,40 @@ namespace Dumplingram.API.Services
 
             throw new Exception("Coś poszło nie tak.");
         }
+
+        public async Task<IAsyncResult> DeleteCommentAsync(int commentId)
+        {
+            var comment = await _photoRepo.GetPhotoCommentAsync(commentId);
+
+            if(comment == null) throw new Exception("Nie znaleziono.");
+
+            _photoRepo.Delete(comment);
+
+            if(await _photoRepo.SaveAllAsync()) return Task.CompletedTask;
+
+            throw new Exception("Coś poszło nie tak.");
+        }
+
+        public async Task<IAsyncResult> AddCommentAsync(CommentForAddDto commentForAddDto)
+        {
+            var comment = _mapper.Map<PhotoComment>(commentForAddDto);
+
+            await _photoRepo.AddAsync(comment);
+
+            if(await _photoRepo.SaveAllAsync()) return Task.CompletedTask;
+
+            throw new Exception("Coś poszło nie tak.");
+        }
+
+        public async Task<IEnumerable<CommentForReturnDto>> GetCommentsForPhoto(int photoId)
+        {
+            var comments = await _photoRepo.GetCommentsForPhotosAsync(photoId);
+
+            if (comments == null) throw new Exception("Nie znaleziono.");
+
+            var commentsToReturn = _mapper.Map<IEnumerable<CommentForReturnDto>>(comments);
+
+            return commentsToReturn;
+        }
     }
 }
