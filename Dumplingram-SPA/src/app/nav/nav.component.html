@@ -41,8 +41,8 @@
           class="dropdown-toggle text-dark"
           aria-controls="dropdown-animated"
         >
-          Witaj {{ authService.currentUser.name | titlecase
-          }}<span class="caret"></span>
+          Witaj <strong>@{{ authService.currentUser.username
+          }}</strong><span class="caret"></span>
         </h1>
         <ul
           id="dropdown-animated"
@@ -69,19 +69,27 @@
             >
           </li>
           <li role="menuitem">
+            <a class="dropdown-item" [routerLink]="['/edit']"
+              ><i class="fa fa-usd mr-2"></i>Wesprzyj twórców</a
+            >
+          </li>
+          <li role="menuitem">
             <a class="dropdown-item" (click)="logout()"
               ><i class="fa fa-sign-out mr-2"></i>Wyloguj się</a
             >
           </li>
+          
         </ul>
       </div>
       <img
+        *ngIf="authService.currentPhotoUrl"
         id="avatar"
-        style="cursor: pointer"
-        src="{{ photoUrl }}"
+        style="cursor: pointer; margin-top: auto; margin-bottom: auto;"
+        src="{{ photoUrl || '../../assets/user.png'}}"
         alt=""
         [routerLink]="'/users/' + authService.decodedToken.nameid"
       />
+      
     </div>
   </div>
 </nav>

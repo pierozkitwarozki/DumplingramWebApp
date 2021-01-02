@@ -178,7 +178,6 @@ export class UserDetailComponent implements OnInit {
 
   openModalPhotoPreview(template: TemplateRef<any>, photo: any) {
     this.photo = photo;
-
     this.modalRef = this.modalService.show(template);
   }
 

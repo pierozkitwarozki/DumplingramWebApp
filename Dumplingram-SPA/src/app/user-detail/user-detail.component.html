@@ -1,13 +1,18 @@
 <div id="main-container" class="container">
   <div id="profile" class="container col">
     <div id="avatar-section">
-      <img id="avatar" src="{{ user.photoUrl || '../../assets/user.png' }}" alt="{{ user.username }}" />
+      <img
+        id="avatar"
+        src="{{ user.photoUrl || '../../assets/user.png' }}"
+        alt="{{ user.username }}"
+      />
       <label id="username" for="avatar">@{{ user.username }}</label>
       <span
         *ngIf="
-          (presenceService.onlineUsers$ | async).includes(user.id.toString()) && !isProfileMine()
+          (presenceService.onlineUsers$ | async).includes(user.id.toString()) &&
+          !isProfileMine()
         "
-        style="margin-left: 20px;"
+        style="margin-left: 20px"
         [class.is-online]="
           (presenceService.onlineUsers$ | async).includes(user.id.toString())
         "
@@ -48,6 +53,7 @@
           *ngIf="!follow"
           (click)="followUser(user.id)"
           class="btn btn-primary"
+          style="font-family: 'Roboto Slab';"
         >
           Obserwuj
         </button>
@@ -55,6 +61,7 @@
           id="unfollow-button"
           *ngIf="follow"
           (click)="unfollow(user.id)"
+          style="font-family: 'Roboto Slab';"
           class="btn btn-primary"
         >
           Przestań obserwować
@@ -62,6 +69,7 @@
         <button
           id="unfollow-button"
           class="btn btn-primary ml-2"
+          style="font-family: 'Roboto Slab';"
           (click)="openCreateMessageModal(messageCreate)"
         >
           Wiadomość
@@ -91,14 +99,21 @@
       Obserwowani: {{ countFollowees() }}
     </h1>
   </div>
-  <div class="modal-body" style="max-height: calc(100vh - 400px); overflow-y: auto">
+  <div
+    class="modal-body"
+    style="max-height: calc(100vh - 400px); overflow-y: auto"
+  >
     <div id="avatar-section" class="mb-4" *ngFor="let user of followeeItems">
       <div
         id="item"
         [routerLink]="['/users/', user.id]"
         (click)="modalRef.hide()"
       >
-        <img id="follow-image" src="{{ user.photoUrl || '../../assets/user.png' }}" alt="" />
+        <img
+          id="follow-image"
+          src="{{ user.photoUrl || '../../assets/user.png' }}"
+          alt=""
+        />
         <b class="w-100"
           ><p id="name">{{ user.name }} {{ user.surname }}</p>
           @{{ user.username }}</b
@@ -116,14 +131,21 @@
       {{ countFollowers() }} obserwujących
     </h1>
   </div>
-  <div class="modal-body" style="max-height: calc(100vh - 400px); overflow-y: auto">
+  <div
+    class="modal-body"
+    style="max-height: calc(100vh - 400px); overflow-y: auto"
+  >
     <div id="avatar-section" class="mb-4" *ngFor="let user of followerItems">
       <div
         id="item"
         [routerLink]="['/users/', user.id]"
         (click)="modalRef.hide()"
       >
-        <img id="follow-image" src="{{ user.photoUrl || '../../assets/user.png'}}" alt="" />
+        <img
+          id="follow-image"
+          src="{{ user.photoUrl || '../../assets/user.png' }}"
+          alt=""
+        />
         <b class="w-100"
           ><p id="name">{{ user.name }} {{ user.surname }}</p>
           @{{ user.username }}</b
@@ -133,8 +155,11 @@
   </div>
 </ng-template>
 
-<ng-template #photoPreview id="photo-preview" [ngStyle]="{ backgroundColor: 'red' }">
-  <div class="modal-body" style="padding: 0px;">
+<ng-template
+  #photoPreview
+  id="photo-preview"
+>
+  <div class="modal-body" style="padding: 0px">
     <app-post-card
       [photo]="photo"
       (getLikerClicked)="closeDialog()"
@@ -159,8 +184,9 @@
           class="float-left"
           placeholder="Wiadomość..."
           (keyup)="onKey($event)"
-        /> {{ newMessage.focus() }}
-        <button class="float-right" (click)="sendMessage()">Wyślij</button>
+        />
+        {{ newMessage.focus() }}
+        <button class="float-right" style="height: 50px; font-family: 'Roboto Slab';" (click)="sendMessage()">Wyślij</button>
       </form>
     </div>
   </div>

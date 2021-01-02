@@ -40,8 +40,8 @@ export class AuthService {
           localStorage.setItem('user', JSON.stringify(this.currentUser));
 
           if (this.currentUser.photoUrl) {
-            localStorage.setItem('photoUrl', this.currentUser.photoUrl);
             this.changeMemberPhoto(this.currentUser.photoUrl);
+            localStorage.setItem('photoUrl', this.currentUser.photoUrl);           
           }
 
           this.presenceService.createHubConnection(this.currentUser);

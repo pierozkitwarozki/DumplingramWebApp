@@ -16,7 +16,7 @@ import { UserService } from '../_services/user.service';
 export class NavComponent implements OnInit {
   modalRef: BsModalRef;
   searchedUsers: User[];
-  word: string;
+  word = '';
   photoUrl: string;
 
   constructor(
@@ -30,15 +30,13 @@ export class NavComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.word = '';
-
     if (this.authService.loggedIn()) {
       const url = localStorage.getItem('photoUrl');
-      if (url) {
+      debugger;
+      if (url!=='null') {
         this.authService.changeMemberPhoto(url);
       }
     }
-
     this.authService.currentPhotoUrl.subscribe(
       (photoUrl) => (this.photoUrl = photoUrl)
     );
@@ -47,10 +45,12 @@ export class NavComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('photoUrl');
     this.presenceService.stopHubConnection();
     this.messageService.stopConnection();
     this.authService.decodedToken = null;
     this.authService.currentUser = null;
+    this.authService.changeMemberPhoto(null);
     this.router.navigate(['/login']);
   }
 
@@ -66,7 +66,7 @@ export class NavComponent implements OnInit {
   }
 
   openSearchedUsers(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    this.modalRef = this.modalService.show(template);
   }
 
   onKey(event) {

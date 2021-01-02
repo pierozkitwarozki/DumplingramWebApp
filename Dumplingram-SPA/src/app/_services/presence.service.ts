@@ -46,7 +46,7 @@ export class PresenceService {
     });
 
     this.hubConnection.on('NewMessageReceived', ({ username }) => {
-      this.alertify.warning('@' + username + ' wysłał Ci wiadomość.');
+      this.alertify.message('@' + username + ' wysłał Ci wiadomość.');
       this.messageService.getMessages()
         .subscribe((res: Message[]) => {
           this.conversations.next(res);

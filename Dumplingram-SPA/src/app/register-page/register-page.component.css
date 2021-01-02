@@ -1,12 +1,12 @@
 #centered-div {
     text-align: center;
-    margin: 0;
+    margin-top: 0;
     padding: 0;
-    position: relative;    
+    position: sticky;    
 }
 
 #form-login {
-    margin-top: 4%;
+    margin-top: 2%;
     background-color: #fcfcfc;
     display: inline-block;
     padding-left: 5%;

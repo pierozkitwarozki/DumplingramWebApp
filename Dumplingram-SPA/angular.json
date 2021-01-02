@@ -25,7 +25,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/@nebular/theme/styles/prebuilt/default.css"
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },

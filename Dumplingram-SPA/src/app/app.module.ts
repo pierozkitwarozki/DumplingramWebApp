@@ -32,6 +32,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { ThreadListComponent } from './thread-list/thread-list.component';
 import { ConversationListResolver } from './_resolvers/conversation-list.resolver';
+import { ToastrModule } from 'ngx-toastr';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -60,6 +61,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
   imports: [
     BrowserModule,
     BsDatepickerModule.forRoot(),
+    ToastrModule.forRoot(),
     CollapseModule.forRoot(),
     ReactiveFormsModule,
     ModalModule.forRoot(),
