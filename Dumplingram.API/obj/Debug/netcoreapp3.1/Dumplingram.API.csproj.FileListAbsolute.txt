@@ -157,3 +157,7 @@ D:/Users/Bart/VS_Code_Projects/DumplingramWebApp_/Dumplingram.API/obj/Debug/netc
 D:/Users/Bart/VS_Code_Projects/DumplingramWebApp_/Dumplingram.API/obj/Debug/netcoreapp3.1/Dumplingram.API.pdb
 D:/Users/Bart/VS_Code_Projects/DumplingramWebApp_/Dumplingram.API/obj/Debug/netcoreapp3.1/Dumplingram.API.genruntimeconfig.cache
 /Users/bartlomiejpierog/VS Code Projects/DumplingramWebApp/Dumplingram.API/obj/Debug/netcoreapp3.1/scopedcss/bundle/Dumplingram.API.styles.css
+/Users/bartlomiejpierog/VS Code Projects/DumplingramWebApp/Dumplingram.API/bin/Debug/netcoreapp3.1/Stripe.net.dll
+/Users/bartlomiejpierog/VS Code Projects/DumplingramWebApp/Dumplingram.API/bin/Debug/netcoreapp3.1/System.Configuration.ConfigurationManager.dll
+/Users/bartlomiejpierog/VS Code Projects/DumplingramWebApp/Dumplingram.API/bin/Debug/netcoreapp3.1/System.Security.Cryptography.ProtectedData.dll
+/Users/bartlomiejpierog/VS Code Projects/DumplingramWebApp/Dumplingram.API/bin/Debug/netcoreapp3.1/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll

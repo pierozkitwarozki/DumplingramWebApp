@@ -13,6 +13,8 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Dumplingram.API.SignalR;
 using Dumplingram.API.Services;
+using Stripe;
+
 namespace Dumplingram.API
 {
     public class Startup
@@ -40,15 +42,21 @@ namespace Dumplingram.API
             services.AddSingleton<PresenceTracker>();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(AuthRepository).Assembly);
+
+            //Repositories
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IPhotoRepository, PhotoRepository>();
-            services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IMessageRepository, MessageRepository>();
-            services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IConnectionGroupRepository, ConnectionGroupRepository>();
+
+            //Services       
+            services.AddScoped<IAuthService, AuthService>();         
+            services.AddScoped<IUsersService, UsersService>();        
+            services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IPaymentService, PaymentService>();
+            
            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -82,6 +90,8 @@ namespace Dumplingram.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            StripeConfiguration.ApiKey = 
+                "sk_test_51I5YvcJvKXNzTQcr0FXZ1sCpuOfJuK5bUGPYud0FdXGfhN1jlSAlKaDFEgx1xIvunT95xjYBr49uioeUEag5AZ9L0025qESCRb";
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

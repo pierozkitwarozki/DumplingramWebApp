@@ -1,0 +1,13 @@
+button:disabled:hover {
+    background-color: #6617cb;
+    background-image: linear-gradient(315deg, #6617cb 0%, #cb218e 74%);
+}
+
+button:hover {
+    background-color: #6247aa;
+    background-image: linear-gradient(316deg, #6247aa 0%, #a594f9 74%);
+}
+
+button {
+    padding-inline: 20px;
+}

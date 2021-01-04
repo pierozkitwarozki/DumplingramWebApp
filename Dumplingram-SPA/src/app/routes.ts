@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { DonateComponent } from './donate/donate.component';
+import { DonationSuccessComponent } from './donation-success/donation-success.component';
 import { HomeComponent } from './home/home.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
@@ -52,6 +54,14 @@ export const appRoutes: Routes = [
         path: 'threads',
         resolve: { messages: ConversationListResolver },
         component: ThreadListComponent
+      },
+      {
+        path: 'donate',
+        component: DonateComponent
+      },
+      {
+        path: 'success-donation',
+        component: DonationSuccessComponent
       }
     ],
   },

@@ -33,6 +33,9 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { ThreadListComponent } from './thread-list/thread-list.component';
 import { ConversationListResolver } from './_resolvers/conversation-list.resolver';
 import { ToastrModule } from 'ngx-toastr';
+import { StripeModule } from 'stripe-angular';
+import { DonateComponent } from './donate/donate.component';
+import { DonationSuccessComponent } from './donation-success/donation-success.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -47,7 +50,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
 }
 
 @NgModule({
-  declarations: [
+  declarations: [				
     AppComponent,
     LoginPageComponent,
     RegisterPageComponent,
@@ -57,13 +60,16 @@ export class CustomHammerConfig extends HammerGestureConfig {
     UserDetailComponent,
     UserEditComponent,
     ThreadListComponent,
-  ],
+      DonateComponent,
+      DonationSuccessComponent
+   ],
   imports: [
     BrowserModule,
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot(),
     CollapseModule.forRoot(),
     ReactiveFormsModule,
+    StripeModule.forRoot('pk_test_51I5YvcJvKXNzTQcriYlZbz2AY6gfE97xSpJ7mUaL2UWOAABOjPBN9mlS3421iRf2nL25anPw6bgSSP5mxg7yI1Z600SJy8Gsm7'),
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),

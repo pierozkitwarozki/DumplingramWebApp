@@ -32,7 +32,6 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.loggedIn()) {
       const url = localStorage.getItem('photoUrl');
-      debugger;
       if (url!=='null') {
         this.authService.changeMemberPhoto(url);
       }
