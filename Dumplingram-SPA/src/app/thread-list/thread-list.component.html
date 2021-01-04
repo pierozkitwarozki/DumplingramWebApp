@@ -15,17 +15,17 @@
   >
     Konwersacje prywatne
   </h1>
-  <div style="max-height: calc(100vh - 200px); overflow-y: auto; width: 100%;">
+  <div style="max-height: calc(100vh - 200px); overflow-y: auto; width: 100%">
     <div
       id="avatar-section"
       class="mb-4"
-      
       *ngFor="let message of presenceService.conversations$ | async"
     >
       <!--follow-image-->
       <div
         id="conv"
-        style="width: 100%;"p
+        style="width: 100%"
+        p
         *ngIf="!isLastMessageFromMe(message)"
         (click)="openConversation(message.senderId, template)"
       >
@@ -33,31 +33,32 @@
           id="follow-image"
           src="{{ message.senderPhotoUrl || '../../assets/user.png' }}"
         />
-        <div style="display: flex;"> 
-          <div style="width: 80%; justify-content: flex-start;">
+        <div style="display: flex">
+          <div style="width: 80%; justify-content: flex-start">
             <p
-            style="
-              display: inline-flex;              
-              word-wrap: normal;
-              margin-right: 10px;
-            "
-          >
-            @{{ message.senderUsername}}: 
-          </p>
-          <p
-            style="
-              display: inline-flex;
-              word-wrap: inital;
-              font-weight: normal;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              max-width: 100%;
-              max-height: 100px;
-            ">
-            {{ message.content }}
-          </p>
+              style="
+                display: inline-flex;
+                word-wrap: normal;
+                margin-right: 10px;
+              "
+            >
+              @{{ message.senderUsername }}:
+            </p>
+            <p
+              style="
+                display: inline-flex;
+                word-wrap: inital;
+                font-weight: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+                max-height: 100px;
+              "
+            >
+              {{ message.content }}
+            </p>
           </div>
-          
+
           <p id="name" style="display: inline-flex; justify-content: flex-end">
             {{ message.messageSent | date: "short" }}
           </p>
@@ -66,7 +67,7 @@
 
       <div
         id="conv"
-        style="width: 100%;"
+        style="width: 100%"
         *ngIf="isLastMessageFromMe(message)"
         (click)="openConversation(message.recipientId, template)"
       >
@@ -74,31 +75,32 @@
           id="follow-image"
           src="{{ message.recipientPhotoUrl || '../../assets/user.png' }}"
         />
-        <div style="display: flex;"> 
-          <div style="width: 80%; justify-content: flex-start;">
+        <div style="display: flex">
+          <div style="width: 80%; justify-content: flex-start">
             <p
-            style="
-              display: inline-flex;              
-              word-wrap: normal;
-              margin-right: 10px;
-            "
-          >
-            Ja: 
-          </p>
-          <p
-            style="
-              display: inline-flex;
-              word-wrap: break-word;
-              font-weight: normal;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              max-width: 100%;
-              max-height: 100px;
-            ">
-            {{ message.content }}
-          </p>
+              style="
+                display: inline-flex;
+                word-wrap: normal;
+                margin-right: 10px;
+              "
+            >
+              Ja:
+            </p>
+            <p
+              style="
+                display: inline-flex;
+                word-wrap: break-word;
+                font-weight: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%;
+                max-height: 100px;
+              "
+            >
+              {{ message.content }}
+            </p>
           </div>
-          
+
           <p id="name" style="display: inline-flex; justify-content: flex-end">
             {{ message.messageSent | date: "short" }}
           </p>
@@ -145,30 +147,36 @@
     >
       <div *ngIf="isFromMe(message)" class="mine messages">
         <div class="message">
-          <p style="font-weight: normal; margin: auto;">{{ message.content }}</p>
+          <p style="font-weight: normal; margin: auto">{{ message.content }}</p>
         </div>
       </div>
 
       <div *ngIf="!isFromMe(message)" class="yours messages">
         <div class="message">
-          <p style="font-weight: normal; margin: auto;">{{ message.content }}</p>
+          <p style="font-weight: normal; margin: auto">{{ message.content }}</p>
         </div>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <div class="container text-center">
+    <div class="w-100 mb-0">
       <input
         #message
         [(ngModel)]="messageContent"
-        class="float-left"
-        style="height: 50px;"
+        class="float-left form-control"
+        style="height: 45px; display: inline; width: 76%; padding-block: 0%; padding-inline: 4%;"
         placeholder="Wiadomość..."
         (keyup)="onKey($event)"
       />
       {{ message.focus() }}
-      <button class="float-right" style="height: 50px;" type="submit" (click)="sendMessage()" [disabled]="messageContent.length==0">
-        Wyślij
+      <button
+        class="float-right btn btn-outline-primary"
+        style="height: 45px; display: inline; width: 20%; border-radius: 12px;"
+        type="submit"
+        (click)="sendMessage()"
+        [disabled]="messageContent.length == 0"
+      >
+        Wyślij <i class="fa fa-send"></i>
       </button>
     </div>
   </div>

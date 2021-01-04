@@ -11,7 +11,7 @@
           [(ngModel)]="model.username"
           id="inputUsername"      
           name="username"
-          placeholder="nazwa użytkownika"
+          placeholder="Nazwa użytkownika"
           required
           autofocus=""
           />
@@ -19,15 +19,15 @@
           type="password"
           id="inputPassword"
           name="password"
-          placeholder="hasło"
+          placeholder="Hasło"
           [(ngModel)]="model.password"
           required
         />
-        <button [disabled]="!loginForm.valid" type="submit" style="height: 40px;">
+        <button class="gradient-button" [disabled]="!loginForm.valid" type="submit" style="height: 40px;">
           Zaloguj się
         </button>
-        <h1 id="login-register-click" class="float-right ml-2" (click)="register()">dołącz</h1>
-        <h1 id="login-register" class="float-right">nie masz konta?</h1>       
+        <h1 id="login-register-click" class="float-right ml-2" (click)="register()">Dołącz</h1>
+        <h1 id="login-register" class="float-right">Nie masz konta?</h1>       
       </form> 
     </div>     
   </div>

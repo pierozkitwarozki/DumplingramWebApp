@@ -168,6 +168,7 @@ export class PostCardComponent implements OnInit {
       this.photoService.deletePhoto(this.photo.id).subscribe(
         (data) => {
           this.getPhotoDeleted.emit();
+          this.alertify.message('Pomyślnie usunięto');
         },
         (error) => {
           this.alertify.error(error);

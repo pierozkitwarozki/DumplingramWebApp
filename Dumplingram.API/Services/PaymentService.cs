@@ -22,10 +22,10 @@ namespace Dumplingram.API.Services
                         PriceData = new SessionLineItemPriceDataOptions
                         {
                             UnitAmount = donationDto.Amount,
-                            Currency = "usd",
+                            Currency = "pln",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
-                                Name = "Stubborn Attachments"
+                                Name = "Donation"
                             }
                         },
                         Quantity = 1

@@ -14,7 +14,7 @@ export class AlertifyService {
         okCallback();
       } else {
       }
-    }).setHeader('Wiadomość od Dumplingram');;
+    }).setHeader('🥟 Wiadomość od Dumplingram 🥟');;
   }
 
   success(message: string) {

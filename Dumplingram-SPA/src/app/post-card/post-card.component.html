@@ -90,7 +90,7 @@
       <div class="w-100">
         <div *ngFor="let comment of comments">
           <p style="margin-left: 4%; max-width: 100%; word-wrap: break-word">
-            <strong>@{{ comment.commenterUsername }} </strong>
+            <strong style="cursor: pointer;" [routerLink]="['/users/', comment.commenterId]">@{{ comment.commenterUsername }} </strong>
             {{ comment.content }}
             <i
               *ngIf="currentUser.id == comment.commenterId"
@@ -104,7 +104,7 @@
     <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="false">
       <div class="w-100" *ngIf="comments.length >= 2">
         <p style="margin-left: 4%; max-width: 100%; word-wrap: break-word">
-          <strong>@{{ comments[0].commenterUsername }} </strong>
+          <strong style="cursor: pointer;" [routerLink]="['/users/', comments[0].commenterId]">@{{ comments[0].commenterUsername }} </strong>
           {{ comments[0].content }}
           <i
             *ngIf="currentUser.id == comments[0].commenterId"
@@ -113,7 +113,7 @@
           ></i>
         </p>
         <p style="margin-left: 4%; max-width: 100%; word-wrap: break-word">
-          <strong>@{{ comments[1].commenterUsername }} </strong>
+          <strong style="cursor: pointer;" [routerLink]="['/users/', comments[1].commenterId]">@{{ comments[1].commenterUsername }} </strong>
           {{ comments[1].content }}
           <i
             *ngIf="currentUser.id == comments[1].commenterId"
@@ -124,7 +124,7 @@
       </div>
       <div class="w-100" *ngIf="comments.length == 1">
         <p style="margin-left: 4%; max-width: 100%; word-wrap: break-word">
-          <strong>@{{ comments[0].commenterUsername }} </strong
+          <strong style="cursor: pointer;" [routerLink]="['/users/', comments[0].commenterId]">@{{ comments[0].commenterUsername }} </strong
           >{{ comments[0].content }}
           <i
             *ngIf="currentUser.id == comments[0].commenterId"
@@ -141,24 +141,22 @@
     </div>
     <!--Comment input-->
     <hr />
-    <div class="w-100" style="margin-inline-start: 2%">
+    <div class="w-100" style="margin-inline: 5%">
       <form class="form-inline" style="padding: 0px">
         <input
           type="text"
           [(ngModel)]="commentContent"
           name="content"
           class="form-control"
-          style="width: 76%; height: 45px; margin-right: 5px; padding: 1%"
+          style="width: 68%; height: 45px; margin-right: 15px; padding: 1%; padding-inline: 4%;"
           placeholder="Dodaj komentarz..."
         />
         <button
-          class="float-right"
+          class="float-right btn btn-outline-primary"
           style="
             width: 20%;
-            font-family: 'Roboto Slab';
+            border-radius: 12px;
             height: 45px;
-            background-color: transparent;
-            background-image: none;
           "
           (click)="addComment()"
           [disabled]="commentContent.length == 0"

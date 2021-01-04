@@ -84,12 +84,12 @@ export class HomeComponent implements OnInit {
 
     this.uploader.onCompleteAll = () => {
       this.modalRef.hide();
-      this.alertify.success("dodano.");
+      this.alertify.success("Pomyślnie opublikowano 🥳");
     };
   }
 
   openAddPhotoModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    this.modalRef = this.modalService.show(template);
   }
 
   onKey(event) {

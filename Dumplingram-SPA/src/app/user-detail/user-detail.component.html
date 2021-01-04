@@ -52,8 +52,8 @@
           id="follow-button"
           *ngIf="!follow"
           (click)="followUser(user.id)"
-          class="btn btn-primary"
-          style="font-family: 'Roboto Slab';"
+          class="btn btn-outline-success"
+          style="font-family: 'Roboto Slab'"
         >
           Obserwuj
         </button>
@@ -61,15 +61,15 @@
           id="unfollow-button"
           *ngIf="follow"
           (click)="unfollow(user.id)"
-          style="font-family: 'Roboto Slab';"
-          class="btn btn-primary"
+          style="font-family: 'Roboto Slab'"
+          class="btn btn-outline-danger"
         >
           Przestań obserwować
         </button>
         <button
           id="unfollow-button"
-          class="btn btn-primary ml-2"
-          style="font-family: 'Roboto Slab';"
+          class="btn btn-outline-primary ml-2"
+          style="font-family: 'Roboto Slab'"
           (click)="openCreateMessageModal(messageCreate)"
         >
           Wiadomość
@@ -155,11 +155,8 @@
   </div>
 </ng-template>
 
-<ng-template
-  #photoPreview
-  id="photo-preview"
->
-  <div class="modal-body" style="padding: 5px;">
+<ng-template #photoPreview id="photo-preview">
+  <div class="modal-body" style="padding: 5px">
     <app-post-card
       [photo]="photo"
       (getLikerClicked)="closeDialog()"
@@ -186,7 +183,13 @@
           (keyup)="onKey($event)"
         />
         {{ newMessage.focus() }}
-        <button class="float-right" style="height: 50px; font-family: 'Roboto Slab';" (click)="sendMessage()">Wyślij</button>
+        <button
+          class="float-right btn btn-outline-primary"
+          style="height: 50px; font-family: 'Roboto Slab'"
+          (click)="sendMessage()"
+        >
+          Wyślij <i class="fa fa-send"></i>
+        </button>
       </form>
     </div>
   </div>

@@ -1,5 +1,11 @@
-<div id="centered-div" >
-  <form #editForm="ngForm" id="form-login" [formGroup]="registerForm" class="text-center" (ngSubmit)="register()">
+<div id="centered-div">
+  <form
+    #editForm="ngForm"
+    id="form-login"
+    [formGroup]="registerForm"
+    class="text-center"
+    (ngSubmit)="register()"
+  >
     <h1 class="mt-4">Utwórz konto</h1>
     <div class="form-group">
       <input
@@ -11,7 +17,7 @@
         }"
         class="form-control"
         formControlName="username"
-        placeholder="nazwa użytkownika"
+        placeholder="Nazwa użytkownika"
         autofocus
       />
       <div class="invalid-feedback">Wprowadź nazwę użytkownika</div>
@@ -25,7 +31,7 @@
             registerForm.get('name').errors && registerForm.get('name').touched
         }"
         class="form-control"
-        placeholder="imię"
+        placeholder="Imię"
         formControlName="name"
       />
       <div
@@ -48,7 +54,7 @@
             registerForm.get('surname').touched
         }"
         class="form-control"
-        placeholder="nazwisko"
+        placeholder="Nazwisko"
         formControlName="surname"
       />
       <div
@@ -71,7 +77,7 @@
             registerForm.get('dateOfBirth').touched
         }"
         class="form-control"
-        placeholder="data urodzenia"
+        placeholder="Data urodzenia"
         formControlName="dateOfBirth"
         type="text"
         bsDatepicker
@@ -96,7 +102,7 @@
             registerForm.get('city').errors && registerForm.get('city').touched
         }"
         class="form-control"
-        placeholder="miasto"
+        placeholder="Miasto"
         formControlName="city"
       />
       <div
@@ -119,7 +125,7 @@
             registerForm.get('country').touched
         }"
         class="form-control"
-        placeholder="kraj"
+        placeholder="Kraj"
         formControlName="country"
       />
       <div
@@ -144,7 +150,7 @@
         }"
         class="form-control"
         formControlName="password"
-        placeholder="hasło"
+        placeholder="Hasło"
       />
       <div
         class="invalid-feedback"
@@ -179,7 +185,7 @@
         }"
         class="form-control"
         formControlName="confirmPassword"
-        placeholder="potwierdź hasło"
+        placeholder="Potwierdź hasło"
       />
       <div
         class="invalid-feedback"
@@ -200,6 +206,14 @@
         Hasła nie są takie same
       </div>
     </div>
-      <button type="submit" [disabled]="!registerForm.valid" style="height: 40px; font-family: 'Roboto Slab';" registerForm.valid = "!registerForm.valid" >zarejestruj</button>
+    <button
+      type="submit"
+      class="gradient-button"
+      [disabled]="!registerForm.valid"
+      style="height: 40px; font-family: 'Roboto Slab'"
+      registerForm.valid="!registerForm.valid"
+    >
+      Zarejestruj
+    </button>
   </form>
 </div>

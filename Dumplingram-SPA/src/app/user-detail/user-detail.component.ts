@@ -211,10 +211,10 @@ export class UserDetailComponent implements OnInit {
         .then(() => {
           this.newMessage.content = '';
           this.modalRef.hide();
-          this.alertify.success('Wysłano.');
+          this.alertify.success('Wysłano 📩');
         });
     } else {
-      this.alertify.error('Nie wysyłaj pustej wiadomości.');
+      this.alertify.warning('Wiadomość jest pusta');
     }
   }
 

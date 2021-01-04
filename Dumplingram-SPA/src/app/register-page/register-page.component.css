@@ -42,13 +42,7 @@ button {
     display: block;
 }
 
-button:disabled:hover {
-    background-color: #D1B875;
-}
 
-button:hover {
-    background-color: #B49D5E
-}
 
 h1 {
     font-family: 'Roboto Slab';

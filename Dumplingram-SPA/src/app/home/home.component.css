@@ -10,15 +10,14 @@
 }
 
 input {
-    margin-bottom: 7%;
     font-size: medium;
     width: 100%;
     font-family: 'Roboto Slab';
     height: 4%;
     outline: none;
     padding: 4%;
-    padding-left: 8%;
-    padding-right: 8%;
+    padding-left: 4%;
+    padding-right: 4%;
 }
 
 .card {
@@ -47,3 +46,5 @@ h1 {
     font-family: 'Roboto Slab';
     font-weight: bold;
 }
+
+

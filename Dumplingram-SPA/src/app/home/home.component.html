@@ -2,7 +2,7 @@
   <div id="add-photo" class="container text-center">
     <button
       id="new-photo-button"
-      class="w-100 h-20"
+      class="gradient-button w-100 h-20"
       (click)="openAddPhotoModal(addphoto)"
     >
       Dodaj zdjęcie
@@ -29,35 +29,25 @@
 <ng-template #addphoto>
   <div class="modal-header">
     <div class="container text-center">
-      <h1 style="margin-bottom: 40px; float: left">
-        Co słychać, {{ authService.currentUser.name }}?
-      </h1>
-      <form id="input">
-        <input (keyup)="onKey($event)" placeholder="Dodaj opis..." />
-      </form>
+      <h2 style="float: left; font-family: 'Roboto Slab'">
+        Co słychać, {{ authService.currentUser.name }}? 🤔
+      </h2>
     </div>
   </div>
-  <div class="modal-body text-center" style="max-height: max-content">
-    <div
-      ng2FileDrop
-      [ngClass]="{ 'nv-file-over': hasBaseDropZoneOver }"
-      (fileOver)="fileOverBase($event)"
-      [uploader]="uploader"
-      class="card bg-faded p-3 text-center mb-3 my-drop-zone"
-    >
-      <i class="fa fa-upload fa-3x"></i>
-      Upuść zdjęcia
-    </div>
-    lub
+  <div
+    class="modal-body text-center"
+    ng2FileDrop
+    [ngClass]="{ 'nv-file-over': hasBaseDropZoneOver }"
+    (fileOver)="fileOverBase($event)"
+    [uploader]="uploader"
+    style="max-height: max-content"
+  >
+    <form id="input" style="margin-bottom: 20px">
+      <input (keyup)="onKey($event)" placeholder="Dodaj opis..." />
+    </form>
     <input
-      style="
-        height: 50px;
-        display: flex;
-        align-content: center;
-        width: 100%;
-        padding: 10px;
-        padding-inline: 25px;
-      "
+      class="form-control"
+      style="height: 50px; padding: 10px; padding-inline: 15px; margin: auto"
       id="file-upload"
       type="file"
       ng2FileSelect
@@ -66,22 +56,41 @@
   </div>
 
   <div
-    class="modal-body text-center"
-    style="margin-bottom: 40px"
+    class="modal-body"
+    style="margin-block: auto"
     *ngIf="uploader?.queue?.length"
   >
-    <div class="text-center m-0">
+    <div *ngFor="let item of uploader.queue; let i = index">
+      <p style="float: left; width: 100%">
+        {{ i + 1 }}. {{ item?.file?.name }}
+      </p>
+    </div>
+    <div class="text-center">
       <button
         type="button"
-        class="w-100"
+        class="w-100 btn btn-outline-success"
+        style="margin-block: 20px; border-radius: 12px; height: 45px;"
         (click)="uploader.uploadAll()"
         [disabled]="!uploader.getNotUploadedItems().length"
       >
         <span class="fa fa-upload"></span> Opublikuj post
       </button>
+      <button
+        type="button"
+        class="w-100 btn btn-outline-danger"
+        style="
+          margin-block: 20px;
+          height: 45px;
+          border-radius: 12px;
+        "
+        (click)="uploader.clearQueue()"
+        [disabled]="!uploader.queue.length"
+      >
+        <span class="fa fa-trash"></span> Wyczyść kolejkę
+      </button>
       <div>
-        Ładowanie
-        <div class="progress" style="background-color: teal">
+        Postępy
+        <div class="progress" style="background-color: gainsboro">
           <div
             class="progress-bar"
             role="progressbar"
