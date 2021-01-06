@@ -32,6 +32,10 @@ input {
     color: white;
 }
 
+button {
+  font-family: 'Roboto Slab';
+}
+
 .gradient-button:disabled:hover {
   background-color: #6617cb;
   background-image: linear-gradient(315deg, #6617cb 0%, #cb218e 74%);
